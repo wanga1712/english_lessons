@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ lesson.title }} - English Lessons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/lesson.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="user-stats">
+                <div class="avatar" id="avatar">🎓</div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span id="experience">0</span> XP
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span id="level">1</span> уровень
+                </div>
+            </div>
+            <h1>{{ lesson.title }}</h1>
+            <div class="description">{{ lesson.description }}</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+        <div class="content">
+            <a href="/" class="back-link">← Назад к списку уроков</a>
+            <div id="topics-selector" class="topics-selector" style="margin-bottom: 20px; display: none;">
+                <div style="font-weight: 600; margin-bottom: 12px; color: #667eea;">Выбери тему:</div>
+                <div id="topics-buttons" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+            </div>
+            <div class="card-container" id="card-container"></div>
+            <div class="completion-screen hidden" id="completion-screen">
+                <h2>🎉 Поздравляем!</h2>
+                <p>Вы завершили урок!</p>
+                <div class="score-display" id="final-score">0%</div>
+                <p>Правильных ответов: <span id="correct-count">0</span> из <span id="total-count">0</span></p>
+                <button class="speak-button" onclick="location.reload()">Пройти еще раз</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'lessons/js/lesson-api.js' %}"></script>
+    <script src="{% static 'lessons/js/lesson-spelling.js' %}"></script>
+    <script src="{% static 'lessons/js/lesson-render.js' %}"></script>
+    <script>
+        const lessonId = {{ lesson.id }};
+        const cardsData = {{ cards_data_json|safe }};
+        const topicsData = {{ topics_data_json|safe }};
+        const topicsList = {{ topics_list|safe }};
+    </script>
+    <script src="{% static 'lessons/js/lesson.js' %}"></script>
+</body>
+</html>
+

@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта приключений</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .teacher-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      z-index: 1000;
+    }
+
+    .teacher-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+    }
+
+    .achievements-panel {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 250px;
+      z-index: 1000;
+    }
+
+    .achievements-panel h3 {
+      margin-bottom: 15px;
+      color: #667eea;
+      font-size: 1.1rem;
+    }
+
+    .achievement-badge {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-badge:hover {
+      transform: scale(1.2);
+    }
+
+    .achievement-locked {
+      background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
+      opacity: 0.5;
+    }
+
+    .adventure-map {
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 120px 20px 200px;
+      min-height: 100vh;
+    }
+
+    .map-container {
+      position: relative;
+      background: linear-gradient(135deg, #e0f7fa 0%, #fff9c4 50%, #f3e5f5 100%);
+      border-radius: 30px;
+      padding: 80px 40px 100px;
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.15),
+        inset 0 0 80px rgba(255,255,255,0.5);
+      overflow: visible;
+      min-height: 700px;
+    }
+
+    .path-line {
+      stroke: #8b4513;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 15, 8;
+      fill: none;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .path-line.locked {
+      stroke: #cccccc;
+      stroke-width: 4;
+    }
+
+    .lesson-node {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+
+    .lesson-node:hover {
+      transform: scale(1.2) translateY(-5px);
+      z-index: 20;
+    }
+
+    .node-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      position: relative;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .node-available {
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      animation: pulse 2s ease-in-out infinite;
+      border: 4px solid #fff;
+    }
+
+    .node-completed {
+      background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+      border: 4px solid #fff;
+    }
+
+    .node-current {
+      background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+      border: 4px solid #fff;
+      animation: glow 1.5s ease-in-out infinite;
+    }
+
+    .node-locked {
+      background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
+      border: 4px solid #616161;
+      opacity: 0.6;
+      cursor: not-allowed;
+      position: relative;
+    }
+
+    .node-locked::after {
+      content: '🔒';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      font-size: 1.2rem;
+      background: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .node-number {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 5px 15px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      white-space: nowrap;
+      z-index: 15;
+    }
+
+    .level-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #C06C84 100%);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+      z-index: 100;
+    }
+
+    .progress-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      z-index: 100;
+      min-width: 180px;
+    }
+
+    .progress-circle {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 10px;
+      position: relative;
+    }
+
+    .progress-circle svg {
+      transform: rotate(-90deg);
+    }
+
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .level-progress {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 2px solid #eee;
+    }
+
+    .next-level-info {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .character-assistant {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .character-assistant:hover {
+      transform: scale(1.1);
+    }
+
+    .speech-bubble {
+      position: fixed;
+      bottom: 160px;
+      right: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 300px;
+      display: none;
+      z-index: 999;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 40px;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid white;
+    }
+
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px;
+      text-align: center;
+      display: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(33, 150, 243, 0.6); }
+      50% { box-shadow: 0 0 40px rgba(33, 150, 243, 1); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .achievements-panel {
+        display: none;
+      }
+      .adventure-map {
+        padding: 100px 10px 150px;
+      }
+      .map-container {
+        padding: 60px 20px 80px;
+      }
+      .lesson-node {
+        width: 70px;
+        height: 70px;
+      }
+      .node-circle {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="{% url 'teacher_panel' %}" class="teacher-button">👨‍🏫 Панель учителя</a>
+
+  <div class="achievements-panel">
+    <h3>🏆 Достижения</h3>
+    <div id="achievementsList">Загрузка...</div>
+  </div>
+
+  <div class="error-message" id="errorMessage"></div>
+
+  <div class="adventure-map">
+    <div class="map-container" id="mapContainer">
+      <div class="level-badge" id="levelBadge">🗺️ Уровень 1</div>
+      
+      <div class="progress-info">
+        <div class="progress-circle">
+          <svg width="80" height="80">
+            <circle cx="40" cy="40" r="35" fill="none" stroke="#eee" stroke-width="8"/>
+            <circle id="progressArc" cx="40" cy="40" r="35" fill="none" stroke="#4CAF50" 
+                    stroke-width="8" stroke-linecap="round"
+                    stroke-dasharray="220" stroke-dashoffset="220"/>
+          </svg>
+          <div class="progress-text">
+            <span id="completedCount">0</span>/<span id="totalCount">0</span>
+          </div>
+        </div>
+        <div style="font-size: 0.9rem; color: #666; margin-bottom: 5px;">Пройдено уроков</div>
+        <div class="level-progress">
+          <div style="font-weight: bold; color: #4CAF50;">⭐ <span id="userScore">0</span> баллов</div>
+          <div class="next-level-info">
+            До уровня 2: <span id="lessonsToNext">25</span> уроков
+          </div>
+        </div>
+      </div>
+
+      <svg id="pathsSvg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;" viewBox="0 0 100 100" preserveAspectRatio="none">
+      </svg>
+
+      <div id="lessonNodes" style="position: relative; width: 100%; height: 100%; min-height: 500px; z-index: 2;">
+        <div style="text-align: center; padding: 40px; color: #666;">Загрузка уроков...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="character-assistant" onclick="toggleSpeech()">
+    🦊
+  </div>
+
+  <div class="speech-bubble" id="speechBubble">
+    <p id="assistantMessage">Привет! Я твой помощник. Выбери урок на карте, чтобы начать приключение!</p>
+  </div>
+
+  <script>
+    // Force console to be available
+    if (typeof console === 'undefined') {
+      window.console = {log: function(){}, error: function(){}, warn: function(){}};
+    }
+    
+    const LESSONS_PER_LEVEL = 25;
+    
+    function logDebug(location, message, data) {
+      if (!data) data = {};
+      // Always log to console for debugging
+      console.log('[' + location + '] ' + message, data);
+    }
+
+    // Initialize variables safely
+    let avatarData = {name: 'Ученик', emoji: '🎓', score: 0.0};
+    let lessons = [];
+    let userProgressId = 0;
+    let completedLessons = new Set();
+    
+    // Parse avatar data
+    try {
+      var avatarDataRaw = {{ avatar_data_json|safe }};
+      if (avatarDataRaw && typeof avatarDataRaw === 'object') {
+        avatarData = avatarDataRaw;
+      }
+    } catch (e) {
+      console.error('Error parsing avatarData:', e);
+    }
+    
+    // Parse user progress ID
+    try {
+      {% if user_progress %}
+      userProgressId = parseInt('{{ user_progress.id }}') || 0;
+      {% endif %}
+    } catch (e) {
+      console.error('Error parsing userProgressId:', e);
+    }
+    
+    console.log('=== PAGE INITIALIZED ===');
+    console.log('Avatar data:', avatarData);
+    console.log('User progress ID:', userProgressId);
+
+    // Coordinates for lesson nodes (better distribution)
+    const nodePositions = [
+      {x: 8, y: 15}, {x: 18, y: 20}, {x: 28, y: 15}, {x: 38, y: 25}, {x: 48, y: 18},
+      {x: 58, y: 22}, {x: 68, y: 16}, {x: 78, y: 24}, {x: 88, y: 19},
+      {x: 85, y: 30}, {x: 75, y: 35}, {x: 65, y: 28}, {x: 55, y: 32}, {x: 45, y: 38},
+      {x: 35, y: 32}, {x: 25, y: 40}, {x: 15, y: 35}, {x: 10, y: 45},
+      {x: 20, y: 50}, {x: 30, y: 48}, {x: 40, y: 52}, {x: 50, y: 55}, {x: 60, y: 50},
+      {x: 70, y: 58}, {x: 80, y: 52}
+    ];
+
+    async function loadLessons() {
+      console.log('=== LOADING LESSONS ===');
+      logDebug('home_uchi.html:loadLessons', 'Starting to load lessons');
+      
+      const achievementsList = document.getElementById('achievementsList');
+      if (achievementsList) {
+        achievementsList.textContent = 'Загрузка...';
+        console.log('Set achievementsList to "Загрузка..."');
+      } else {
+        console.error('ERROR: achievementsList element not found!');
+      }
+      
+      try {
+        console.log('Fetching from /api/lessons/');
+        logDebug('home_uchi.html:loadLessons', 'Fetching from /api/lessons/');
+        
+        const response = await fetch('/api/lessons/');
+        console.log('Response received:', {status: response.status, ok: response.ok, statusText: response.statusText});
+        logDebug('home_uchi.html:loadLessons', 'API response received', {status: response.status, ok: response.ok});
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('API error:', {status: response.status, text: errorText});
+          logDebug('home_uchi.html:loadLessons', 'API error response', {status: response.status, text: errorText});
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('Data received:', {
+          hasLessons: !!data.lessons,
+          count: data.lessons?.length || 0,
+          dataKeys: Object.keys(data),
+          firstLesson: data.lessons?.[0]
+        });
+        logDebug('home_uchi.html:loadLessons', 'Lessons data parsed', {
+          hasLessons: !!data.lessons,
+          count: data.lessons?.length || 0,
+          dataKeys: Object.keys(data)
+        });
+        
+        lessons = data.lessons || [];
+        console.log('Lessons array set:', {length: lessons.length, lessons: lessons});
+        logDebug('home_uchi.html:loadLessons', 'Lessons array set', {lessonsLength: lessons.length});
+        
+        // Get completed lessons
+        lessons.forEach(lesson => {
+          if (lesson.user_completed) {
+            completedLessons.add(lesson.id);
+          }
+        });
+        
+        console.log('Completed lessons:', {count: completedLessons.size, ids: Array.from(completedLessons)});
+        logDebug('home_uchi.html:loadLessons', 'Completed lessons identified', {count: completedLessons.size});
+
+        if (lessons.length === 0) {
+          console.warn('No lessons found!');
+          showError('Нет доступных уроков. Загрузите видео в панели учителя.');
+          if (achievementsList) {
+            achievementsList.innerHTML = '<div style="color: #999; font-size: 0.9rem;">Нет достижений</div>';
+          }
+        } else {
+          console.log('Calling renderMap, updateProgress, loadAchievements');
+          logDebug('home_uchi.html:loadLessons', 'Calling renderMap, updateProgress, loadAchievements');
+          
+          try {
+            renderMap();
+            console.log('renderMap completed');
+          } catch (e) {
+            console.error('Error in renderMap:', e);
+          }
+          
+          try {
+            updateProgress();
+            console.log('updateProgress completed');
+          } catch (e) {
+            console.error('Error in updateProgress:', e);
+          }
+          
+          try {
+            loadAchievements();
+            console.log('loadAchievements completed');
+          } catch (e) {
+            console.error('Error in loadAchievements:', e);
+          }
+        }
+      } catch (error) {
+        console.error('ERROR loading lessons:', error);
+        logDebug('home_uchi.html:loadLessons', 'Error loading lessons', {error: error.message, stack: error.stack});
+        showError('Ошибка загрузки уроков: ' + error.message);
+        if (achievementsList) {
+          achievementsList.innerHTML = '<div style="color: #c62828; font-size: 0.9rem;">Ошибка: ' + error.message + '</div>';
+        }
+      }
+    }
+
+    function showError(message) {
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+    }
+
+    function renderMap() {
+      console.log('=== RENDERING MAP ===');
+      logDebug('home_uchi.html:renderMap', 'Starting map render', {
+        lessonsCount: lessons.length,
+        completedCount: completedLessons.size
+      });
+      
+      const nodesContainer = document.getElementById('lessonNodes');
+      const pathsSvg = document.getElementById('pathsSvg');
+      const mapContainer = document.getElementById('mapContainer');
+      
+      console.log('Elements check:', {
+        nodesContainer: !!nodesContainer,
+        pathsSvg: !!pathsSvg,
+        mapContainer: !!mapContainer
+      });
+      
+      if (!nodesContainer) {
+        console.error('ERROR: nodesContainer not found!');
+        logDebug('home_uchi.html:renderMap', 'Missing nodesContainer');
+        showError('Ошибка: не найден контейнер для узлов');
+        return;
+      }
+      if (!pathsSvg) {
+        console.error('ERROR: pathsSvg not found!');
+        logDebug('home_uchi.html:renderMap', 'Missing pathsSvg');
+        showError('Ошибка: не найден SVG для путей');
+        return;
+      }
+      if (!mapContainer) {
+        console.error('ERROR: mapContainer not found!');
+        logDebug('home_uchi.html:renderMap', 'Missing mapContainer');
+        showError('Ошибка: не найден контейнер карты');
+        return;
+      }
+      
+      console.log('Clearing containers');
+      logDebug('home_uchi.html:renderMap', 'Clearing containers');
+      nodesContainer.innerHTML = '';
+      pathsSvg.innerHTML = '';
+      
+      if (lessons.length === 0) {
+        console.warn('No lessons to render');
+        logDebug('home_uchi.html:renderMap', 'No lessons to render');
+        nodesContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">Нет уроков для отображения</div>';
+        return;
+      }
+      
+      console.log('Rendering', lessons.length, 'lessons');
+
+      // Calculate current level
+      const currentLevel = Math.floor(lessons.length / LESSONS_PER_LEVEL) + 1;
+      const levelBadge = document.getElementById('levelBadge');
+      if (levelBadge) {
+        levelBadge.textContent = `🗺️ Уровень ${currentLevel}`;
+      }
+
+      // Determine which lessons are available
+      lessons.forEach((lesson, index) => {
+        const pos = nodePositions[index % nodePositions.length];
+        const isCompleted = completedLessons.has(lesson.id);
+        const isAvailable = index === 0 || completedLessons.has(lessons[index - 1]?.id);
+        const isCurrent = isAvailable && !isCompleted;
+        const isLocked = !isAvailable && !isCompleted;
+
+        // Draw path to previous node
+        if (index > 0) {
+          const prevPos = nodePositions[(index - 1) % nodePositions.length];
+          const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          
+          // Use percentage-based coordinates for SVG
+          const midX = (prevPos.x + pos.x) / 2;
+          const midY = (prevPos.y + pos.y) / 2 - 2;
+          
+          // SVG path using percentages (viewBox will handle scaling)
+          path.setAttribute('d', `M ${prevPos.x}% ${prevPos.y}% Q ${midX}% ${midY}% ${pos.x}% ${pos.y}%`);
+          path.setAttribute('class', 'path-line' + (isLocked ? ' locked' : ''));
+          pathsSvg.appendChild(path);
+        }
+
+        // Create node
+        const node = document.createElement('div');
+        node.className = 'lesson-node';
+        node.style.left = `${pos.x}%`;
+        node.style.top = `${pos.y}%`;
+        node.style.transform = 'translate(-50%, -50%)';
+
+        let statusClass = 'node-locked';
+        let emoji = '❓';
+        
+        if (isCompleted) {
+          statusClass = 'node-completed';
+          emoji = '✅';
+        } else if (isCurrent) {
+          statusClass = 'node-current';
+          emoji = '🎯';
+        } else if (isAvailable) {
+          statusClass = 'node-available';
+          emoji = '📚';
+        }
+
+        node.innerHTML = `
+          <div class="node-circle ${statusClass}">
+            ${emoji}
+          </div>
+          <div class="node-number">Урок ${index + 1}</div>
+        `;
+
+        if (!isLocked) {
+          node.onclick = () => openLesson(lesson.id);
+        } else {
+          node.title = `Завершите урок ${index} чтобы разблокировать`;
+        }
+
+        nodesContainer.appendChild(node);
+        console.log(`Node ${index + 1} created:`, {
+          lessonId: lesson.id,
+          status: statusClass,
+          position: pos,
+          isCompleted,
+          isAvailable,
+          isCurrent,
+          isLocked
+        });
+        logDebug('home_uchi.html:renderMap', 'Node created', {
+          index: index,
+          lessonId: lesson.id,
+          status: statusClass,
+          position: pos
+        });
+      });
+      
+      console.log('Map rendered successfully:', {
+        nodesCreated: lessons.length,
+        pathsCreated: lessons.length - 1,
+        containerChildren: nodesContainer.children.length
+      });
+      logDebug('home_uchi.html:renderMap', 'Map rendered successfully', {
+        nodesCreated: lessons.length,
+        pathsCreated: lessons.length - 1
+      });
+    }
+
+    function updateProgress() {
+      const completed = completedLessons.size;
+      const total = lessons.length;
+      const percentage = total > 0 ? (completed / total) * 100 : 0;
+      
+      const completedEl = document.getElementById('completedCount');
+      const totalEl = document.getElementById('totalCount');
+      const scoreEl = document.getElementById('userScore');
+      
+      if (completedEl) completedEl.textContent = completed;
+      if (totalEl) totalEl.textContent = total;
+      if (scoreEl) scoreEl.textContent = Math.round(avatarData.score || 0);
+
+      // Update progress circle
+      const circumference = 220;
+      const offset = circumference - (percentage / 100) * circumference;
+      const progressArc = document.getElementById('progressArc');
+      if (progressArc) {
+        progressArc.style.strokeDashoffset = offset;
+      }
+
+      // Calculate lessons to next level
+      const currentLevelLessons = completed % LESSONS_PER_LEVEL;
+      const lessonsToNext = LESSONS_PER_LEVEL - currentLevelLessons;
+      const lessonsToNextEl = document.getElementById('lessonsToNext');
+      if (lessonsToNextEl) {
+        lessonsToNextEl.textContent = lessonsToNext;
+      }
+    }
+
+    function loadAchievements() {
+      console.log('=== LOADING ACHIEVEMENTS ===');
+      logDebug('home_uchi.html:loadAchievements', 'Loading achievements', {
+        completedLessons: completedLessons.size,
+        totalLessons: lessons.length
+      });
+      
+      const achievementsList = document.getElementById('achievementsList');
+      if (!achievementsList) {
+        console.error('ERROR: achievementsList element not found!');
+        logDebug('home_uchi.html:loadAchievements', 'achievementsList not found');
+        return;
+      }
+      
+      console.log('achievementsList found, calculating achievements');
+      const achievements = [
+        {id: 'first', emoji: '🎉', title: 'Первый урок', unlocked: completedLessons.size >= 1},
+        {id: 'five', emoji: '🌟', title: '5 уроков', unlocked: completedLessons.size >= 5},
+        {id: 'ten', emoji: '🏆', title: '10 уроков', unlocked: completedLessons.size >= 10},
+        {id: 'level1', emoji: '🎖️', title: 'Уровень 1', unlocked: completedLessons.size >= 25},
+        {id: 'perfect', emoji: '💎', title: 'Идеально', unlocked: false},
+        {id: 'streak', emoji: '🔥', title: 'Неделя подряд', unlocked: false},
+      ];
+
+      const unlockedCount = achievements.filter(a => a.unlocked).length;
+      console.log('Achievements calculated:', {
+        unlocked: unlockedCount,
+        total: achievements.length,
+        completedLessons: completedLessons.size
+      });
+      logDebug('home_uchi.html:loadAchievements', 'Achievements calculated', {
+        unlocked: unlockedCount,
+        total: achievements.length
+      });
+
+      const html = achievements.map(ach => 
+        `<div class="achievement-badge ${ach.unlocked ? '' : 'achievement-locked'}" 
+              title="${ach.title}">
+          ${ach.emoji}
+        </div>`
+      ).join('');
+      
+      console.log('Setting achievements HTML:', html.substring(0, 100) + '...');
+      achievementsList.innerHTML = html;
+      console.log('Achievements rendered successfully');
+      logDebug('home_uchi.html:loadAchievements', 'Achievements rendered');
+    }
+
+    function openLesson(lessonId) {
+      logDebug('home_uchi.html:openLesson', 'Opening lesson', {lessonId});
+      window.location.href = `/lesson/${lessonId}/uchi/`;
+    }
+
+    function toggleSpeech() {
+      const bubble = document.getElementById('speechBubble');
+      if (!bubble) return;
+      
+      bubble.style.display = bubble.style.display === 'block' ? 'none' : 'block';
+      
+      const messages = [
+        'Отличная работа! Продолжай в том же духе! 🎉',
+        'Каждый урок приближает тебя к новым знаниям! 📚',
+        'Не забывай делать перерывы! ☕',
+        'Ты уже многому научился! Горжусь тобой! ⭐',
+      ];
+      
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      const messageEl = document.getElementById('assistantMessage');
+      if (messageEl) {
+        messageEl.textContent = randomMessage;
+      }
+    }
+
+    // Load lessons on page load
+    console.log('=== INITIALIZING PAGE ===');
+    console.log('Avatar data:', avatarData);
+    console.log('User progress ID:', userProgressId);
+    
+    logDebug('home_uchi.html:init', 'Page loaded, starting initialization', {
+      avatarData: avatarData,
+      userProgressId: userProgressId
+    });
+    
+    // Ensure DOM is ready and start loading
+    function initialize() {
+      console.log('=== STARTING INITIALIZATION ===');
+      logDebug('home_uchi.html:init', 'Starting initialization');
+      
+      // Check if required elements exist
+      const achievementsList = document.getElementById('achievementsList');
+      const mapContainer = document.getElementById('mapContainer');
+      const lessonNodes = document.getElementById('lessonNodes');
+      
+      console.log('Elements check:', {
+        achievementsList: !!achievementsList,
+        mapContainer: !!mapContainer,
+        lessonNodes: !!lessonNodes
+      });
+      
+      if (!achievementsList) {
+        console.error('ERROR: achievementsList not found!');
+      }
+      if (!mapContainer) {
+        console.error('ERROR: mapContainer not found!');
+      }
+      if (!lessonNodes) {
+        console.error('ERROR: lessonNodes not found!');
+      }
+      
+      // Start loading lessons
+      loadLessons();
+    }
+    
+    // Wait for DOM to be fully ready
+    if (document.readyState === 'loading') {
+      console.log('DOM is loading, waiting for DOMContentLoaded');
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded fired');
+        initialize();
+      });
+    } else {
+      console.log('DOM already ready, initializing immediately');
+      // Use setTimeout to ensure all scripts are loaded
+      setTimeout(initialize, 100);
+    }
+  </script>
+</body>
+</html>

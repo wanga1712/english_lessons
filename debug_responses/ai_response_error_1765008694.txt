@@ -1,0 +1,1834 @@
+=== ОРИГИНАЛЬНЫЙ ОТВЕТ ===
+{
+  "lessonTitle": "Actions, Animals, Family and Toys",
+  "lessonDescription": "На уроке мы учили действия, животных, семью и игрушки.",
+  "languageLevel": "A1",
+  "topics": [
+    {
+      "topic": "actions",
+      "topicName": "Действия",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "I can jump, I can swim.",
+          "promptText": "Повтори вслух эти фразы о действиях.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "jump",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can jump", "I can swim"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "speak",
+          "questionText": "I can't cook, I can't swim.",
+          "promptText": "Проговори эти фразы о том, что ты не можешь делать.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "cook",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can't cook", "I can't swim"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я могу плавать'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "I can swim",
+          "options": ["I can swim", "I can't swim", "I swim", "I swim not"],
+          "iconName": "swim",
+          "translationText": "Я могу плавать",
+          "hintText": "Подумай о том, что ты умеешь делать.",
+          "extraData": {},
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What is 'прыгать' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "jump",
+          "options": ["jump", "run", "swim", "fly"],
+          "iconName": "jump",
+          "translationText": "Прыгать",
+          "hintText": "Это действие, когда ты поднимаешься вверх.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это плавание.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "swim",
+          "options": null,
+          "iconName": "swim",
+          "translationText": "Плавание",
+          "hintText": "Первая буква S, последняя M.",
+          "extraData": {
+            "scrambledLetters": ["s", "m", "i", "w"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, что ты можешь делать.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I can...'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'играть'?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "play",
+          "options": ["play", "jump", "run", "swim"],
+          "iconName": "play",
+          "translationText": "Играть",
+          "hintText": "Это действие, когда ты развлекаешься.",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Can you jump?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "Yes, I can.",
+          "options": ["Yes, I can.", "No, I can't.", "I can jump.", "Jump?"],
+          "iconName": "jump",
+          "translationText": "Да, я могу.",
+          "hintText": "Подумай, можешь ли ты это сделать.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это играть.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "play",
+          "options": null,
+          "iconName": "play",
+          "translationText": "Играть",
+          "hintText": "Первая буква P, последняя Y.",
+          "extraData": {
+            "scrambledLetters": ["p", "l", "a", "y"]
+          },
+          "orderIndex": 8
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I can play, I can't jump.",
+          "promptText": "Повтори вслух эти фразы.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "play",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can play", "I can't jump"]
+          },
+          "orderIndex": 9
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'бегать'?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "run",
+          "options": ["run", "jump", "swim", "play"],
+          "iconName": "run",
+          "translationText": "Бегать",
+          "hintText": "Это действие, когда ты двигаешься быстро.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Can you swim?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "Yes, I can swim.",
+          "options": ["Yes, I can swim.", "No, I can't swim.", "I swim.", "Swim?"],
+          "iconName": "swim",
+          "translationText": "Да, я могу плавать.",
+          "hintText": "Подумай, можешь ли ты это сделать.",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "animals",
+      "topicName": "Животные",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "dog, cat, elephant",
+          "promptText": "Повтори вслух эти слова о животных.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "dog",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["dog", "cat", "elephant"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это собака.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "dog",
+          "options": null,
+          "iconName": "dog",
+          "translationText": "Собака",
+          "hintText": "Первая буква D, последняя G.",
+          "extraData": {
+            "scrambledLetters": ["g", "o", "d"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'кот'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "cat",
+          "options": ["cat", "dog", "fish", "bird"],
+          "iconName": "cat",
+          "translationText": "Кот",
+          "hintText": "Это домашнее животное.",
+          "extraData": {},
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'слон'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "elephant",
+          "options": ["elephant", "tiger", "lion", "bear"],
+          "iconName": "elephant",
+          "translationText": "Слон",
+          "hintText": "Это большое животное с хоботом.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это кот.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "cat",
+          "options": null,
+          "iconName": "cat",
+          "translationText": "Кот",
+          "hintText": "Первая буква C, последняя T.",
+          "extraData": {
+            "scrambledLetters": ["a", "t", "c"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'птица'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "bird",
+          "options": ["bird", "fish", "cat", "dog"],
+          "iconName": "bird",
+          "translationText": "Птица",
+          "hintText": "Это животное, которое летает.",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'собака' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "dog",
+          "options": ["dog", "cat", "bird", "lion"],
+          "iconName": "dog",
+          "translationText": "Собака",
+          "hintText": "Это домашнее животное.",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'птица' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "bird",
+          "options": ["bird", "fish", "dog", "cat"],
+          "iconName": "bird",
+          "translationText": "Птица",
+          "hintText": "Это животное, которое летает.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "cat, dog, bird",
+          "promptText": "Повтори вслух эти слова о животных.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "cat",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["cat", "dog", "bird"]
+          },
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'рыба'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "fish",
+          "options": ["fish", "bird", "cat", "dog"],
+          "iconName": "fish",
+          "translationText": "Рыба",
+          "hintText": "Это животное, которое живет в воде.",
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о своем любимом животном.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I like...' и названия животных.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это рыба.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "fish",
+          "options": null,
+          "iconName": "fish",
+          "translationText": "Рыба",
+          "hintText": "Первая буква F, последняя H.",
+          "extraData": {
+            "scrambledLetters": ["i", "h", "f"]
+          },
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "family",
+      "topicName": "Семья",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "mother, father, sister",
+          "promptText": "Повтори вслух эти слова о семье.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "family",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["mother", "father", "sister"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'брат'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "brother",
+          "options": ["brother", "sister", "mother", "father"],
+          "iconName": "family",
+          "translationText": "Брат",
+          "hintText": "Это мальчик в семье.",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это мама.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "mother",
+          "options": null,
+          "iconName": "family",
+          "translationText": "Мама",
+          "hintText": "Первая буква M, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["m", "o", "e", "t", "h", "r"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'папа' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "father",
+          "options": ["father", "mother", "brother", "sister"],
+          "iconName": "family",
+          "translationText": "Папа",
+          "hintText": "Это мужчина в семье.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это брат.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "brother",
+          "options": null,
+          "iconName": "family",
+          "translationText": "Брат",
+          "hintText": "Первая буква B, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["h", "e", "r", "b", "o", "t"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'сестра'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "sister",
+          "options": ["sister", "mother", "father", "brother"],
+          "iconName": "family",
+          "translationText": "Сестра",
+          "hintText": "Это девочка в семье.",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "father, brother, sister",
+          "promptText": "Повтори вслух эти слова о семье.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "family",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["father", "brother", "sister"]
+          },
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'сестра' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "sister",
+          "options": ["sister", "mother", "father", "brother"],
+          "iconName": "family",
+          "translationText": "Сестра",
+          "hintText": "Это девочка в семье.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о своей семье.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I have a...' и имена членов семьи.",
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это папа.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "father",
+          "options": null,
+          "iconName": "family",
+          "translationText": "Папа",
+          "hintText": "Первая буква F, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["a", "t", "e", "h", "r", "f"]
+          },
+          "orderIndex": 9
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'дедушка'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "grandfather",
+          "options": ["grandfather", "grandmother", "uncle", "aunt"],
+          "iconName": "family",
+          "translationText": "Дедушка",
+          "hintText": "Это отец твоей мамы или папы.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'бабушка'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "grandmother",
+          "options": ["grandmother", "grandfather", "aunt", "uncle"],
+          "iconName": "family",
+          "translationText": "Бабушка",
+          "hintText": "Это мама твоего папы или мамы.",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "toys",
+      "topicName": "Игрушки",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "car, doll, ball",
+          "promptText": "Повтори вслух эти слова о игрушках.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "toys",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["car", "doll", "ball"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'мяч'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "ball",
+          "options": ["ball", "car", "doll", "robot"],
+          "iconName": "ball",
+          "translationText": "Мяч",
+          "hintText": "Это круглая игрушка.",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это машина.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "car",
+          "options": null,
+          "iconName": "car",
+          "translationText": "Машина",
+          "hintText": "Первая буква C, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["c", "a", "r"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'кукла' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "doll",
+          "options": ["doll", "car", "ball", "robot"],
+          "iconName": "doll",
+          "translationText": "Кукла",
+          "hintText": "Это игрушка для девочек.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это кукла.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "doll",
+          "options": null,
+          "iconName": "doll",
+          "translationText": "Кукла",
+          "hintText": "Первая буква D, последняя L.",
+          "extraData": {
+            "scrambledLetters": ["d", "l", "o"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'робот'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "robot",
+          "options": ["robot", "car", "doll", "ball"],
+          "iconName": "robot",
+          "translationText": "Робот",
+          "hintText": "Это игрушка, которая двигается.",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "doll, robot, ball",
+          "promptText": "Повтори вслух эти слова о игрушках.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "doll",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["doll", "robot", "ball"]
+          },
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'машина' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "car",
+          "options": ["car", "doll", "ball", "robot"],
+          "iconName": "car",
+          "translationText": "Машина",
+          "hintText": "Это транспортное средство.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о своей любимой игрушке.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'My favorite toy is...' и название игрушки.",
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это робот.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "robot",
+          "options": null,
+          "iconName": "robot",
+          "translationText": "Робот",
+          "hintText": "Первая буква R, последняя T.",
+          "extraData": {
+            "scrambledLetters": ["o", "t", "b", "r"]
+          },
+          "orderIndex": 9
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'конструктор'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "constructor",
+          "options": ["constructor", "ball", "car", "doll"],
+          "iconName": "constructor",
+          "translationText": "Конструктор",
+          "hintText": "Это игрушка, из которой можно строить.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'пазл'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "puzzle",
+          "options": ["puzzle", "ball", "car", "doll"],
+          "iconName": "puzzle",
+          "translationText": "Пазл",
+          "hintText": "Это игрушка, которая состоит из кусочков.",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I can jump, I can swim.",
+      "promptText": "Повтори вслух эти фразы о действиях.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "jump",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can jump", "I can swim"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "actions",
+      "cardType": "speak",
+      "questionText": "I can't cook, I can't swim.",
+      "promptText": "Проговори эти фразы о том, что ты не можешь делать.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "cook",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can't cook", "I can't swim"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "actions",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я могу плавать'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "I can swim",
+      "options": ["I can swim", "I can't swim", "I swim", "I swim not"],
+      "iconName": "swim",
+      "translationText": "Я могу плавать",
+      "hintText": "Подумай о том, что ты умеешь делать.",
+      "extraData": {},
+      "orderIndex": 2
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What is 'прыгать' in English?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "jump",
+      "options": ["jump", "run", "swim", "fly"],
+      "iconName": "jump",
+      "translationText": "Прыгать",
+      "hintText": "Это действие, когда ты поднимаешься вверх.",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это плавание.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "swim",
+      "options": null,
+      "iconName": "swim",
+      "translationText": "Плавание",
+      "hintText": "Первая буква S, последняя M.",
+      "extraData": {
+        "scrambledLetters": ["s", "m", "i", "w"]
+      },
+      "orderIndex": 4
+    },
+    {
+      "topic": "actions",
+      "cardType": "writing",
+      "questionText": "Напиши, что ты можешь делать.",
+      "promptText": "Напиши 2-3 предложения.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Используй 'I can...'",
+      "extraData": {},
+      "orderIndex": 5
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'играть'?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "play",
+      "options": ["play", "jump", "run", "swim"],
+      "iconName": "play",
+      "translationText": "Играть",
+      "hintText": "Это действие, когда ты развлекаешься.",
+      "extraData": {},
+      "orderIndex": 6
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "Can you jump?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "Yes, I can.",
+      "options": ["Yes, I can.", "No, I can't.", "I can jump.", "Jump?"],
+      "iconName": "jump",
+      "translationText": "Да, я могу.",
+      "hintText": "Подумай, можешь ли ты это сделать.",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это играть.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "play",
+      "options": null,
+      "iconName": "play",
+      "translationText": "Играть",
+      "hintText": "Первая буква P, последняя Y.",
+      "extraData": {
+        "scrambledLetters": ["p", "l", "a", "y"]
+      },
+      "orderIndex": 8
+    },
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I can play, I can't jump.",
+      "promptText": "Повтори вслух эти фразы.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "play",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can play", "I can't jump"]
+      },
+      "orderIndex": 9
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'бегать'?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "run",
+      "options": ["run", "jump", "swim", "play"],
+      "iconName": "run",
+      "translationText": "Бегать",
+      "hintText": "Это действие, когда ты двигаешься быстро.",
+      "extraData": {},
+      "orderIndex": 10
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "Can you swim?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "Yes, I can swim.",
+      "options": ["Yes, I can swim.", "No, I can't swim.", "I swim.", "Swim?"],
+      "iconName": "swim",
+      "translationText": "Да, я могу плавать.",
+      "hintText": "Подумай, можешь ли ты это сделать.",
+      "extraData": {},
+      "orderIndex": 11
+    },
+    {
+      "topic": "animals",
+      "cardType": "repeat",
+      "questionText": "dog, cat, elephant",
+      "promptText": "Повтори вслух эти слова о животных.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "dog",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["dog", "cat", "elephant"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это собака.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "dog",
+      "options": null,
+      "iconName": "dog",
+      "translationText": "Собака",
+      "hintText": "Первая буква D, последняя G.",
+      "extraData": {
+        "scrambledLetters": ["g", "o", "d"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'кот'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "cat",
+      "options": ["cat", "dog", "fish", "bird"],
+      "iconName": "cat",
+      "translationText": "Кот",
+      "hintText": "Это домашнее животное.",
+      "extraData": {},
+      "orderIndex": 2
+    },
+    {
+      "topic": "animals",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'слон'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "elephant",
+      "options": ["elephant", "tiger", "lion", "bear"],
+      "iconName": "elephant",
+      "translationText": "Слон",
+      "hintText": "Это большое животное с хоботом.",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это кот.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "cat",
+      "options": null,
+      "iconName": "cat",
+      "translationText": "Кот",
+      "hintText": "Первая буква C, последняя T.",
+      "extraData": {
+        "scrambledLetters": ["a", "t", "c"]
+      },
+      "orderIndex": 4
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'птица'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "bird",
+      "options": ["bird", "fish", "cat", "dog"],
+      "iconName": "bird",
+      "translationText": "Птица",
+      "hintText": "Это животное, которое летает.",
+      "extraData": {},
+      "orderIndex": 5
+    },
+    {
+      "topic": "animals",
+      "cardType": "choose",
+      "questionText": "What is 'собака' in English?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "dog",
+      "options": ["dog", "cat", "bird", "lion"],
+      "iconName": "dog",
+      "translationText": "Собака",
+      "hintText": "Это домашнее животное.",
+      "extraData": {},
+      "orderIndex": 6
+    },
+    {
+      "topic": "animals",
+      "cardType": "choose",
+      "questionText": "What is 'птица' in English?",
+      "promptText": "Выбери правильный ответ.",
+      "correct
+
+=== ПОСЛЕ ОЧИСТКИ ===
+{
+  "lessonTitle": "Actions, Animals, Family and Toys",
+  "lessonDescription": "На уроке мы учили действия, животных, семью и игрушки.",
+  "languageLevel": "A1",
+  "topics": [
+    {
+      "topic": "actions",
+      "topicName": "Действия",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "I can jump, I can swim.",
+          "promptText": "Повтори вслух эти фразы о действиях.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "jump",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can jump", "I can swim"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "speak",
+          "questionText": "I can't cook, I can't swim.",
+          "promptText": "Проговори эти фразы о том, что ты не можешь делать.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "cook",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can't cook", "I can't swim"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я могу плавать'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "I can swim",
+          "options": ["I can swim", "I can't swim", "I swim", "I swim not"],
+          "iconName": "swim",
+          "translationText": "Я могу плавать",
+          "hintText": "Подумай о том, что ты умеешь делать.",
+          "extraData": {},
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What is 'прыгать' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "jump",
+          "options": ["jump", "run", "swim", "fly"],
+          "iconName": "jump",
+          "translationText": "Прыгать",
+          "hintText": "Это действие, когда ты поднимаешься вверх.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это плавание.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "swim",
+          "options": null,
+          "iconName": "swim",
+          "translationText": "Плавание",
+          "hintText": "Первая буква S, последняя M.",
+          "extraData": {
+            "scrambledLetters": ["s", "m", "i", "w"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, что ты можешь делать.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I can...'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'играть'?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "play",
+          "options": ["play", "jump", "run", "swim"],
+          "iconName": "play",
+          "translationText": "Играть",
+          "hintText": "Это действие, когда ты развлекаешься.",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Can you jump?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "Yes, I can.",
+          "options": ["Yes, I can.", "No, I can't.", "I can jump.", "Jump?"],
+          "iconName": "jump",
+          "translationText": "Да, я могу.",
+          "hintText": "Подумай, можешь ли ты это сделать.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это играть.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "play",
+          "options": null,
+          "iconName": "play",
+          "translationText": "Играть",
+          "hintText": "Первая буква P, последняя Y.",
+          "extraData": {
+            "scrambledLetters": ["p", "l", "a", "y"]
+          },
+          "orderIndex": 8
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I can play, I can't jump.",
+          "promptText": "Повтори вслух эти фразы.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "play",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can play", "I can't jump"]
+          },
+          "orderIndex": 9
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'бегать'?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "run",
+          "options": ["run", "jump", "swim", "play"],
+          "iconName": "run",
+          "translationText": "Бегать",
+          "hintText": "Это действие, когда ты двигаешься быстро.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Can you swim?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "Yes, I can swim.",
+          "options": ["Yes, I can swim.", "No, I can't swim.", "I swim.", "Swim?"],
+          "iconName": "swim",
+          "translationText": "Да, я могу плавать.",
+          "hintText": "Подумай, можешь ли ты это сделать.",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "animals",
+      "topicName": "Животные",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "dog, cat, elephant",
+          "promptText": "Повтори вслух эти слова о животных.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "dog",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["dog", "cat", "elephant"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это собака.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "dog",
+          "options": null,
+          "iconName": "dog",
+          "translationText": "Собака",
+          "hintText": "Первая буква D, последняя G.",
+          "extraData": {
+            "scrambledLetters": ["g", "o", "d"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'кот'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "cat",
+          "options": ["cat", "dog", "fish", "bird"],
+          "iconName": "cat",
+          "translationText": "Кот",
+          "hintText": "Это домашнее животное.",
+          "extraData": {},
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'слон'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "elephant",
+          "options": ["elephant", "tiger", "lion", "bear"],
+          "iconName": "elephant",
+          "translationText": "Слон",
+          "hintText": "Это большое животное с хоботом.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это кот.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "cat",
+          "options": null,
+          "iconName": "cat",
+          "translationText": "Кот",
+          "hintText": "Первая буква C, последняя T.",
+          "extraData": {
+            "scrambledLetters": ["a", "t", "c"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'птица'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "bird",
+          "options": ["bird", "fish", "cat", "dog"],
+          "iconName": "bird",
+          "translationText": "Птица",
+          "hintText": "Это животное, которое летает.",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'собака' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "dog",
+          "options": ["dog", "cat", "bird", "lion"],
+          "iconName": "dog",
+          "translationText": "Собака",
+          "hintText": "Это домашнее животное.",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'птица' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "bird",
+          "options": ["bird", "fish", "dog", "cat"],
+          "iconName": "bird",
+          "translationText": "Птица",
+          "hintText": "Это животное, которое летает.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "cat, dog, bird",
+          "promptText": "Повтори вслух эти слова о животных.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "cat",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["cat", "dog", "bird"]
+          },
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'рыба'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "fish",
+          "options": ["fish", "bird", "cat", "dog"],
+          "iconName": "fish",
+          "translationText": "Рыба",
+          "hintText": "Это животное, которое живет в воде.",
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о своем любимом животном.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I like...' и названия животных.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это рыба.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "fish",
+          "options": null,
+          "iconName": "fish",
+          "translationText": "Рыба",
+          "hintText": "Первая буква F, последняя H.",
+          "extraData": {
+            "scrambledLetters": ["i", "h", "f"]
+          },
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "family",
+      "topicName": "Семья",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "mother, father, sister",
+          "promptText": "Повтори вслух эти слова о семье.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "family",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["mother", "father", "sister"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'брат'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "brother",
+          "options": ["brother", "sister", "mother", "father"],
+          "iconName": "family",
+          "translationText": "Брат",
+          "hintText": "Это мальчик в семье.",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это мама.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "mother",
+          "options": null,
+          "iconName": "family",
+          "translationText": "Мама",
+          "hintText": "Первая буква M, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["m", "o", "e", "t", "h", "r"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'папа' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "father",
+          "options": ["father", "mother", "brother", "sister"],
+          "iconName": "family",
+          "translationText": "Папа",
+          "hintText": "Это мужчина в семье.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это брат.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "brother",
+          "options": null,
+          "iconName": "family",
+          "translationText": "Брат",
+          "hintText": "Первая буква B, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["h", "e", "r", "b", "o", "t"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'сестра'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "sister",
+          "options": ["sister", "mother", "father", "brother"],
+          "iconName": "family",
+          "translationText": "Сестра",
+          "hintText": "Это девочка в семье.",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "father, brother, sister",
+          "promptText": "Повтори вслух эти слова о семье.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "family",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["father", "brother", "sister"]
+          },
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'сестра' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "sister",
+          "options": ["sister", "mother", "father", "brother"],
+          "iconName": "family",
+          "translationText": "Сестра",
+          "hintText": "Это девочка в семье.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о своей семье.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I have a...' и имена членов семьи.",
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это папа.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "father",
+          "options": null,
+          "iconName": "family",
+          "translationText": "Папа",
+          "hintText": "Первая буква F, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["a", "t", "e", "h", "r", "f"]
+          },
+          "orderIndex": 9
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'дедушка'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "grandfather",
+          "options": ["grandfather", "grandmother", "uncle", "aunt"],
+          "iconName": "family",
+          "translationText": "Дедушка",
+          "hintText": "Это отец твоей мамы или папы.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'бабушка'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "grandmother",
+          "options": ["grandmother", "grandfather", "aunt", "uncle"],
+          "iconName": "family",
+          "translationText": "Бабушка",
+          "hintText": "Это мама твоего папы или мамы.",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "toys",
+      "topicName": "Игрушки",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "car, doll, ball",
+          "promptText": "Повтори вслух эти слова о игрушках.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "toys",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["car", "doll", "ball"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'мяч'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "ball",
+          "options": ["ball", "car", "doll", "robot"],
+          "iconName": "ball",
+          "translationText": "Мяч",
+          "hintText": "Это круглая игрушка.",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это машина.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "car",
+          "options": null,
+          "iconName": "car",
+          "translationText": "Машина",
+          "hintText": "Первая буква C, последняя R.",
+          "extraData": {
+            "scrambledLetters": ["c", "a", "r"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'кукла' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "doll",
+          "options": ["doll", "car", "ball", "robot"],
+          "iconName": "doll",
+          "translationText": "Кукла",
+          "hintText": "Это игрушка для девочек.",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это кукла.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "doll",
+          "options": null,
+          "iconName": "doll",
+          "translationText": "Кукла",
+          "hintText": "Первая буква D, последняя L.",
+          "extraData": {
+            "scrambledLetters": ["d", "l", "o"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'робот'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "robot",
+          "options": ["robot", "car", "doll", "ball"],
+          "iconName": "robot",
+          "translationText": "Робот",
+          "hintText": "Это игрушка, которая двигается.",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "doll, robot, ball",
+          "promptText": "Повтори вслух эти слова о игрушках.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "doll",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["doll", "robot", "ball"]
+          },
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What is 'машина' in English?",
+          "promptText": "Выбери правильный ответ.",
+          "correctAnswer": "car",
+          "options": ["car", "doll", "ball", "robot"],
+          "iconName": "car",
+          "translationText": "Машина",
+          "hintText": "Это транспортное средство.",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о своей любимой игрушке.",
+          "promptText": "Напиши 2-3 предложения.",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'My favorite toy is...' и название игрушки.",
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это робот.",
+          "promptText": "Собери слово из букв.",
+          "correctAnswer": "robot",
+          "options": null,
+          "iconName": "robot",
+          "translationText": "Робот",
+          "hintText": "Первая буква R, последняя T.",
+          "extraData": {
+            "scrambledLetters": ["o", "t", "b", "r"]
+          },
+          "orderIndex": 9
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'конструктор'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "constructor",
+          "options": ["constructor", "ball", "car", "doll"],
+          "iconName": "constructor",
+          "translationText": "Конструктор",
+          "hintText": "Это игрушка, из которой можно строить.",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Как по-английски 'пазл'?",
+          "promptText": "Выбери правильный вариант.",
+          "correctAnswer": "puzzle",
+          "options": ["puzzle", "ball", "car", "doll"],
+          "iconName": "puzzle",
+          "translationText": "Пазл",
+          "hintText": "Это игрушка, которая состоит из кусочков.",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I can jump, I can swim.",
+      "promptText": "Повтори вслух эти фразы о действиях.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "jump",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can jump", "I can swim"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "actions",
+      "cardType": "speak",
+      "questionText": "I can't cook, I can't swim.",
+      "promptText": "Проговори эти фразы о том, что ты не можешь делать.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "cook",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can't cook", "I can't swim"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "actions",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я могу плавать'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "I can swim",
+      "options": ["I can swim", "I can't swim", "I swim", "I swim not"],
+      "iconName": "swim",
+      "translationText": "Я могу плавать",
+      "hintText": "Подумай о том, что ты умеешь делать.",
+      "extraData": {},
+      "orderIndex": 2
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What is 'прыгать' in English?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "jump",
+      "options": ["jump", "run", "swim", "fly"],
+      "iconName": "jump",
+      "translationText": "Прыгать",
+      "hintText": "Это действие, когда ты поднимаешься вверх.",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это плавание.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "swim",
+      "options": null,
+      "iconName": "swim",
+      "translationText": "Плавание",
+      "hintText": "Первая буква S, последняя M.",
+      "extraData": {
+        "scrambledLetters": ["s", "m", "i", "w"]
+      },
+      "orderIndex": 4
+    },
+    {
+      "topic": "actions",
+      "cardType": "writing",
+      "questionText": "Напиши, что ты можешь делать.",
+      "promptText": "Напиши 2-3 предложения.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Используй 'I can...'",
+      "extraData": {},
+      "orderIndex": 5
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'играть'?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "play",
+      "options": ["play", "jump", "run", "swim"],
+      "iconName": "play",
+      "translationText": "Играть",
+      "hintText": "Это действие, когда ты развлекаешься.",
+      "extraData": {},
+      "orderIndex": 6
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "Can you jump?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "Yes, I can.",
+      "options": ["Yes, I can.", "No, I can't.", "I can jump.", "Jump?"],
+      "iconName": "jump",
+      "translationText": "Да, я могу.",
+      "hintText": "Подумай, можешь ли ты это сделать.",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это играть.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "play",
+      "options": null,
+      "iconName": "play",
+      "translationText": "Играть",
+      "hintText": "Первая буква P, последняя Y.",
+      "extraData": {
+        "scrambledLetters": ["p", "l", "a", "y"]
+      },
+      "orderIndex": 8
+    },
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I can play, I can't jump.",
+      "promptText": "Повтори вслух эти фразы.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "play",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can play", "I can't jump"]
+      },
+      "orderIndex": 9
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'бегать'?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "run",
+      "options": ["run", "jump", "swim", "play"],
+      "iconName": "run",
+      "translationText": "Бегать",
+      "hintText": "Это действие, когда ты двигаешься быстро.",
+      "extraData": {},
+      "orderIndex": 10
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "Can you swim?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "Yes, I can swim.",
+      "options": ["Yes, I can swim.", "No, I can't swim.", "I swim.", "Swim?"],
+      "iconName": "swim",
+      "translationText": "Да, я могу плавать.",
+      "hintText": "Подумай, можешь ли ты это сделать.",
+      "extraData": {},
+      "orderIndex": 11
+    },
+    {
+      "topic": "animals",
+      "cardType": "repeat",
+      "questionText": "dog, cat, elephant",
+      "promptText": "Повтори вслух эти слова о животных.",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "dog",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["dog", "cat", "elephant"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это собака.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "dog",
+      "options": null,
+      "iconName": "dog",
+      "translationText": "Собака",
+      "hintText": "Первая буква D, последняя G.",
+      "extraData": {
+        "scrambledLetters": ["g", "o", "d"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'кот'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "cat",
+      "options": ["cat", "dog", "fish", "bird"],
+      "iconName": "cat",
+      "translationText": "Кот",
+      "hintText": "Это домашнее животное.",
+      "extraData": {},
+      "orderIndex": 2
+    },
+    {
+      "topic": "animals",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'слон'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "elephant",
+      "options": ["elephant", "tiger", "lion", "bear"],
+      "iconName": "elephant",
+      "translationText": "Слон",
+      "hintText": "Это большое животное с хоботом.",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это кот.",
+      "promptText": "Собери слово из букв.",
+      "correctAnswer": "cat",
+      "options": null,
+      "iconName": "cat",
+      "translationText": "Кот",
+      "hintText": "Первая буква C, последняя T.",
+      "extraData": {
+        "scrambledLetters": ["a", "t", "c"]
+      },
+      "orderIndex": 4
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "Как по-английски 'птица'?",
+      "promptText": "Выбери правильный вариант.",
+      "correctAnswer": "bird",
+      "options": ["bird", "fish", "cat", "dog"],
+      "iconName": "bird",
+      "translationText": "Птица",
+      "hintText": "Это животное, которое летает.",
+      "extraData": {},
+      "orderIndex": 5
+    },
+    {
+      "topic": "animals",
+      "cardType": "choose",
+      "questionText": "What is 'собака' in English?",
+      "promptText": "Выбери правильный ответ.",
+      "correctAnswer": "dog",
+      "options": ["dog", "cat", "bird", "lion"],
+      "iconName": "dog",
+      "translationText": "Собака",
+      "hintText": "Это домашнее животное.",
+      "extraData": {},
+      "orderIndex": 6
+    }
+
+=== ОШИБКА ===
+Expecting ',' delimiter: line 910 column 6 (char 29582)
+
+Позиция ошибки: 29582, строка 910, колонка 6

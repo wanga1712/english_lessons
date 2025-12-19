@@ -1,0 +1,135 @@
+"""
+Views для обработки видео
+Размер: ~200 строк
+"""
+import logging
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.views import View
+from lessons.models import VideoFile, Lesson
+from lessons.services.video_processor import VideoProcessor
+
+logger = logging.getLogger(__name__)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ProcessVideoView(View):
+    """API endpoint для ручной обработки видео"""
+    
+    def post(self, request, video_id):
+        """Обработать видео вручную"""
+        try:
+            import json
+            video_file = VideoFile.objects.get(id=video_id)
+            
+            # Проверяем параметр force_recreate из тела запроса
+            force_recreate = False
+            if request.body:
+                try:
+                    body_data = json.loads(request.body)
+                    force_recreate = body_data.get('force_recreate', False)
+                except json.JSONDecodeError:
+                    pass
+            
+            if video_file.status == 'processing' and not force_recreate:
+                return JsonResponse({
+                    'error': 'Видео уже обрабатывается'
+                }, status=400)
+            
+            if video_file.status == 'done' and hasattr(video_file, 'lesson') and not force_recreate:
+                return JsonResponse({
+                    'error': 'Видео уже обработано',
+                    'lesson_id': video_file.lesson.id,
+                    'message': 'Используйте параметр force_recreate=true для пересоздания урока'
+                }, status=400)
+            
+            video_file.status = 'pending'
+            video_file.error_message = None
+            video_file.save()
+            
+            processor = VideoProcessor()
+            lesson = processor.process_video(video_file, force_recreate=force_recreate)
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Видео успешно обработано' + (' (урок пересоздан)' if force_recreate else ''),
+                'lesson_id': lesson.id,
+                'lesson_title': lesson.title,
+                'cards_count': lesson.cards.count(),
+                'recreated': force_recreate
+            })
+            
+        except VideoFile.DoesNotExist:
+            return JsonResponse({'error': 'Видеофайл не найден'}, status=404)
+        except Exception as e:
+            logger.error(f'Ошибка обработки видео {video_id}: {str(e)}', exc_info=True)
+            return JsonResponse({
+                'error': f'Ошибка обработки: {str(e)}'
+            }, status=500)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ProcessNextPendingVideoView(View):
+    """API endpoint для обработки следующего ожидающего видео"""
+
+    def post(self, request):
+        try:
+            logger.info('Запрос обработки следующего видео')
+            from lessons.services.video_watcher import VideoWatcher
+            watcher = VideoWatcher()
+            watcher.process_existing_files()
+
+            video_file = (
+                VideoFile.objects
+                .exclude(status='done')
+                .order_by('created_at')
+                .first()
+            )
+
+            if not video_file:
+                logger.info('Нет видео для обработки')
+                return JsonResponse({
+                    'error': 'Новых видео для обработки нет'
+                }, status=404)
+
+            if video_file.status in ('error', 'processing'):
+                logger.info(
+                    'Видео %s в статусе %s, переустанавливаем в pending',
+                    video_file.file_name,
+                    video_file.status,
+                )
+                video_file.status = 'pending'
+                video_file.error_message = None
+                video_file.save()
+
+            processor = VideoProcessor()
+            logger.info(
+                'Начинаем обработку видео: %s (id=%s)',
+                video_file.file_name,
+                video_file.id,
+            )
+            lesson = processor.process_video(video_file)
+
+            response_data = {
+                'success': True,
+                'message': 'Видео успешно обработано',
+                'lesson_id': lesson.id,
+                'lesson_title': lesson.title,
+                'cards_count': lesson.cards.count(),
+                'video_id': video_file.id,
+                'video_file_name': video_file.file_name,
+            }
+            logger.info(
+                'Обработка завершена успешно: урок id=%s, карточек=%s',
+                lesson.id,
+                response_data['cards_count'],
+            )
+            return JsonResponse(response_data)
+
+        except Exception as e:
+            logger.error(f'Ошибка обработки следующего видео: {str(e)}', exc_info=True)
+            return JsonResponse({
+                'error': f'Ошибка обработки: {str(e)}'
+            }, status=500)
+

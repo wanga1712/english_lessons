@@ -1,0 +1,1882 @@
+=== ОРИГИНАЛЬНЫЙ ОТВЕТ ===
+{
+  "lessonTitle": "Actions, Food, Animals",
+  "lessonDescription": "На уроке мы учили действия, еду и животных.",
+  "languageLevel": "A1",
+  "topics": [
+    {
+      "topic": "actions",
+      "topicName": "Действия",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "I can swim, I can't cook",
+          "promptText": "Повтори вслух эти фразы о действиях",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "run",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can swim", "I can't cook"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "speak",
+          "questionText": "Can you jump?",
+          "promptText": "Скажи, можешь ли ты прыгать?",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "jump",
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 1
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'make a sandwich' mean?",
+          "promptText": "Объясни, что значит 'сделать сэндвич'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я не могу готовить'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I can't cook",
+          "options": ["I can't cook", "I can cook", "I can't swim", "I can swim"],
+          "iconName": null,
+          "translationText": "Я не могу готовить",
+          "hintText": "Подумай о том, что ты не можешь сделать",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это прыгать",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "jump",
+          "options": null,
+          "iconName": "jump",
+          "translationText": "Прыгать",
+          "hintText": "Первая буква J, последняя P",
+          "extraData": {
+            "scrambledLetters": ["j", "u", "m", "p"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'cleaning' mean?",
+          "promptText": "Объясни, что значит 'уборка'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 5
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это прыгать",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "dance",
+          "options": null,
+          "iconName": "dance",
+          "translationText": "Танцевать",
+          "hintText": "Первая буква D, последняя E",
+          "extraData": {
+            "scrambledLetters": ["d", "a", "n", "c", "e"]
+          },
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What can you do?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I can swim",
+          "options": ["I can swim", "I can't swim", "I can't jump", "I can cook"],
+          "iconName": null,
+          "translationText": "Я могу плавать",
+          "hintText": "Подумай о том, что ты умеешь делать",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши три вещи, которые ты можешь делать.",
+          "promptText": "Напиши свои действия",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Подумай о том, что ты умеешь делать",
+          "extraData": null,
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'I don't like cleaning' mean?",
+          "promptText": "Объясни, что значит 'мне не нравится уборка'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 9
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Can you run?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "Yes, I can",
+          "options": ["Yes, I can", "No, I can't", "I can't run", "I can run"],
+          "iconName": null,
+          "translationText": "Да, я могу",
+          "hintText": "Подумай, можешь ли ты бегать",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I like running, I like jumping",
+          "promptText": "Повтори вслух эти фразы о действиях",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "run",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I like running", "I like jumping"]
+          },
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "food",
+      "topicName": "Еда",
+      "cards": [
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'sandwich' mean?",
+          "promptText": "Объясни, что значит 'сэндвич'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 0
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это торт",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "cake",
+          "options": null,
+          "iconName": "cake",
+          "translationText": "Торт",
+          "hintText": "Первая буква C, последняя E",
+          "extraData": {
+            "scrambledLetters": ["c", "a", "k", "e"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I like cake, I like salad",
+          "promptText": "Повтори вслух эти фразы о еде",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "cake",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I like cake", "I like salad"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я люблю торт'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I like cake",
+          "options": ["I like cake", "I love cake", "I don't like cake", "I like salad"],
+          "iconName": null,
+          "translationText": "Я люблю торт",
+          "hintText": "Подумай о том, что ты любишь есть",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'salad' mean?",
+          "promptText": "Объясни, что значит 'салат'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 4
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это картошка",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "potato",
+          "options": null,
+          "iconName": "food",
+          "translationText": "Картошка",
+          "hintText": "Первая буква P, последняя O",
+          "extraData": {
+            "scrambledLetters": ["p", "o", "t", "a", "t", "o"]
+          },
+          "orderIndex": 5
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'cheese' mean?",
+          "promptText": "Объясни, что значит 'сыр'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What do you like?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I like salad",
+          "options": ["I like salad", "I don't like salad", "I can't eat salad", "I like cake"],
+          "iconName": null,
+          "translationText": "Я люблю салат",
+          "hintText": "Подумай, что ты любишь есть",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши три вещи, которые ты любишь есть.",
+          "promptText": "Напиши свои любимые продукты",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Подумай о том, что ты любишь есть",
+          "extraData": null,
+          "orderIndex": 8
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What do you see in the fridge?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I see cheese",
+          "options": ["I see cheese", "I see bread", "I see salad", "I see cake"],
+          "iconName": null,
+          "translationText": "Я вижу сыр",
+          "hintText": "Подумай, что есть в холодильнике",
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I have got a sandwich, I have got a cake",
+          "promptText": "Повтори вслух эти фразы о еде",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "sandwich",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I have got a sandwich", "I have got a cake"]
+          },
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'book' mean?",
+          "promptText": "Объясни, что значит 'книга'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "animals",
+      "topicName": "Животные",
+      "cards": [
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'cat' mean?",
+          "promptText": "Объясни, что значит 'кот'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 0
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это собака",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "dog",
+          "options": null,
+          "iconName": "dog",
+          "translationText": "Собака",
+          "hintText": "Первая буква D, последняя G",
+          "extraData": {
+            "scrambledLetters": ["d", "o", "g"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I like dogs, I like cats",
+          "promptText": "Повтори вслух эти фразы о животных",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "dog",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I like dogs", "I like cats"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я люблю котов'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I like cats",
+          "options": ["I like cats", "I love cats", "I don't like cats", "I like dogs"],
+          "iconName": null,
+          "translationText": "Я люблю котов",
+          "hintText": "Подумай о том, что ты любишь",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'bird' mean?",
+          "promptText": "Объясни, что значит 'птица'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 4
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это корова",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "cow",
+          "options": null,
+          "iconName": "cow",
+          "translationText": "Корова",
+          "hintText": "Первая буква C, последняя W",
+          "extraData": {
+            "scrambledLetters": ["c", "o", "w"]
+          },
+          "orderIndex": 5
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'sheep' mean?",
+          "promptText": "Объясни, что значит 'овца'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What do you see at the zoo?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I see a lion",
+          "options": ["I see a lion", "I see a dog", "I see a cat", "I see a bird"],
+          "iconName": null,
+          "translationText": "Я вижу льва",
+          "hintText": "Подумай, кого ты видишь в зоопарке",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши три животных, которые тебе нравятся.",
+          "promptText": "Напиши своих любимых животных",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Подумай о своих любимых животных",
+          "extraData": null,
+          "orderIndex": 8
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What animal do you like?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I like cats",
+          "options": ["I like cats", "I don't like cats", "I can't see cats", "I like dogs"],
+          "iconName": null,
+          "translationText": "Я люблю котов",
+          "hintText": "Подумай, какое животное тебе нравится",
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I have got a dog, I have got a cat",
+          "promptText": "Повтори вслух эти фразы о животных",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "dog",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I have got a dog", "I have got a cat"]
+          },
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'fish' mean?",
+          "promptText": "Объясни, что значит 'рыба'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 11
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I can swim, I can't cook",
+      "promptText": "Повтори вслух эти фразы о действиях",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "run",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can swim", "I can't cook"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "actions",
+      "cardType": "speak",
+      "questionText": "Can you jump?",
+      "promptText": "Скажи, можешь ли ты прыгать?",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "jump",
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 1
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What does 'make a sandwich' mean?",
+      "promptText": "Объясни, что значит 'сделать сэндвич'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 2
+    },
+    {
+      "topic": "actions",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я не могу готовить'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I can't cook",
+      "options": ["I can't cook", "I can cook", "I can't swim", "I can swim"],
+      "iconName": null,
+      "translationText": "Я не могу готовить",
+      "hintText": "Подумай о том, что ты не можешь сделать",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это прыгать",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "jump",
+      "options": null,
+      "iconName": "jump",
+      "translationText": "Прыгать",
+      "hintText": "Первая буква J, последняя P",
+      "extraData": {
+        "scrambledLetters": ["j", "u", "m", "p"]
+      },
+      "orderIndex": 4
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What does 'cleaning' mean?",
+      "promptText": "Объясни, что значит 'уборка'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 5
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это прыгать",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "dance",
+      "options": null,
+      "iconName": "dance",
+      "translationText": "Танцевать",
+      "hintText": "Первая буква D, последняя E",
+      "extraData": {
+        "scrambledLetters": ["d", "a", "n", "c", "e"]
+      },
+      "orderIndex": 6
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "What can you do?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I can swim",
+      "options": ["I can swim", "I can't swim", "I can't jump", "I can cook"],
+      "iconName": null,
+      "translationText": "Я могу плавать",
+      "hintText": "Подумай о том, что ты умеешь делать",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "actions",
+      "cardType": "writing",
+      "questionText": "Напиши три вещи, которые ты можешь делать.",
+      "promptText": "Напиши свои действия",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Подумай о том, что ты умеешь делать",
+      "extraData": null,
+      "orderIndex": 8
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What does 'I don't like cleaning' mean?",
+      "promptText": "Объясни, что значит 'мне не нравится уборка'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 9
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "Can you run?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "Yes, I can",
+      "options": ["Yes, I can", "No, I can't", "I can't run", "I can run"],
+      "iconName": null,
+      "translationText": "Да, я могу",
+      "hintText": "Подумай, можешь ли ты бегать",
+      "extraData": {},
+      "orderIndex": 10
+    },
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I like running, I like jumping",
+      "promptText": "Повтори вслух эти фразы о действиях",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "run",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I like running", "I like jumping"]
+      },
+      "orderIndex": 11
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'sandwich' mean?",
+      "promptText": "Объясни, что значит 'сэндвич'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 0
+    },
+    {
+      "topic": "food",
+      "cardType": "spelling",
+      "questionText": "Что это? Это торт",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "cake",
+      "options": null,
+      "iconName": "cake",
+      "translationText": "Торт",
+      "hintText": "Первая буква C, последняя E",
+      "extraData": {
+        "scrambledLetters": ["c", "a", "k", "e"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "food",
+      "cardType": "repeat",
+      "questionText": "I like cake, I like salad",
+      "promptText": "Повтори вслух эти фразы о еде",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "cake",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I like cake", "I like salad"]
+      },
+      "orderIndex": 2
+    },
+    {
+      "topic": "food",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я люблю торт'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I like cake",
+      "options": ["I like cake", "I love cake", "I don't like cake", "I like salad"],
+      "iconName": null,
+      "translationText": "Я люблю торт",
+      "hintText": "Подумай о том, что ты любишь есть",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'salad' mean?",
+      "promptText": "Объясни, что значит 'салат'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 4
+    },
+    {
+      "topic": "food",
+      "cardType": "spelling",
+      "questionText": "Что это? Это картошка",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "potato",
+      "options": null,
+      "iconName": "food",
+      "translationText": "Картошка",
+      "hintText": "Первая буква P, последняя O",
+      "extraData": {
+        "scrambledLetters": ["p", "o", "t", "a", "t", "o"]
+      },
+      "orderIndex": 5
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'cheese' mean?",
+      "promptText": "Объясни, что значит 'сыр'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 6
+    },
+    {
+      "topic": "food",
+      "cardType": "choose",
+      "questionText": "What do you like?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I like salad",
+      "options": ["I like salad", "I don't like salad", "I can't eat salad", "I like cake"],
+      "iconName": null,
+      "translationText": "Я люблю салат",
+      "hintText": "Подумай, что ты любишь есть",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "food",
+      "cardType": "writing",
+      "questionText": "Напиши три вещи, которые ты любишь есть.",
+      "promptText": "Напиши свои любимые продукты",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Подумай о том, что ты любишь есть",
+      "extraData": null,
+      "orderIndex": 8
+    },
+    {
+      "topic": "food",
+      "cardType": "choose",
+      "questionText": "What do you see in the fridge?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I see cheese",
+      "options": ["I see cheese", "I see bread", "I see salad", "I see cake"],
+      "iconName": null,
+      "translationText": "Я вижу сыр",
+      "hintText": "Подумай, что есть в холодильнике",
+      "extraData": {},
+      "orderIndex": 9
+    },
+    {
+      "topic": "food",
+      "cardType": "repeat",
+      "questionText": "I have got a sandwich, I have got a cake",
+      "promptText": "Повтори вслух эти фразы о еде",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "sandwich",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I have got a sandwich", "I have got a cake"]
+      },
+      "orderIndex": 10
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'book' mean?",
+      "promptText": "Объясни, что значит 'книга'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 11
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "What does 'cat' mean?",
+      "promptText": "Объясни, что значит 'кот'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 0
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это собака",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "dog",
+      "options": null,
+      "iconName": "dog",
+      "translationText": "Собака",
+      "hintText": "Первая буква D, последняя G",
+      "extraData": {
+        "scrambledLetters": ["d", "o", "g"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "animals",
+      "cardType": "repeat",
+      "questionText": "I like dogs, I like cats",
+      "promptText": "Повтори вслух эти фразы о животных",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "dog",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I like dogs", "I like cats"]
+      },
+      "orderIndex": 2
+    },
+    {
+      "topic": "animals",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я люблю котов'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I like cats",
+      "options": ["I like cats", "I love cats", "I don't like cats", "I like dogs"],
+      "iconName": null,
+      "translationText": "Я люблю котов",
+      "hintText": "Подумай о том, что ты любишь",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "What does 'bird' mean?",
+      "promptText": "Объясни, что значит 'птица'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 4
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это корова",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "cow",
+      "options": null,
+      "iconName": "cow",
+      "translationText": "Корова",
+      "hintText": "Первая буква C, последняя W",
+      "extraData": {
+        "scrambledLetters": ["c", "o", "w"]
+      },
+      "orderIndex": 5
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "What does 'sheep' mean?",
+      "promptText": "Объясни, что значит 'овца'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 6
+    },
+    {
+      "topic": "animals",
+      "cardType": "choose",
+      "questionText": "What do you see at the zoo?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I see a lion",
+      "options": ["I see a lion", "I see a dog", "I see a cat", "I see a bird"],
+      "iconName": null,
+      "translationText": "Я вижу льва",
+      "hintText": "Подумай, кого ты видишь в зоопарке",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "animals",
+      "cardType": "writing",
+      "questionText": "Напиши три животных, которые тебе нравятся.",
+      "promptText": "Напиши своих любимых животных",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Подумай о своих любимых животных",
+      "extraData": null,
+      "orderIndex": 8
+    },
+    {
+      "topic": "animals",
+      "cardType": "choose",
+      "questionText": "What animal do you like?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I like cats",
+      "options": ["I like cats", "I don't like cats", "I can't see cats", "I like dogs"],
+      "iconName": null,
+      "translationText": "Я люблю котов",
+     
+
+=== ПОСЛЕ ОЧИСТКИ ===
+{
+  "lessonTitle": "Actions, Food, Animals",
+  "lessonDescription": "На уроке мы учили действия, еду и животных.",
+  "languageLevel": "A1",
+  "topics": [
+    {
+      "topic": "actions",
+      "topicName": "Действия",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "I can swim, I can't cook",
+          "promptText": "Повтори вслух эти фразы о действиях",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "run",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can swim", "I can't cook"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "speak",
+          "questionText": "Can you jump?",
+          "promptText": "Скажи, можешь ли ты прыгать?",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "jump",
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 1
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'make a sandwich' mean?",
+          "promptText": "Объясни, что значит 'сделать сэндвич'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я не могу готовить'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I can't cook",
+          "options": ["I can't cook", "I can cook", "I can't swim", "I can swim"],
+          "iconName": null,
+          "translationText": "Я не могу готовить",
+          "hintText": "Подумай о том, что ты не можешь сделать",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это прыгать",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "jump",
+          "options": null,
+          "iconName": "jump",
+          "translationText": "Прыгать",
+          "hintText": "Первая буква J, последняя P",
+          "extraData": {
+            "scrambledLetters": ["j", "u", "m", "p"]
+          },
+          "orderIndex": 4
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'cleaning' mean?",
+          "promptText": "Объясни, что значит 'уборка'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 5
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это прыгать",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "dance",
+          "options": null,
+          "iconName": "dance",
+          "translationText": "Танцевать",
+          "hintText": "Первая буква D, последняя E",
+          "extraData": {
+            "scrambledLetters": ["d", "a", "n", "c", "e"]
+          },
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What can you do?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I can swim",
+          "options": ["I can swim", "I can't swim", "I can't jump", "I can cook"],
+          "iconName": null,
+          "translationText": "Я могу плавать",
+          "hintText": "Подумай о том, что ты умеешь делать",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши три вещи, которые ты можешь делать.",
+          "promptText": "Напиши свои действия",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Подумай о том, что ты умеешь делать",
+          "extraData": null,
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'I don't like cleaning' mean?",
+          "promptText": "Объясни, что значит 'мне не нравится уборка'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 9
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Can you run?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "Yes, I can",
+          "options": ["Yes, I can", "No, I can't", "I can't run", "I can run"],
+          "iconName": null,
+          "translationText": "Да, я могу",
+          "hintText": "Подумай, можешь ли ты бегать",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I like running, I like jumping",
+          "promptText": "Повтори вслух эти фразы о действиях",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "run",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I like running", "I like jumping"]
+          },
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "food",
+      "topicName": "Еда",
+      "cards": [
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'sandwich' mean?",
+          "promptText": "Объясни, что значит 'сэндвич'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 0
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это торт",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "cake",
+          "options": null,
+          "iconName": "cake",
+          "translationText": "Торт",
+          "hintText": "Первая буква C, последняя E",
+          "extraData": {
+            "scrambledLetters": ["c", "a", "k", "e"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I like cake, I like salad",
+          "promptText": "Повтори вслух эти фразы о еде",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "cake",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I like cake", "I like salad"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я люблю торт'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I like cake",
+          "options": ["I like cake", "I love cake", "I don't like cake", "I like salad"],
+          "iconName": null,
+          "translationText": "Я люблю торт",
+          "hintText": "Подумай о том, что ты любишь есть",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'salad' mean?",
+          "promptText": "Объясни, что значит 'салат'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 4
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это картошка",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "potato",
+          "options": null,
+          "iconName": "food",
+          "translationText": "Картошка",
+          "hintText": "Первая буква P, последняя O",
+          "extraData": {
+            "scrambledLetters": ["p", "o", "t", "a", "t", "o"]
+          },
+          "orderIndex": 5
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'cheese' mean?",
+          "promptText": "Объясни, что значит 'сыр'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What do you like?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I like salad",
+          "options": ["I like salad", "I don't like salad", "I can't eat salad", "I like cake"],
+          "iconName": null,
+          "translationText": "Я люблю салат",
+          "hintText": "Подумай, что ты любишь есть",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши три вещи, которые ты любишь есть.",
+          "promptText": "Напиши свои любимые продукты",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Подумай о том, что ты любишь есть",
+          "extraData": null,
+          "orderIndex": 8
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What do you see in the fridge?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I see cheese",
+          "options": ["I see cheese", "I see bread", "I see salad", "I see cake"],
+          "iconName": null,
+          "translationText": "Я вижу сыр",
+          "hintText": "Подумай, что есть в холодильнике",
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I have got a sandwich, I have got a cake",
+          "promptText": "Повтори вслух эти фразы о еде",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "sandwich",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I have got a sandwich", "I have got a cake"]
+          },
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'book' mean?",
+          "promptText": "Объясни, что значит 'книга'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "animals",
+      "topicName": "Животные",
+      "cards": [
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'cat' mean?",
+          "promptText": "Объясни, что значит 'кот'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 0
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это собака",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "dog",
+          "options": null,
+          "iconName": "dog",
+          "translationText": "Собака",
+          "hintText": "Первая буква D, последняя G",
+          "extraData": {
+            "scrambledLetters": ["d", "o", "g"]
+          },
+          "orderIndex": 1
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I like dogs, I like cats",
+          "promptText": "Повтори вслух эти фразы о животных",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "dog",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I like dogs", "I like cats"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'я люблю котов'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "I like cats",
+          "options": ["I like cats", "I love cats", "I don't like cats", "I like dogs"],
+          "iconName": null,
+          "translationText": "Я люблю котов",
+          "hintText": "Подумай о том, что ты любишь",
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'bird' mean?",
+          "promptText": "Объясни, что значит 'птица'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 4
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это корова",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "cow",
+          "options": null,
+          "iconName": "cow",
+          "translationText": "Корова",
+          "hintText": "Первая буква C, последняя W",
+          "extraData": {
+            "scrambledLetters": ["c", "o", "w"]
+          },
+          "orderIndex": 5
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'sheep' mean?",
+          "promptText": "Объясни, что значит 'овца'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 6
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What do you see at the zoo?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I see a lion",
+          "options": ["I see a lion", "I see a dog", "I see a cat", "I see a bird"],
+          "iconName": null,
+          "translationText": "Я вижу льва",
+          "hintText": "Подумай, кого ты видишь в зоопарке",
+          "extraData": {},
+          "orderIndex": 7
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши три животных, которые тебе нравятся.",
+          "promptText": "Напиши своих любимых животных",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Подумай о своих любимых животных",
+          "extraData": null,
+          "orderIndex": 8
+        },
+        {
+          "cardType": "choose",
+          "questionText": "What animal do you like?",
+          "promptText": "Выбери правильный ответ",
+          "correctAnswer": "I like cats",
+          "options": ["I like cats", "I don't like cats", "I can't see cats", "I like dogs"],
+          "iconName": null,
+          "translationText": "Я люблю котов",
+          "hintText": "Подумай, какое животное тебе нравится",
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "repeat",
+          "questionText": "I have got a dog, I have got a cat",
+          "promptText": "Повтори вслух эти фразы о животных",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "dog",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I have got a dog", "I have got a cat"]
+          },
+          "orderIndex": 10
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "What does 'fish' mean?",
+          "promptText": "Объясни, что значит 'рыба'",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": null,
+          "orderIndex": 11
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I can swim, I can't cook",
+      "promptText": "Повтори вслух эти фразы о действиях",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "run",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I can swim", "I can't cook"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "actions",
+      "cardType": "speak",
+      "questionText": "Can you jump?",
+      "promptText": "Скажи, можешь ли ты прыгать?",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "jump",
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 1
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What does 'make a sandwich' mean?",
+      "promptText": "Объясни, что значит 'сделать сэндвич'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 2
+    },
+    {
+      "topic": "actions",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я не могу готовить'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I can't cook",
+      "options": ["I can't cook", "I can cook", "I can't swim", "I can swim"],
+      "iconName": null,
+      "translationText": "Я не могу готовить",
+      "hintText": "Подумай о том, что ты не можешь сделать",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это прыгать",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "jump",
+      "options": null,
+      "iconName": "jump",
+      "translationText": "Прыгать",
+      "hintText": "Первая буква J, последняя P",
+      "extraData": {
+        "scrambledLetters": ["j", "u", "m", "p"]
+      },
+      "orderIndex": 4
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What does 'cleaning' mean?",
+      "promptText": "Объясни, что значит 'уборка'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 5
+    },
+    {
+      "topic": "actions",
+      "cardType": "spelling",
+      "questionText": "Что это? Это прыгать",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "dance",
+      "options": null,
+      "iconName": "dance",
+      "translationText": "Танцевать",
+      "hintText": "Первая буква D, последняя E",
+      "extraData": {
+        "scrambledLetters": ["d", "a", "n", "c", "e"]
+      },
+      "orderIndex": 6
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "What can you do?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I can swim",
+      "options": ["I can swim", "I can't swim", "I can't jump", "I can cook"],
+      "iconName": null,
+      "translationText": "Я могу плавать",
+      "hintText": "Подумай о том, что ты умеешь делать",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "actions",
+      "cardType": "writing",
+      "questionText": "Напиши три вещи, которые ты можешь делать.",
+      "promptText": "Напиши свои действия",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Подумай о том, что ты умеешь делать",
+      "extraData": null,
+      "orderIndex": 8
+    },
+    {
+      "topic": "actions",
+      "cardType": "new_words",
+      "questionText": "What does 'I don't like cleaning' mean?",
+      "promptText": "Объясни, что значит 'мне не нравится уборка'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 9
+    },
+    {
+      "topic": "actions",
+      "cardType": "choose",
+      "questionText": "Can you run?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "Yes, I can",
+      "options": ["Yes, I can", "No, I can't", "I can't run", "I can run"],
+      "iconName": null,
+      "translationText": "Да, я могу",
+      "hintText": "Подумай, можешь ли ты бегать",
+      "extraData": {},
+      "orderIndex": 10
+    },
+    {
+      "topic": "actions",
+      "cardType": "repeat",
+      "questionText": "I like running, I like jumping",
+      "promptText": "Повтори вслух эти фразы о действиях",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "run",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I like running", "I like jumping"]
+      },
+      "orderIndex": 11
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'sandwich' mean?",
+      "promptText": "Объясни, что значит 'сэндвич'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 0
+    },
+    {
+      "topic": "food",
+      "cardType": "spelling",
+      "questionText": "Что это? Это торт",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "cake",
+      "options": null,
+      "iconName": "cake",
+      "translationText": "Торт",
+      "hintText": "Первая буква C, последняя E",
+      "extraData": {
+        "scrambledLetters": ["c", "a", "k", "e"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "food",
+      "cardType": "repeat",
+      "questionText": "I like cake, I like salad",
+      "promptText": "Повтори вслух эти фразы о еде",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "cake",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I like cake", "I like salad"]
+      },
+      "orderIndex": 2
+    },
+    {
+      "topic": "food",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я люблю торт'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I like cake",
+      "options": ["I like cake", "I love cake", "I don't like cake", "I like salad"],
+      "iconName": null,
+      "translationText": "Я люблю торт",
+      "hintText": "Подумай о том, что ты любишь есть",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'salad' mean?",
+      "promptText": "Объясни, что значит 'салат'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 4
+    },
+    {
+      "topic": "food",
+      "cardType": "spelling",
+      "questionText": "Что это? Это картошка",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "potato",
+      "options": null,
+      "iconName": "food",
+      "translationText": "Картошка",
+      "hintText": "Первая буква P, последняя O",
+      "extraData": {
+        "scrambledLetters": ["p", "o", "t", "a", "t", "o"]
+      },
+      "orderIndex": 5
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'cheese' mean?",
+      "promptText": "Объясни, что значит 'сыр'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 6
+    },
+    {
+      "topic": "food",
+      "cardType": "choose",
+      "questionText": "What do you like?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I like salad",
+      "options": ["I like salad", "I don't like salad", "I can't eat salad", "I like cake"],
+      "iconName": null,
+      "translationText": "Я люблю салат",
+      "hintText": "Подумай, что ты любишь есть",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "food",
+      "cardType": "writing",
+      "questionText": "Напиши три вещи, которые ты любишь есть.",
+      "promptText": "Напиши свои любимые продукты",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Подумай о том, что ты любишь есть",
+      "extraData": null,
+      "orderIndex": 8
+    },
+    {
+      "topic": "food",
+      "cardType": "choose",
+      "questionText": "What do you see in the fridge?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I see cheese",
+      "options": ["I see cheese", "I see bread", "I see salad", "I see cake"],
+      "iconName": null,
+      "translationText": "Я вижу сыр",
+      "hintText": "Подумай, что есть в холодильнике",
+      "extraData": {},
+      "orderIndex": 9
+    },
+    {
+      "topic": "food",
+      "cardType": "repeat",
+      "questionText": "I have got a sandwich, I have got a cake",
+      "promptText": "Повтори вслух эти фразы о еде",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "sandwich",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I have got a sandwich", "I have got a cake"]
+      },
+      "orderIndex": 10
+    },
+    {
+      "topic": "food",
+      "cardType": "new_words",
+      "questionText": "What does 'book' mean?",
+      "promptText": "Объясни, что значит 'книга'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 11
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "What does 'cat' mean?",
+      "promptText": "Объясни, что значит 'кот'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 0
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это собака",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "dog",
+      "options": null,
+      "iconName": "dog",
+      "translationText": "Собака",
+      "hintText": "Первая буква D, последняя G",
+      "extraData": {
+        "scrambledLetters": ["d", "o", "g"]
+      },
+      "orderIndex": 1
+    },
+    {
+      "topic": "animals",
+      "cardType": "repeat",
+      "questionText": "I like dogs, I like cats",
+      "promptText": "Повтори вслух эти фразы о животных",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "dog",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["I like dogs", "I like cats"]
+      },
+      "orderIndex": 2
+    },
+    {
+      "topic": "animals",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'я люблю котов'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "I like cats",
+      "options": ["I like cats", "I love cats", "I don't like cats", "I like dogs"],
+      "iconName": null,
+      "translationText": "Я люблю котов",
+      "hintText": "Подумай о том, что ты любишь",
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "What does 'bird' mean?",
+      "promptText": "Объясни, что значит 'птица'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 4
+    },
+    {
+      "topic": "animals",
+      "cardType": "spelling",
+      "questionText": "Что это? Это корова",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "cow",
+      "options": null,
+      "iconName": "cow",
+      "translationText": "Корова",
+      "hintText": "Первая буква C, последняя W",
+      "extraData": {
+        "scrambledLetters": ["c", "o", "w"]
+      },
+      "orderIndex": 5
+    },
+    {
+      "topic": "animals",
+      "cardType": "new_words",
+      "questionText": "What does 'sheep' mean?",
+      "promptText": "Объясни, что значит 'овца'",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": null,
+      "extraData": null,
+      "orderIndex": 6
+    },
+    {
+      "topic": "animals",
+      "cardType": "choose",
+      "questionText": "What do you see at the zoo?",
+      "promptText": "Выбери правильный ответ",
+      "correctAnswer": "I see a lion",
+      "options": ["I see a lion", "I see a dog", "I see a cat", "I see a bird"],
+      "iconName": null,
+      "translationText": "Я вижу льва",
+      "hintText": "Подумай, кого ты видишь в зоопарке",
+      "extraData": {},
+      "orderIndex": 7
+    },
+    {
+      "topic": "animals",
+      "cardType": "writing",
+      "questionText": "Напиши три животных, которые тебе нравятся.",
+      "promptText": "Напиши своих любимых животных",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Подумай о своих любимых животных",
+      "extraData": null,
+      "orderIndex": 8
+    }
+
+=== ОШИБКА ===
+Expecting ',' delimiter: line 932 column 6 (char 29152)
+
+Позиция ошибки: 29152, строка 932, колонка 6

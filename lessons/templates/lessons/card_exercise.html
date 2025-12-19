@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Упражнение - {{ card.question_text|truncatewords:5 }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/card-exercise.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="user-stats">
+                <div class="avatar-container">
+                    <div class="avatar">{{ avatar_data.emoji|default:"🎓" }}</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">{{ avatar_data.name|default:"Ученик" }}</div>
+                        <div class="avatar-score">Балл: <span>{{ avatar_data.score|default:"0.0" }}</span></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span>{{ user_progress.total_experience|default:0 }}</span> XP
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>{{ user_progress.current_level|default:1 }}</span> уровень
+                </div>
+            </div>
+            <a href="javascript:window.close()" class="back-link">← Закрыть</a>
+            <h2>Упражнение: {{ lesson.title }}</h2>
+        </div>
+        <div class="content">
+            <div id="card-exercise-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const lessonId = {{ lesson.id }};
+        const cardId = {{ card.id }};
+        const cardData = {{ card_data_json|safe }};
+        const attemptId = {{ attempt_id|default:"null" }};
+    </script>
+    <script src="{% static 'lessons/js/lesson-api.js' %}"></script>
+    <script src="{% static 'lessons/js/lesson-spelling.js' %}"></script>
+    <script src="{% static 'lessons/js/lesson-render.js' %}"></script>
+    <script src="{% static 'lessons/js/card-exercise.js' %}"></script>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ lesson.title }} - Темы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/lesson-topics.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="user-stats">
+                <div class="avatar-container">
+                    <div class="avatar">{{ avatar_data.emoji|default:"🎓" }}</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">{{ avatar_data.name|default:"Ученик" }}</div>
+                        <div class="avatar-score">Балл: <span>{{ avatar_data.score|default:"0.0" }}</span></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span>{{ user_progress.total_experience|default:0 }}</span> XP
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>{{ user_progress.current_level|default:1 }}</span> уровень
+                </div>
+            </div>
+            <a href="/" class="back-link">← Назад к урокам</a>
+            <h1>{{ lesson.title }}</h1>
+            <div class="description">{{ lesson.description }}</div>
+        </div>
+        <div class="content">
+            <div class="topics-grid">
+                {% for topic in topics %}
+                <div class="topic-card" onclick="window.location.href='/lesson/{{ lesson.id }}/topic/{{ topic.topic }}/'">
+                    <div class="topic-icon">{{ topic.topic_name|first }}</div>
+                    <div class="topic-info">
+                        <h3>{{ topic.topic_name }}</h3>
+                        <p>{{ topic.cards_completed }}/{{ topic.cards_count }} карточек</p>
+                        {% if topic.completion_percent > 0 %}
+                        <div class="topic-progress">
+                            <div class="topic-progress-bar">
+                                <div class="topic-progress-fill" style="width: {{ topic.completion_percent }}%; 
+                                    background: {% if topic.completion_percent >= 80 %}#22c55e{% elif topic.completion_percent >= 50 %}#f59e0b{% else %}#ef4444{% endif %};">
+                                </div>
+                            </div>
+                            <span class="topic-progress-text">{{ topic.completion_percent }}%</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="topic-arrow">→</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

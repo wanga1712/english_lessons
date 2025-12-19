@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ lesson.title }} - English Lessons</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/lesson-grid.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="user-stats">
+                <div class="avatar-container">
+                    <div class="avatar" id="avatar-emoji">🎓</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name" id="avatar-name">Ученик</div>
+                        <div class="avatar-score">Балл: <span id="avatar-score">0.0</span></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span id="experience">0</span> XP
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span id="level">1</span> уровень
+                </div>
+            </div>
+            <h1>{{ lesson.title }}</h1>
+            <div class="description">{{ lesson.description }}</div>
+        </div>
+        <div class="content">
+            <a href="/lesson/{{ lesson.id }}/" class="back-link">← Назад к темам урока</a>
+            {% if current_topic %}
+            <div style="margin-bottom: 20px; padding: 16px; background: #f0f9ff; border-radius: 12px; border-left: 4px solid #667eea;">
+                <h2 style="margin: 0; font-size: 20px; color: #667eea;">Тема: {{ current_topic }}</h2>
+            </div>
+            {% endif %}
+            <div id="topics-grid" class="topics-grid"></div>
+        </div>
+    </div>
+
+
+    <script>
+        const lessonId = {{ lesson.id }};
+        const cardsData = {{ cards_data_json|safe }};
+        const topicsData = {{ topics_data_json|safe }};
+        const topicsList = {{ topics_list|safe }};
+        const avatarData = {{ avatar_data_json|safe }};
+        const userProgress = {{ user_progress_json|safe }};
+    </script>
+    <script src="{% static 'lessons/js/lesson-grid.js' %}"></script>
+</body>
+</html>
+

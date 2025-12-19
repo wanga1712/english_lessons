@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта приключений</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .teacher-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      text-decoration: none;
+      display: inline-block;
+      z-index: 1000;
+    }
+
+    .game-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      min-height: 700px;
+    }
+
+    .game-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .game-header h1 {
+      color: #667eea;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .stats-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .stat-card h3 {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    .game-map-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 600px;
+      background: linear-gradient(135deg, #87CEEB 0%, #98D8C8 50%, #F7DC6F 100%);
+      border-radius: 15px;
+      border: 5px solid #8b4513;
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    #gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .achievements-panel {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 250px;
+      z-index: 1000;
+    }
+
+    .achievement-badge {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+      margin: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .achievement-locked {
+      background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
+      opacity: 0.5;
+    }
+
+    .error-box {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+      color: #E65100;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      display: none;
+      white-space: pre-line;
+      line-height: 1.8;
+      font-size: 16px;
+      border: 3px solid #FF9800;
+      box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+    }
+    
+    .error-box a {
+      color: #667eea;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    
+    .error-box a:hover {
+      color: #764ba2;
+    }
+
+    .tooltip {
+      position: absolute;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      pointer-events: none;
+      z-index: 10000;
+      display: none;
+      max-width: 250px;
+    }
+  </style>
+</head>
+<body>
+  <a href="/teacher/" class="teacher-button">👨‍🏫 Панель учителя</a>
+
+  <div class="achievements-panel">
+    <h3 style="margin-bottom: 15px; color: #667eea; font-size: 1.1rem;">🏆 Достижения</h3>
+    <div id="achievementsList">Загрузка...</div>
+  </div>
+
+  <div class="game-container">
+    <div class="game-header">
+      <h1>🗺️ Карта Приключений</h1>
+      <p style="color: #666;">Исследуй острова знаний!</p>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <div class="stats-panel">
+      <div class="stat-card">
+        <h3 id="totalLessons">0</h3>
+        <p>Всего уроков</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="completedLessons">0</h3>
+        <p>Пройдено</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="userScore">0</h3>
+        <p>⭐ Баллов</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="currentLevel">1</h3>
+        <p>Уровень</p>
+      </div>
+    </div>
+
+    <div class="game-map-wrapper">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    console.log('=== GAME MAP SCRIPT LOADED ===');
+    
+    const LESSONS_PER_LEVEL = 25;
+    let lessons = [];
+    let completedLessons = new Set();
+    let avatarData = {name: 'Ученик', emoji: '🎓', score: 0.0};
+    
+    // Parse avatar data
+    {% if avatar_data_json %}
+    try {
+      avatarData = JSON.parse('{{ avatar_data_json|escapejs }}');
+    } catch(e) {
+      console.warn('Could not parse avatar data:', e);
+    }
+    {% endif %}
+    
+    console.log('Avatar data:', avatarData);
+    
+    // Canvas setup
+    const canvas = document.getElementById('gameCanvas');
+    if (!canvas) {
+      console.error('❌ ERROR: Canvas element not found!');
+    } else {
+      console.log('✅ Canvas element found');
+    }
+    
+    const ctx = canvas ? canvas.getContext('2d') : null;
+    if (!ctx) {
+      console.error('❌ ERROR: Cannot get canvas context!');
+    } else {
+      console.log('✅ Canvas context created');
+    }
+    
+    const tooltip = document.getElementById('tooltip');
+    let hoveredLesson = null;
+    
+    // Resize canvas
+    function resizeCanvas() {
+      if (!canvas) {
+        console.error('Cannot resize: canvas not found');
+        return;
+      }
+      const wrapper = canvas.parentElement;
+      if (!wrapper) {
+        console.error('Cannot resize: wrapper not found');
+        return;
+      }
+      canvas.width = wrapper.clientWidth;
+      canvas.height = wrapper.clientHeight;
+      console.log(`Canvas resized to ${canvas.width}x${canvas.height}`);
+      if (lessons.length > 0) {
+        renderMap();
+      }
+    }
+    
+    if (canvas) {
+      window.addEventListener('resize', resizeCanvas);
+      // Wait for DOM to be ready before resizing
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(resizeCanvas, 100);
+        });
+      } else {
+        setTimeout(resizeCanvas, 100);
+      }
+    }
+    
+    // Island positions (sequential path)
+    const islandPositions = [
+      {x: 0.1, y: 0.2},   // Island 1
+      {x: 0.25, y: 0.15},  // Island 2
+      {x: 0.4, y: 0.2},    // Island 3
+      {x: 0.55, y: 0.15},  // Island 4
+      {x: 0.7, y: 0.2},    // Island 5
+      {x: 0.85, y: 0.15},  // Island 6
+      {x: 0.9, y: 0.3},    // Island 7
+      {x: 0.75, y: 0.35},  // Island 8
+      {x: 0.6, y: 0.32},   // Island 9
+      {x: 0.45, y: 0.38},  // Island 10
+      {x: 0.3, y: 0.4},    // Island 11
+      {x: 0.15, y: 0.45},  // Island 12
+      {x: 0.2, y: 0.55},   // Island 13
+      {x: 0.35, y: 0.5},   // Island 14
+      {x: 0.5, y: 0.55},   // Island 15
+      {x: 0.65, y: 0.52},  // Island 16
+      {x: 0.8, y: 0.58},   // Island 17
+      {x: 0.85, y: 0.7},   // Island 18
+      {x: 0.7, y: 0.75},   // Island 19
+      {x: 0.55, y: 0.72},  // Island 20
+      {x: 0.4, y: 0.78},   // Island 21
+      {x: 0.25, y: 0.75},  // Island 22
+      {x: 0.15, y: 0.8},   // Island 23
+      {x: 0.3, y: 0.85},   // Island 24
+      {x: 0.5, y: 0.88}    // Island 25
+    ];
+    
+    async function loadLessons() {
+      console.log('=== LOADING LESSONS ===');
+      const errorBox = document.getElementById('errorBox');
+      const achievementsList = document.getElementById('achievementsList');
+      
+      try {
+        console.log('Fetching from /api/lessons/');
+        const response = await fetch('/api/lessons/');
+        console.log('Response status:', response.status);
+        console.log('Response ok:', response.ok);
+        
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('Response error:', errorText);
+          throw new Error('HTTP ' + response.status + ': ' + errorText);
+        }
+        
+        const data = await response.json();
+        console.log('=== DATA RECEIVED ===');
+        console.log('Full data object:', data);
+        console.log('Data keys:', Object.keys(data));
+        console.log('Has lessons property:', 'lessons' in data);
+        console.log('Lessons value:', data.lessons);
+        console.log('Lessons type:', typeof data.lessons);
+        console.log('Lessons is array:', Array.isArray(data.lessons));
+        console.log('Database info:', data.database || 'not provided');
+        console.log('Message:', data.message || 'none');
+        
+        lessons = data.lessons || [];
+        console.log('=== LESSONS ARRAY ===');
+        console.log('Lessons count:', lessons.length);
+        
+        if (lessons.length > 0) {
+          console.log('✅ SUCCESS! Lessons loaded:', lessons.length);
+          console.log('First lesson:', lessons[0]);
+          console.log('Last lesson:', lessons[lessons.length - 1]);
+          // Log first 3 lessons for debugging
+          lessons.slice(0, 3).forEach((lesson, idx) => {
+            console.log(`Lesson ${idx + 1}: id=${lesson.id}, title="${lesson.title}", cards=${lesson.cards_count || 0}`);
+          });
+        } else {
+          console.error('❌ ERROR: Lessons array is EMPTY!');
+          console.error('Full response data:', data);
+          console.error('Database used:', data.database || 'unknown');
+          console.error('Message from server:', data.message || 'none');
+          console.error('Error from server:', data.error || 'none');
+        }
+        
+        // Find completed lessons
+        lessons.forEach(lesson => {
+          if (lesson.user_completed) {
+            completedLessons.add(lesson.id);
+          }
+        });
+        
+        console.log('Completed lessons:', completedLessons.size);
+        console.log('Completed lesson IDs:', Array.from(completedLessons));
+        
+        if (lessons.length === 0) {
+          console.warn('⚠️ No lessons found!');
+          const errorMsg = '📚 Нет доступных уроков\n\n' +
+            'Чтобы начать обучение:\n\n' +
+            '1️⃣ Откройте панель учителя\n' +
+            '2️⃣ Загрузите видеофайл\n' +
+            '3️⃣ Обработайте видео\n' +
+            '4️⃣ Уроки появятся на карте!\n\n' +
+            '👉 <a href="/teacher/" style="color: #667eea; font-weight: bold; text-decoration: underline;">Перейти в панель учителя</a>';
+          showError(errorMsg);
+          if (achievementsList) {
+            achievementsList.innerHTML = '<div style="color: #999;">Нет достижений</div>';
+          }
+        } else {
+          console.log('✅ SUCCESS! Found', lessons.length, 'lessons');
+          console.log('Calling renderMap()...');
+          renderMap();
+          console.log('Calling updateStats()...');
+          updateStats();
+          console.log('Calling loadAchievements()...');
+          loadAchievements();
+          console.log('✅ All functions called');
+        }
+      } catch (error) {
+        console.error('❌ ERROR in loadLessons:', error);
+        console.error('Error stack:', error.stack);
+        showError('Ошибка загрузки: ' + error.message);
+        if (achievementsList) {
+          achievementsList.innerHTML = '<div style="color: #c62828;">Ошибка загрузки</div>';
+        }
+      }
+    }
+    
+    function showError(message) {
+      const errorBox = document.getElementById('errorBox');
+      if (errorBox) {
+        errorBox.innerHTML = message; // Use innerHTML to support links
+        errorBox.style.display = 'block';
+      }
+      console.error('Error message:', message);
+    }
+    
+    function renderMap() {
+      console.log('=== RENDERING GAME MAP ===');
+      console.log('Lessons to render:', lessons.length);
+      console.log('Lessons array:', JSON.stringify(lessons, null, 2));
+      
+      if (!canvas) {
+        console.error('❌ Canvas element not found!');
+        return;
+      }
+      
+      if (!ctx) {
+        console.error('❌ Canvas context not available!');
+        return;
+      }
+      
+      const width = canvas.width;
+      const height = canvas.height;
+      console.log('Canvas size:', width, 'x', height);
+      
+      if (width === 0 || height === 0) {
+        console.warn('⚠️ Canvas has zero size, waiting for resize...');
+        setTimeout(renderMap, 100);
+        return;
+      }
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      console.log('Canvas cleared');
+      
+      // Draw water background with waves
+      drawWaterBackground(ctx, width, height);
+      
+      // Draw paths between islands
+      lessons.forEach((lesson, index) => {
+        if (index > 0) {
+          const prevPos = islandPositions[(index - 1) % islandPositions.length];
+          const currPos = islandPositions[index % islandPositions.length];
+          const isCompleted = completedLessons.has(lessons[index - 1]?.id);
+          const isAvailable = index === 0 || completedLessons.has(lessons[index - 1]?.id);
+          
+          drawPath(ctx, 
+            prevPos.x * width, prevPos.y * height,
+            currPos.x * width, currPos.y * height,
+            isAvailable && isCompleted
+          );
+        }
+      });
+      
+      // Draw islands with lessons
+      console.log('Drawing', lessons.length, 'islands...');
+      lessons.forEach((lesson, index) => {
+        const pos = islandPositions[index % islandPositions.length];
+        const x = pos.x * width;
+        const y = pos.y * height;
+        
+        const isCompleted = completedLessons.has(lesson.id);
+        const isAvailable = index === 0 || completedLessons.has(lessons[index - 1]?.id);
+        const isCurrent = isAvailable && !isCompleted;
+        const isLocked = !isAvailable && !isCompleted;
+        
+        console.log(`Island ${index + 1}: lesson_id=${lesson.id}, pos=(${x.toFixed(0)}, ${y.toFixed(0)}), completed=${isCompleted}, available=${isAvailable}, current=${isCurrent}, locked=${isLocked}`);
+        
+        drawIsland(ctx, x, y, lesson, index, isCompleted, isCurrent, isLocked);
+      });
+      
+      console.log('✅ Map rendered successfully');
+    }
+    
+    function drawWaterBackground(ctx, width, height) {
+      // Sky gradient
+      const skyGradient = ctx.createLinearGradient(0, 0, 0, height * 0.3);
+      skyGradient.addColorStop(0, '#87CEEB');
+      skyGradient.addColorStop(1, '#E0F6FF');
+      ctx.fillStyle = skyGradient;
+      ctx.fillRect(0, 0, width, height * 0.3);
+      
+      // Water gradient
+      const waterGradient = ctx.createLinearGradient(0, height * 0.3, 0, height);
+      waterGradient.addColorStop(0, '#4A90E2');
+      waterGradient.addColorStop(0.5, '#5BA3F5');
+      waterGradient.addColorStop(1, '#2E5C8A');
+      ctx.fillStyle = waterGradient;
+      ctx.fillRect(0, height * 0.3, width, height);
+      
+      // Draw waves
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.lineWidth = 2;
+      for (let i = 0; i < 5; i++) {
+        ctx.beginPath();
+        const waveY = height * 0.3 + (i * height * 0.15);
+        ctx.moveTo(0, waveY);
+        for (let x = 0; x < width; x += 20) {
+          ctx.lineTo(x, waveY + Math.sin(x / 50 + i) * 5);
+        }
+        ctx.stroke();
+      }
+    }
+    
+    function drawPath(ctx, x1, y1, x2, y2, isActive) {
+      ctx.strokeStyle = isActive ? '#8B4513' : '#CCCCCC';
+      ctx.lineWidth = isActive ? 8 : 4;
+      ctx.lineCap = 'round';
+      ctx.setLineDash(isActive ? [] : [10, 5]);
+      
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      
+      // Curved path
+      const midX = (x1 + x2) / 2;
+      const midY = (y1 + y2) / 2 - 30;
+      ctx.quadraticCurveTo(midX, midY, x2, y2);
+      ctx.stroke();
+      
+      ctx.setLineDash([]);
+    }
+    
+    function drawIsland(ctx, x, y, lesson, index, isCompleted, isCurrent, isLocked) {
+      const islandRadius = 50;
+      const lessonRadius = 25;
+      
+      // Draw island (base)
+      const islandGradient = ctx.createRadialGradient(x, y - 10, 0, x, y, islandRadius);
+      if (isLocked) {
+        islandGradient.addColorStop(0, '#9E9E9E');
+        islandGradient.addColorStop(1, '#757575');
+      } else if (isCompleted) {
+        islandGradient.addColorStop(0, '#81C784');
+        islandGradient.addColorStop(1, '#66BB6A');
+      } else if (isCurrent) {
+        islandGradient.addColorStop(0, '#64B5F6');
+        islandGradient.addColorStop(1, '#42A5F5');
+      } else {
+        islandGradient.addColorStop(0, '#FFD54F');
+        islandGradient.addColorStop(1, '#FFC107');
+      }
+      
+      ctx.fillStyle = islandGradient;
+      ctx.beginPath();
+      ctx.arc(x, y, islandRadius, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Island border
+      ctx.strokeStyle = '#8B4513';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      // Draw lesson circle
+      const lessonGradient = ctx.createRadialGradient(x, y - 10, 0, x, y - 10, lessonRadius);
+      if (isLocked) {
+        lessonGradient.addColorStop(0, '#BDBDBD');
+        lessonGradient.addColorStop(1, '#9E9E9E');
+      } else if (isCompleted) {
+        lessonGradient.addColorStop(0, '#A5D6A7');
+        lessonGradient.addColorStop(1, '#81C784');
+      } else if (isCurrent) {
+        lessonGradient.addColorStop(0, '#90CAF9');
+        lessonGradient.addColorStop(1, '#64B5F6');
+      } else {
+        lessonGradient.addColorStop(0, '#FFF59D');
+        lessonGradient.addColorStop(1, '#FFD54F');
+      }
+      
+      ctx.fillStyle = lessonGradient;
+      ctx.beginPath();
+      ctx.arc(x, y - 10, lessonRadius, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+      
+      // Draw emoji or number
+      ctx.font = 'bold 20px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = isLocked ? '#666' : '#333';
+      
+      if (isLocked) {
+        ctx.fillText('🔒', x, y - 10);
+      } else if (isCompleted) {
+        ctx.fillText('✅', x, y - 10);
+      } else if (isCurrent) {
+        ctx.fillText('🎯', x, y - 10);
+      } else {
+        ctx.fillText('📚', x, y - 10);
+      }
+      
+      // Draw lesson number
+      ctx.font = 'bold 14px Arial';
+      ctx.fillStyle = '#333';
+      ctx.fillText((index + 1).toString(), x, y + islandRadius - 15);
+      
+      // Draw glow for current lesson
+      if (isCurrent) {
+        ctx.shadowColor = '#42A5F5';
+        ctx.shadowBlur = 20;
+        ctx.beginPath();
+        ctx.arc(x, y - 10, lessonRadius + 5, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+      }
+    }
+    
+    // Mouse interaction
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      hoveredLesson = null;
+      
+      lessons.forEach((lesson, index) => {
+        const pos = islandPositions[index % islandPositions.length];
+        const islandX = pos.x * canvas.width;
+        const islandY = pos.y * canvas.height;
+        const distance = Math.sqrt((x - islandX) ** 2 + (y - islandY) ** 2);
+        
+        if (distance < 50) {
+          const isCompleted = completedLessons.has(lesson.id);
+          const isAvailable = index === 0 || completedLessons.has(lessons[index - 1]?.id);
+          const isLocked = !isAvailable && !isCompleted;
+          
+          if (!isLocked) {
+            hoveredLesson = {lesson, index, x: islandX, y: islandY};
+            canvas.style.cursor = 'pointer';
+            showTooltip(e.clientX, e.clientY, lesson.title);
+            return;
+          }
+        }
+      });
+      
+      if (!hoveredLesson) {
+        canvas.style.cursor = 'default';
+        hideTooltip();
+      }
+    });
+    
+    canvas.addEventListener('click', (e) => {
+      if (hoveredLesson && !hoveredLesson.isLocked) {
+        window.location.href = '/lesson/' + hoveredLesson.lesson.id + '/uchi/';
+      }
+    });
+    
+    function showTooltip(x, y, text) {
+      tooltip.textContent = text;
+      tooltip.style.display = 'block';
+      tooltip.style.left = (x + 10) + 'px';
+      tooltip.style.top = (y - 40) + 'px';
+    }
+    
+    function hideTooltip() {
+      tooltip.style.display = 'none';
+    }
+    
+    function updateStats() {
+      const total = lessons.length;
+      const completed = completedLessons.size;
+      const level = Math.floor(completed / LESSONS_PER_LEVEL) + 1;
+      
+      const totalEl = document.getElementById('totalLessons');
+      const completedEl = document.getElementById('completedLessons');
+      const scoreEl = document.getElementById('userScore');
+      const levelEl = document.getElementById('currentLevel');
+      
+      if (totalEl) totalEl.textContent = total;
+      if (completedEl) completedEl.textContent = completed;
+      if (scoreEl) scoreEl.textContent = Math.round(avatarData.score || 0);
+      if (levelEl) levelEl.textContent = level;
+    }
+    
+    function loadAchievements() {
+      const achievementsList = document.getElementById('achievementsList');
+      if (!achievementsList) return;
+      
+      const achievements = [
+        {emoji: '🎉', title: 'Первый урок', unlocked: completedLessons.size >= 1},
+        {emoji: '🌟', title: '5 уроков', unlocked: completedLessons.size >= 5},
+        {emoji: '🏆', title: '10 уроков', unlocked: completedLessons.size >= 10},
+        {emoji: '🎖️', title: 'Уровень 1', unlocked: completedLessons.size >= 25},
+        {emoji: '💎', title: 'Идеально', unlocked: false},
+        {emoji: '🔥', title: 'Неделя подряд', unlocked: false},
+      ];
+      
+      achievementsList.innerHTML = achievements.map(ach => 
+        '<div class="achievement-badge ' + (ach.unlocked ? '' : 'achievement-locked') + 
+        '" title="' + ach.title + '">' + ach.emoji + '</div>'
+      ).join('');
+    }
+    
+    // Start loading when page is ready
+    console.log('Starting initialization...');
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadLessons);
+    } else {
+      loadLessons();
+    }
+  </script>
+</body>
+</html>
+

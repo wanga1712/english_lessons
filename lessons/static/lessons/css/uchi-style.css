@@ -1,0 +1,606 @@
+/* 
+ * Стили в стиле Uchi.ru
+ * Яркий, игровой дизайн для детей 7 лет
+ */
+
+:root {
+    --uchi-blue: #3B82F6;
+    --uchi-purple: #A855F7;
+    --uchi-pink: #EC4899;
+    --uchi-orange: #F97316;
+    --uchi-yellow: #FDE047;
+    --uchi-green: #10B981;
+    --uchi-red: #EF4444;
+    --uchi-bg: #F0F7FF;
+    --uchi-white: #FFFFFF;
+    --shadow-soft: 0 4px 20px rgba(59, 130, 246, 0.15);
+    --shadow-hover: 0 8px 30px rgba(59, 130, 246, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', 'Fredoka One', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Облака на фоне */
+.clouds {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+    opacity: 0.6;
+    animation: float 20s infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    50% { transform: translateX(100px) translateY(-20px); }
+}
+
+/* Контейнер приложения */
+.app-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Шапка с персонажем */
+.character-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #FFF 0%, #F0F9FF 100%);
+    border-radius: 30px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-soft);
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Персонаж-помощник */
+.character-helper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.character-avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--uchi-blue), var(--uchi-purple));
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    animation: bounce 2s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.character-avatar::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid var(--uchi-yellow);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.character-speech {
+    background: var(--uchi-white);
+    border-radius: 20px;
+    padding: 15px 25px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.character-speech::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid var(--uchi-white);
+}
+
+.character-speech h2 {
+    font-size: 24px;
+    color: var(--uchi-blue);
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+.character-speech p {
+    font-size: 16px;
+    color: #666;
+    font-weight: 600;
+}
+
+/* Статистика пользователя */
+.user-stats-uchi {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-badge {
+    background: linear-gradient(135deg, var(--uchi-yellow), var(--uchi-orange));
+    border-radius: 20px;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+    animation: statFloat 3s ease-in-out infinite;
+    min-width: 120px;
+}
+
+@keyframes statFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.stat-badge:nth-child(2) {
+    background: linear-gradient(135deg, var(--uchi-green), var(--uchi-blue));
+    animation-delay: 0.5s;
+}
+
+.stat-badge:nth-child(3) {
+    background: linear-gradient(135deg, var(--uchi-pink), var(--uchi-purple));
+    animation-delay: 1s;
+}
+
+.stat-badge i {
+    font-size: 28px;
+    color: var(--uchi-white);
+}
+
+.stat-value {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--uchi-white);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Карта уроков */
+.lesson-map {
+    background: var(--uchi-white);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 30px;
+}
+
+.lesson-map-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.lesson-map-title {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--uchi-blue), var(--uchi-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.lesson-map-subtitle {
+    font-size: 18px;
+    color: #666;
+    font-weight: 600;
+}
+
+/* Путь уроков */
+.lessons-path {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 20px 0;
+}
+
+.lessons-path::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, var(--uchi-blue), var(--uchi-purple), var(--uchi-pink));
+    border-radius: 10px;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+/* Остров урока */
+.lesson-island {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: islandAppear 0.5s ease-out backwards;
+}
+
+.lesson-island:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+@keyframes islandAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.lesson-card-uchi {
+    background: linear-gradient(135deg, #FFF, #F0F9FF);
+    border-radius: 30px;
+    padding: 30px;
+    width: 450px;
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 4px solid transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.lesson-card-uchi:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--uchi-blue);
+}
+
+.lesson-card-uchi.completed {
+    background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
+    border-color: var(--uchi-green);
+}
+
+.lesson-card-uchi.in-progress {
+    background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+    border-color: var(--uchi-orange);
+}
+
+.lesson-card-uchi.locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(0.5);
+}
+
+/* Иконка урока */
+.lesson-icon-big {
+    width: 80px;
+    height: 80px;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--uchi-blue), var(--uchi-purple));
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.lesson-icon-big.completed {
+    background: linear-gradient(135deg, var(--uchi-green), #059669);
+}
+
+.lesson-icon-big.in-progress {
+    background: linear-gradient(135deg, var(--uchi-orange), #EA580C);
+}
+
+/* Контент карточки урока */
+.lesson-title-uchi {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1F2937;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.lesson-description-uchi {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Прогресс урока */
+.lesson-progress {
+    margin-bottom: 15px;
+}
+
+.progress-bar-uchi {
+    height: 12px;
+    background: #E5E7EB;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill-uchi {
+    height: 100%;
+    background: linear-gradient(90deg, var(--uchi-green), var(--uchi-blue));
+    border-radius: 20px;
+    transition: width 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill-uchi::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+/* Звездочки */
+.stars-earned {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.star-icon {
+    font-size: 32px;
+    color: var(--uchi-yellow);
+    filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.5));
+    animation: starTwinkle 2s ease-in-out infinite;
+}
+
+.star-icon:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.star-icon:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.star-icon.empty {
+    color: #E5E7EB;
+    filter: none;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Кнопка начать урок */
+.btn-start-lesson {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--uchi-blue), var(--uchi-purple));
+    color: var(--uchi-white);
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-start-lesson:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+}
+
+.btn-start-lesson:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Маркер на карте */
+.path-marker {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: var(--uchi-white);
+    border-radius: 50%;
+    border: 4px solid var(--uchi-blue);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    z-index: 2;
+}
+
+.path-marker.completed {
+    background: linear-gradient(135deg, var(--uchi-green), #059669);
+    border-color: var(--uchi-green);
+}
+
+.path-marker.current {
+    animation: markerPulse 1.5s ease-in-out infinite;
+    border-width: 6px;
+}
+
+@keyframes markerPulse {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.2);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6);
+    }
+}
+
+/* Достижения */
+.achievements-section {
+    background: linear-gradient(135deg, #FFF, #F0F9FF);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: var(--shadow-soft);
+}
+
+.achievements-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--uchi-purple);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.achievement-badge {
+    background: var(--uchi-white);
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.achievement-badge:hover {
+    transform: translateY(-5px);
+}
+
+.achievement-badge.locked {
+    opacity: 0.4;
+    filter: grayscale(1);
+}
+
+.achievement-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.achievement-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1F2937;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .character-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .user-stats-uchi {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .lesson-island {
+        flex-direction: column !important;
+    }
+    
+    .lesson-card-uchi {
+        width: 100%;
+    }
+    
+    .lessons-path::before {
+        left: 30px;
+    }
+}
+

@@ -1,0 +1,1886 @@
+=== ОРИГИНАЛЬНЫЙ ОТВЕТ ===
+{
+  "lessonTitle": "Weather, Actions, Colors, Toys, Family",
+  "lessonDescription": "На уроке мы учили погоду, действия, цвета, игрушки и семью.",
+  "languageLevel": "A1",
+  "topics": [
+    {
+      "topic": "weather",
+      "topicName": "Погода",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "It's sunny, it's rainy, it's cloudy, it's windy",
+          "promptText": "Повтори вслух эти фразы о погоде",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "sun",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["it's sunny", "it's rainy", "it's cloudy", "it's windy"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'ветреный'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "it's windy",
+          "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+          "iconName": "wind",
+          "translationText": "Ветреный",
+          "hintText": "Подумай о погоде, когда дует ветер",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это дождь",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "rain",
+          "options": null,
+          "iconName": "rain",
+          "translationText": "Дождь",
+          "hintText": "Первая буква R, последняя N",
+          "extraData": {
+            "scrambledLetters": ["r", "a", "i", "n"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'солнце' на английском",
+          "promptText": "Как будет 'солнце'?",
+          "correctAnswer": "sun",
+          "options": null,
+          "iconName": "sun",
+          "translationText": "Солнце",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'облако' на английском",
+          "promptText": "Как будет 'облако'?",
+          "correctAnswer": "cloud",
+          "options": null,
+          "iconName": "cloud",
+          "translationText": "Облако",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, какая погода сегодня.",
+          "promptText": "Напиши 'Сегодня погода...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'sunny', 'rainy', 'cloudy' или 'windy'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one is rainy?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "it's rainy",
+          "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+          "iconName": "rain",
+          "translationText": "Дождливый",
+          "hintText": "Подумай о погоде, когда идет дождь",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это облако",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "cloud",
+          "options": null,
+          "iconName": "cloud",
+          "translationText": "Облако",
+          "hintText": "Первая буква C, последняя D",
+          "extraData": {
+            "scrambledLetters": ["c", "l", "o", "u", "d"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'снег' на английском",
+          "promptText": "Как будет 'снег'?",
+          "correctAnswer": "snow",
+          "options": null,
+          "iconName": "snow",
+          "translationText": "Снег",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'лето' на английском",
+          "promptText": "Как будет 'лето'?",
+          "correctAnswer": "summer",
+          "options": null,
+          "iconName": null,
+          "translationText": "Лето",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о твоем любимом времени года.",
+          "promptText": "Напиши 'Мое любимое время года...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'spring', 'summer', 'autumn' или 'winter'",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one is sunny?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "it's sunny",
+          "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+          "iconName": "sun",
+          "translationText": "Солнечно",
+          "hintText": "Подумай о погоде, когда светит солнце",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "actions",
+      "topicName": "Действия",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "I can read, I can jump, I can swim",
+          "promptText": "Повтори вслух эти фразы о действиях",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can read", "I can jump", "I can swim"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'прыгать'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "jump",
+          "options": ["jump", "swim", "run", "read"],
+          "iconName": null,
+          "translationText": "Прыгать",
+          "hintText": "Подумай о действии, когда ты в воздухе",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это плавание",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "swim",
+          "options": null,
+          "iconName": null,
+          "translationText": "Плавание",
+          "hintText": "Первая буква S, последняя M",
+          "extraData": {
+            "scrambledLetters": ["s", "w", "i", "m"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'играть' на английском",
+          "promptText": "Как будет 'играть'?",
+          "correctAnswer": "play",
+          "options": null,
+          "iconName": null,
+          "translationText": "Играть",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'танцевать' на английском",
+          "promptText": "Как будет 'танцевать'?",
+          "correctAnswer": "dance",
+          "options": null,
+          "iconName": null,
+          "translationText": "Танцевать",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, что ты умеешь делать.",
+          "promptText": "Напиши 'Я могу...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I can...' ",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'плавать'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "swim",
+          "options": ["run", "jump", "swim", "read"],
+          "iconName": null,
+          "translationText": "Плавать",
+          "hintText": "Подумай о действии в воде",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это бег",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "run",
+          "options": null,
+          "iconName": null,
+          "translationText": "Бег",
+          "hintText": "Первая буква R, последняя N",
+          "extraData": {
+            "scrambledLetters": ["r", "u", "n"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'прыгать' на английском",
+          "promptText": "Как будет 'прыгать'?",
+          "correctAnswer": "jump",
+          "options": null,
+          "iconName": null,
+          "translationText": "Прыгать",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'читать' на английском",
+          "promptText": "Как будет 'читать'?",
+          "correctAnswer": "read",
+          "options": null,
+          "iconName": null,
+          "translationText": "Читать",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, что ты не умеешь делать.",
+          "promptText": "Напиши 'Я не могу...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I can't...' ",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'танцевать'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "dance",
+          "options": ["dance", "jump", "run", "play"],
+          "iconName": null,
+          "translationText": "Танцевать",
+          "hintText": "Подумай о действии на сцене",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "colors",
+      "topicName": "Цвета",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "Red, blue, green, yellow",
+          "promptText": "Повтори вслух эти цвета",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["red", "blue", "green", "yellow"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'синий'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "blue",
+          "options": ["red", "blue", "green", "yellow"],
+          "iconName": null,
+          "translationText": "Синий",
+          "hintText": "Подумай о цвете неба",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это зеленый",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "green",
+          "options": null,
+          "iconName": null,
+          "translationText": "Зеленый",
+          "hintText": "Первая буква G, последняя N",
+          "extraData": {
+            "scrambledLetters": ["g", "r", "e", "e", "n"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'черный' на английском",
+          "promptText": "Как будет 'черный'?",
+          "correctAnswer": "black",
+          "options": null,
+          "iconName": null,
+          "translationText": "Черный",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'белый' на английском",
+          "promptText": "Как будет 'белый'?",
+          "correctAnswer": "white",
+          "options": null,
+          "iconName": null,
+          "translationText": "Белый",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши любимый цвет.",
+          "promptText": "Напиши 'Мой любимый цвет...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'red', 'blue', 'green' или 'yellow'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'красный'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "red",
+          "options": ["red", "blue", "green", "yellow"],
+          "iconName": null,
+          "translationText": "Красный",
+          "hintText": "Подумай о цвете помидора",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это желтый",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "yellow",
+          "options": null,
+          "iconName": null,
+          "translationText": "Желтый",
+          "hintText": "Первая буква Y, последняя W",
+          "extraData": {
+            "scrambledLetters": ["y", "e", "l", "l", "o", "w"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'оранжевый' на английском",
+          "promptText": "Как будет 'оранжевый'?",
+          "correctAnswer": "orange",
+          "options": null,
+          "iconName": null,
+          "translationText": "Оранжевый",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'розовый' на английском",
+          "promptText": "Как будет 'розовый'?",
+          "correctAnswer": "pink",
+          "options": null,
+          "iconName": null,
+          "translationText": "Розовый",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши цвет, который ты видишь сейчас.",
+          "promptText": "Напиши 'Я вижу...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Опиши цвет предмета рядом",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'синий'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "blue",
+          "options": ["red", "blue", "green", "yellow"],
+          "iconName": null,
+          "translationText": "Синий",
+          "hintText": "Подумай о цвете неба",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "toys",
+      "topicName": "Игрушки",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "Toy, car, doll, ball",
+          "promptText": "Повтори вслух эти игрушки",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["toy", "car", "doll", "ball"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'машинка'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "car",
+          "options": ["toy", "car", "doll", "ball"],
+          "iconName": null,
+          "translationText": "Машинка",
+          "hintText": "Подумай о маленьком автомобиле",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это кукла",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "doll",
+          "options": null,
+          "iconName": null,
+          "translationText": "Кукла",
+          "hintText": "Первая буква D, последняя L",
+          "extraData": {
+            "scrambledLetters": ["d", "o", "l", "l"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'мяч' на английском",
+          "promptText": "Как будет 'мяч'?",
+          "correctAnswer": "ball",
+          "options": null,
+          "iconName": null,
+          "translationText": "Мяч",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'плюшевая игрушка' на английском",
+          "promptText": "Как будет 'плюшевая игрушка'?",
+          "correctAnswer": "stuffed toy",
+          "options": null,
+          "iconName": null,
+          "translationText": "Плюшевая игрушка",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, какая у тебя любимая игрушка.",
+          "promptText": "Напиши 'Моя любимая игрушка...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'Моя любимая игрушка - машина'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'плюшевая игрушка'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "stuffed toy",
+          "options": ["stuffed toy", "doll", "ball", "car"],
+          "iconName": null,
+          "translationText": "Плюшевая игрушка",
+          "hintText": "Подумай о мягкой игрушке",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это игрушка",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "toy",
+          "options": null,
+          "iconName": null,
+          "translationText": "Игрушка",
+          "hintText": "Первая буква T, последняя Y",
+          "extraData": {
+            "scrambledLetters": ["t", "o", "y"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'конструктор' на английском",
+          "promptText": "Как будет 'конструктор'?",
+          "correctAnswer": "building blocks",
+          "options": null,
+          "iconName": null,
+          "translationText": "Конструктор",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'пазл' на английском",
+          "promptText": "Как будет 'пазл'?",
+          "correctAnswer": "puzzle",
+          "options": null,
+          "iconName": null,
+          "translationText": "Пазл",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, с кем ты играешь в игрушки.",
+          "promptText": "Напиши 'Я играю с...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'Я играю с другом'",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'мяч'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "ball",
+          "options": ["car", "doll", "ball", "toy"],
+          "iconName": null,
+          "translationText": "Мяч",
+          "hintText": "Подумай о круглом предмете, с которым играют",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "family",
+      "topicName": "Семья",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "Mom, dad, sister, brother",
+          "promptText": "Повтори вслух эти слова о семье",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["mom", "dad", "sister", "brother"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'сестра'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "sister",
+          "options": ["mom", "dad", "sister", "brother"],
+          "iconName": null,
+          "translationText": "Сестра",
+          "hintText": "Подумай о девочке, которая в твоей семье",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это брат",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "brother",
+          "options": null,
+          "iconName": null,
+          "translationText": "Брат",
+          "hintText": "Первая буква B, последняя R",
+          "extraData": {
+            "scrambledLetters": ["b", "r", "o", "t", "h", "e", "r"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'бабушка' на английском",
+          "promptText": "Как будет 'бабушка'?",
+          "correctAnswer": "grandmother",
+          "options": null,
+          "iconName": null,
+          "translationText": "Бабушка",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'дедушка' на английском",
+          "promptText": "Как будет 'дедушка'?",
+          "correctAnswer": "grandfather",
+          "options": null,
+          "iconName": null,
+          "translationText": "Дедушка",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, кто у тебя в семье.",
+          "promptText": "Напиши 'В моей семье...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'В моей семье мама и папа'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'папа'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "dad",
+          "options": ["mom", "dad", "sister", "brother"],
+          "iconName": null,
+          "translationText": "Папа",
+          "hintText": "Подумай о мужчине в твоей семье",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это мама",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "mom",
+          "options": null,
+          "iconName": null,
+          "translationText": "Мама",
+          "hintText": "Первая буква M, последняя M",
+          "extraData": {
+            "scrambledLetters": ["m", "o", "m"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'дядя' на английском",
+          "promptText": "Как будет 'дядя'?",
+          "correctAnswer": "uncle",
+          "options": null,
+          "iconName": null,
+          "translationText": "Дядя",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'тётя' на английском",
+          "promptText": "Как будет 'тётя'?",
+          "correctAnswer": "aunt",
+          "options": null,
+          "iconName": null,
+          "translationText": "Тётя",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, как зовут твою маму.",
+          "promptText": "Напиши 'Мою маму зовут...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'Мою маму зовут Анна'",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'сестра'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "sister",
+          "options": ["mom", "dad", "sister", "brother"],
+          "iconName": null,
+          "translationText": "Сестра",
+          "hintText": "Подумай о девочке в твоей семье",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "weather",
+      "cardType": "repeat",
+      "questionText": "It's sunny, it's rainy, it's cloudy, it's windy",
+      "promptText": "Повтори вслух эти фразы о погоде",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "sun",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["it's sunny", "it's rainy", "it's cloudy", "it's windy"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "weather",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'ветреный'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "it's windy",
+      "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+      "iconName": "wind",
+      "translationText": "Ветреный",
+      "hintText": "Подумай о погоде, когда дует ветер",
+      "extraData": {},
+      "orderIndex": 1
+    },
+    {
+      "topic": "weather",
+      "cardType": "spelling",
+      "questionText": "Что это? Это дождь",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "rain",
+      "options": null,
+      "iconName": "rain",
+      "translationText": "Дождь",
+      "hintText": "Первая буква R, последняя N",
+      "extraData": {
+        "scrambledLetters": ["r", "a", "i", "n"]
+      },
+      "orderIndex": 2
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'солнце' на английском",
+      "promptText": "Как будет 'солнце'?",
+      "correctAnswer": "sun",
+      "options": null,
+      "iconName": "sun",
+      "translationText": "Солнце",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'облако' на английском",
+      "promptText": "Как будет 'облако'?",
+      "correctAnswer": "cloud",
+      "options": null,
+      "iconName": "cloud",
+      "translationText": "Облако",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 4
+    },
+    {
+      "topic": "weather",
+      "cardType": "writing",
+      "questionText": "Напиши, какая погода сегодня.",
+      "promptText": "Напиши 'Сегодня погода...' ",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Используй 'sunny', 'rainy', 'cloudy' или 'windy'",
+      "extraData": {},
+      "orderIndex": 5
+    },
+    {
+      "topic": "weather",
+      "cardType": "choose",
+      "questionText": "Which one is rainy?",
+      "promptText": "Выбери правильное слово",
+      "correctAnswer": "it's rainy",
+      "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+      "iconName": "rain",
+      "translationText": "Дождливый",
+      "hintText": "Подумай о погоде, когда идет дождь",
+      "extraData": {},
+      "orderIndex": 6
+    },
+    {
+      "topic": "weather",
+      "cardType": "spelling",
+      "questionText": "Что это? Это облако",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "cloud",
+      "options": null,
+      "iconName": "cloud",
+      "translationText": "Облако",
+      "hintText": "Первая буква C, последняя D",
+      "extraData": {
+        "scrambledLetters": ["c", "l", "o", "u", "d"]
+      },
+      "orderIndex": 7
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'снег' на английском",
+      "promptText": "Как будет 'снег'?",
+      "correctAnswer": "snow",
+      "options": null,
+      "iconName": "snow",
+      "translationText": "Снег",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 8
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'лето' на английском",
+      "promptText": "Как будет 'лето'?",
+      "correctAnswer": "summer",
+      "options": null,
+      "iconName": null,
+      "translationText": "Лето",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 9
+    },
+    {
+      "topic": "weather",
+      "cardType": "writing",
+      "questionText": "Напиши о твоем любимом времени года.",
+      "promptText": "Напиши 'Мое любимое время года...' ",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Используй 'spring', 'summer', 'autumn' или 'winter'",
+      "extraData": {},
+      "orderIndex": 10
+    },
+    {
+      "topic": "weather",
+      "cardType": "choose",
+      "questionText": "Which one is sunny?",
+      "promptText": "Выбери правильное слово",
+      "correctAnswer": "it's sunny
+
+=== ПОСЛЕ ОЧИСТКИ ===
+{
+  "lessonTitle": "Weather, Actions, Colors, Toys, Family",
+  "lessonDescription": "На уроке мы учили погоду, действия, цвета, игрушки и семью.",
+  "languageLevel": "A1",
+  "topics": [
+    {
+      "topic": "weather",
+      "topicName": "Погода",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "It's sunny, it's rainy, it's cloudy, it's windy",
+          "promptText": "Повтори вслух эти фразы о погоде",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": "sun",
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["it's sunny", "it's rainy", "it's cloudy", "it's windy"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'ветреный'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "it's windy",
+          "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+          "iconName": "wind",
+          "translationText": "Ветреный",
+          "hintText": "Подумай о погоде, когда дует ветер",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это дождь",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "rain",
+          "options": null,
+          "iconName": "rain",
+          "translationText": "Дождь",
+          "hintText": "Первая буква R, последняя N",
+          "extraData": {
+            "scrambledLetters": ["r", "a", "i", "n"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'солнце' на английском",
+          "promptText": "Как будет 'солнце'?",
+          "correctAnswer": "sun",
+          "options": null,
+          "iconName": "sun",
+          "translationText": "Солнце",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'облако' на английском",
+          "promptText": "Как будет 'облако'?",
+          "correctAnswer": "cloud",
+          "options": null,
+          "iconName": "cloud",
+          "translationText": "Облако",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, какая погода сегодня.",
+          "promptText": "Напиши 'Сегодня погода...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'sunny', 'rainy', 'cloudy' или 'windy'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one is rainy?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "it's rainy",
+          "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+          "iconName": "rain",
+          "translationText": "Дождливый",
+          "hintText": "Подумай о погоде, когда идет дождь",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это облако",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "cloud",
+          "options": null,
+          "iconName": "cloud",
+          "translationText": "Облако",
+          "hintText": "Первая буква C, последняя D",
+          "extraData": {
+            "scrambledLetters": ["c", "l", "o", "u", "d"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'снег' на английском",
+          "promptText": "Как будет 'снег'?",
+          "correctAnswer": "snow",
+          "options": null,
+          "iconName": "snow",
+          "translationText": "Снег",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'лето' на английском",
+          "promptText": "Как будет 'лето'?",
+          "correctAnswer": "summer",
+          "options": null,
+          "iconName": null,
+          "translationText": "Лето",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши о твоем любимом времени года.",
+          "promptText": "Напиши 'Мое любимое время года...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'spring', 'summer', 'autumn' или 'winter'",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one is sunny?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "it's sunny",
+          "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+          "iconName": "sun",
+          "translationText": "Солнечно",
+          "hintText": "Подумай о погоде, когда светит солнце",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "actions",
+      "topicName": "Действия",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "I can read, I can jump, I can swim",
+          "promptText": "Повтори вслух эти фразы о действиях",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["I can read", "I can jump", "I can swim"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'прыгать'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "jump",
+          "options": ["jump", "swim", "run", "read"],
+          "iconName": null,
+          "translationText": "Прыгать",
+          "hintText": "Подумай о действии, когда ты в воздухе",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это плавание",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "swim",
+          "options": null,
+          "iconName": null,
+          "translationText": "Плавание",
+          "hintText": "Первая буква S, последняя M",
+          "extraData": {
+            "scrambledLetters": ["s", "w", "i", "m"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'играть' на английском",
+          "promptText": "Как будет 'играть'?",
+          "correctAnswer": "play",
+          "options": null,
+          "iconName": null,
+          "translationText": "Играть",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'танцевать' на английском",
+          "promptText": "Как будет 'танцевать'?",
+          "correctAnswer": "dance",
+          "options": null,
+          "iconName": null,
+          "translationText": "Танцевать",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, что ты умеешь делать.",
+          "promptText": "Напиши 'Я могу...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I can...' ",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'плавать'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "swim",
+          "options": ["run", "jump", "swim", "read"],
+          "iconName": null,
+          "translationText": "Плавать",
+          "hintText": "Подумай о действии в воде",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это бег",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "run",
+          "options": null,
+          "iconName": null,
+          "translationText": "Бег",
+          "hintText": "Первая буква R, последняя N",
+          "extraData": {
+            "scrambledLetters": ["r", "u", "n"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'прыгать' на английском",
+          "promptText": "Как будет 'прыгать'?",
+          "correctAnswer": "jump",
+          "options": null,
+          "iconName": null,
+          "translationText": "Прыгать",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'читать' на английском",
+          "promptText": "Как будет 'читать'?",
+          "correctAnswer": "read",
+          "options": null,
+          "iconName": null,
+          "translationText": "Читать",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, что ты не умеешь делать.",
+          "promptText": "Напиши 'Я не могу...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'I can't...' ",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'танцевать'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "dance",
+          "options": ["dance", "jump", "run", "play"],
+          "iconName": null,
+          "translationText": "Танцевать",
+          "hintText": "Подумай о действии на сцене",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "colors",
+      "topicName": "Цвета",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "Red, blue, green, yellow",
+          "promptText": "Повтори вслух эти цвета",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["red", "blue", "green", "yellow"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'синий'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "blue",
+          "options": ["red", "blue", "green", "yellow"],
+          "iconName": null,
+          "translationText": "Синий",
+          "hintText": "Подумай о цвете неба",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это зеленый",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "green",
+          "options": null,
+          "iconName": null,
+          "translationText": "Зеленый",
+          "hintText": "Первая буква G, последняя N",
+          "extraData": {
+            "scrambledLetters": ["g", "r", "e", "e", "n"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'черный' на английском",
+          "promptText": "Как будет 'черный'?",
+          "correctAnswer": "black",
+          "options": null,
+          "iconName": null,
+          "translationText": "Черный",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'белый' на английском",
+          "promptText": "Как будет 'белый'?",
+          "correctAnswer": "white",
+          "options": null,
+          "iconName": null,
+          "translationText": "Белый",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши любимый цвет.",
+          "promptText": "Напиши 'Мой любимый цвет...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Используй 'red', 'blue', 'green' или 'yellow'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'красный'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "red",
+          "options": ["red", "blue", "green", "yellow"],
+          "iconName": null,
+          "translationText": "Красный",
+          "hintText": "Подумай о цвете помидора",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это желтый",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "yellow",
+          "options": null,
+          "iconName": null,
+          "translationText": "Желтый",
+          "hintText": "Первая буква Y, последняя W",
+          "extraData": {
+            "scrambledLetters": ["y", "e", "l", "l", "o", "w"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'оранжевый' на английском",
+          "promptText": "Как будет 'оранжевый'?",
+          "correctAnswer": "orange",
+          "options": null,
+          "iconName": null,
+          "translationText": "Оранжевый",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'розовый' на английском",
+          "promptText": "Как будет 'розовый'?",
+          "correctAnswer": "pink",
+          "options": null,
+          "iconName": null,
+          "translationText": "Розовый",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши цвет, который ты видишь сейчас.",
+          "promptText": "Напиши 'Я вижу...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Опиши цвет предмета рядом",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'синий'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "blue",
+          "options": ["red", "blue", "green", "yellow"],
+          "iconName": null,
+          "translationText": "Синий",
+          "hintText": "Подумай о цвете неба",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "toys",
+      "topicName": "Игрушки",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "Toy, car, doll, ball",
+          "promptText": "Повтори вслух эти игрушки",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["toy", "car", "doll", "ball"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'машинка'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "car",
+          "options": ["toy", "car", "doll", "ball"],
+          "iconName": null,
+          "translationText": "Машинка",
+          "hintText": "Подумай о маленьком автомобиле",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это кукла",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "doll",
+          "options": null,
+          "iconName": null,
+          "translationText": "Кукла",
+          "hintText": "Первая буква D, последняя L",
+          "extraData": {
+            "scrambledLetters": ["d", "o", "l", "l"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'мяч' на английском",
+          "promptText": "Как будет 'мяч'?",
+          "correctAnswer": "ball",
+          "options": null,
+          "iconName": null,
+          "translationText": "Мяч",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'плюшевая игрушка' на английском",
+          "promptText": "Как будет 'плюшевая игрушка'?",
+          "correctAnswer": "stuffed toy",
+          "options": null,
+          "iconName": null,
+          "translationText": "Плюшевая игрушка",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, какая у тебя любимая игрушка.",
+          "promptText": "Напиши 'Моя любимая игрушка...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'Моя любимая игрушка - машина'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'плюшевая игрушка'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "stuffed toy",
+          "options": ["stuffed toy", "doll", "ball", "car"],
+          "iconName": null,
+          "translationText": "Плюшевая игрушка",
+          "hintText": "Подумай о мягкой игрушке",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это игрушка",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "toy",
+          "options": null,
+          "iconName": null,
+          "translationText": "Игрушка",
+          "hintText": "Первая буква T, последняя Y",
+          "extraData": {
+            "scrambledLetters": ["t", "o", "y"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'конструктор' на английском",
+          "promptText": "Как будет 'конструктор'?",
+          "correctAnswer": "building blocks",
+          "options": null,
+          "iconName": null,
+          "translationText": "Конструктор",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'пазл' на английском",
+          "promptText": "Как будет 'пазл'?",
+          "correctAnswer": "puzzle",
+          "options": null,
+          "iconName": null,
+          "translationText": "Пазл",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, с кем ты играешь в игрушки.",
+          "promptText": "Напиши 'Я играю с...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'Я играю с другом'",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'мяч'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "ball",
+          "options": ["car", "doll", "ball", "toy"],
+          "iconName": null,
+          "translationText": "Мяч",
+          "hintText": "Подумай о круглом предмете, с которым играют",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    },
+    {
+      "topic": "family",
+      "topicName": "Семья",
+      "cards": [
+        {
+          "cardType": "repeat",
+          "questionText": "Mom, dad, sister, brother",
+          "promptText": "Повтори вслух эти слова о семье",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": null,
+          "extraData": {
+            "words": ["mom", "dad", "sister", "brother"]
+          },
+          "orderIndex": 0
+        },
+        {
+          "cardType": "translate",
+          "questionText": "Как по-английски 'сестра'?",
+          "promptText": "Выбери правильный вариант",
+          "correctAnswer": "sister",
+          "options": ["mom", "dad", "sister", "brother"],
+          "iconName": null,
+          "translationText": "Сестра",
+          "hintText": "Подумай о девочке, которая в твоей семье",
+          "extraData": {},
+          "orderIndex": 1
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это брат",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "brother",
+          "options": null,
+          "iconName": null,
+          "translationText": "Брат",
+          "hintText": "Первая буква B, последняя R",
+          "extraData": {
+            "scrambledLetters": ["b", "r", "o", "t", "h", "e", "r"]
+          },
+          "orderIndex": 2
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'бабушка' на английском",
+          "promptText": "Как будет 'бабушка'?",
+          "correctAnswer": "grandmother",
+          "options": null,
+          "iconName": null,
+          "translationText": "Бабушка",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 3
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'дедушка' на английском",
+          "promptText": "Как будет 'дедушка'?",
+          "correctAnswer": "grandfather",
+          "options": null,
+          "iconName": null,
+          "translationText": "Дедушка",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 4
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, кто у тебя в семье.",
+          "promptText": "Напиши 'В моей семье...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'В моей семье мама и папа'",
+          "extraData": {},
+          "orderIndex": 5
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'папа'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "dad",
+          "options": ["mom", "dad", "sister", "brother"],
+          "iconName": null,
+          "translationText": "Папа",
+          "hintText": "Подумай о мужчине в твоей семье",
+          "extraData": {},
+          "orderIndex": 6
+        },
+        {
+          "cardType": "spelling",
+          "questionText": "Что это? Это мама",
+          "promptText": "Собери слово из букв",
+          "correctAnswer": "mom",
+          "options": null,
+          "iconName": null,
+          "translationText": "Мама",
+          "hintText": "Первая буква M, последняя M",
+          "extraData": {
+            "scrambledLetters": ["m", "o", "m"]
+          },
+          "orderIndex": 7
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'дядя' на английском",
+          "promptText": "Как будет 'дядя'?",
+          "correctAnswer": "uncle",
+          "options": null,
+          "iconName": null,
+          "translationText": "Дядя",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 8
+        },
+        {
+          "cardType": "new_words",
+          "questionText": "Слово 'тётя' на английском",
+          "promptText": "Как будет 'тётя'?",
+          "correctAnswer": "aunt",
+          "options": null,
+          "iconName": null,
+          "translationText": "Тётя",
+          "hintText": null,
+          "extraData": {},
+          "orderIndex": 9
+        },
+        {
+          "cardType": "writing",
+          "questionText": "Напиши, как зовут твою маму.",
+          "promptText": "Напиши 'Мою маму зовут...' ",
+          "correctAnswer": null,
+          "options": null,
+          "iconName": null,
+          "translationText": null,
+          "hintText": "Например, 'Мою маму зовут Анна'",
+          "extraData": {},
+          "orderIndex": 10
+        },
+        {
+          "cardType": "choose",
+          "questionText": "Which one means 'сестра'?",
+          "promptText": "Выбери правильное слово",
+          "correctAnswer": "sister",
+          "options": ["mom", "dad", "sister", "brother"],
+          "iconName": null,
+          "translationText": "Сестра",
+          "hintText": "Подумай о девочке в твоей семье",
+          "extraData": {},
+          "orderIndex": 11
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "topic": "weather",
+      "cardType": "repeat",
+      "questionText": "It's sunny, it's rainy, it's cloudy, it's windy",
+      "promptText": "Повтори вслух эти фразы о погоде",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": "sun",
+      "translationText": null,
+      "hintText": null,
+      "extraData": {
+        "words": ["it's sunny", "it's rainy", "it's cloudy", "it's windy"]
+      },
+      "orderIndex": 0
+    },
+    {
+      "topic": "weather",
+      "cardType": "translate",
+      "questionText": "Как по-английски 'ветреный'?",
+      "promptText": "Выбери правильный вариант",
+      "correctAnswer": "it's windy",
+      "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+      "iconName": "wind",
+      "translationText": "Ветреный",
+      "hintText": "Подумай о погоде, когда дует ветер",
+      "extraData": {},
+      "orderIndex": 1
+    },
+    {
+      "topic": "weather",
+      "cardType": "spelling",
+      "questionText": "Что это? Это дождь",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "rain",
+      "options": null,
+      "iconName": "rain",
+      "translationText": "Дождь",
+      "hintText": "Первая буква R, последняя N",
+      "extraData": {
+        "scrambledLetters": ["r", "a", "i", "n"]
+      },
+      "orderIndex": 2
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'солнце' на английском",
+      "promptText": "Как будет 'солнце'?",
+      "correctAnswer": "sun",
+      "options": null,
+      "iconName": "sun",
+      "translationText": "Солнце",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 3
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'облако' на английском",
+      "promptText": "Как будет 'облако'?",
+      "correctAnswer": "cloud",
+      "options": null,
+      "iconName": "cloud",
+      "translationText": "Облако",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 4
+    },
+    {
+      "topic": "weather",
+      "cardType": "writing",
+      "questionText": "Напиши, какая погода сегодня.",
+      "promptText": "Напиши 'Сегодня погода...' ",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Используй 'sunny', 'rainy', 'cloudy' или 'windy'",
+      "extraData": {},
+      "orderIndex": 5
+    },
+    {
+      "topic": "weather",
+      "cardType": "choose",
+      "questionText": "Which one is rainy?",
+      "promptText": "Выбери правильное слово",
+      "correctAnswer": "it's rainy",
+      "options": ["it's sunny", "it's cloudy", "it's rainy", "it's windy"],
+      "iconName": "rain",
+      "translationText": "Дождливый",
+      "hintText": "Подумай о погоде, когда идет дождь",
+      "extraData": {},
+      "orderIndex": 6
+    },
+    {
+      "topic": "weather",
+      "cardType": "spelling",
+      "questionText": "Что это? Это облако",
+      "promptText": "Собери слово из букв",
+      "correctAnswer": "cloud",
+      "options": null,
+      "iconName": "cloud",
+      "translationText": "Облако",
+      "hintText": "Первая буква C, последняя D",
+      "extraData": {
+        "scrambledLetters": ["c", "l", "o", "u", "d"]
+      },
+      "orderIndex": 7
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'снег' на английском",
+      "promptText": "Как будет 'снег'?",
+      "correctAnswer": "snow",
+      "options": null,
+      "iconName": "snow",
+      "translationText": "Снег",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 8
+    },
+    {
+      "topic": "weather",
+      "cardType": "new_words",
+      "questionText": "Слово 'лето' на английском",
+      "promptText": "Как будет 'лето'?",
+      "correctAnswer": "summer",
+      "options": null,
+      "iconName": null,
+      "translationText": "Лето",
+      "hintText": null,
+      "extraData": {},
+      "orderIndex": 9
+    },
+    {
+      "topic": "weather",
+      "cardType": "writing",
+      "questionText": "Напиши о твоем любимом времени года.",
+      "promptText": "Напиши 'Мое любимое время года...' ",
+      "correctAnswer": null,
+      "options": null,
+      "iconName": null,
+      "translationText": null,
+      "hintText": "Используй 'spring', 'summer', 'autumn' или 'winter'",
+      "extraData": {},
+      "orderIndex": 10
+    }
+
+=== ОШИБКА ===
+Expecting ',' delimiter: line 936 column 6 (char 29937)
+
+Позиция ошибки: 29937, строка 936, колонка 6

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Панель Учителя</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      color: #667eea;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .stat-card h3 {
+      font-size: 2rem;
+      margin-bottom: 5px;
+    }
+
+    .stat-card p {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      color: #667eea;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+    }
+
+    .upload-area {
+      border: 3px dashed #667eea;
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      background: #f8f9ff;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 20px;
+    }
+
+    .upload-area:hover {
+      background: #eef0ff;
+      transform: translateY(-2px);
+    }
+
+    .upload-area.dragover {
+      background: #e0e5ff;
+      border-color: #764ba2;
+    }
+
+    .upload-icon {
+      font-size: 4rem;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin: 5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+      color: white;
+    }
+
+    .video-table, .lesson-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .video-table th, .lesson-table th {
+      background: #667eea;
+      color: white;
+      padding: 15px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .video-table td, .lesson-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .video-table tr:hover, .lesson-table tr:hover {
+      background: #f8f9ff;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      background: #ffd93d;
+      color: #856404;
+    }
+
+    .status-processing {
+      background: #6bcfff;
+      color: #004085;
+    }
+
+    .status-done {
+      background: #6ef3d6;
+      color: #155724;
+    }
+
+    .status-error {
+      background: #ff6b9d;
+      color: #721c24;
+    }
+
+    .progress-container {
+      margin: 20px 0;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 30px;
+      display: none;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      transition: width 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+
+    .log-container {
+      background: #1e1e1e;
+      color: #00ff00;
+      padding: 20px;
+      border-radius: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .log-entry {
+      margin-bottom: 5px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background: white;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+
+    .back-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="{% url 'home_uchi' %}" class="back-link">← Вернуться к урокам</a>
+
+    <div class="header">
+      <h1>🎓 Панель Учителя</h1>
+      <p>Управление видео и создание уроков</p>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>{{ total_videos }}</h3>
+          <p>Всего видео</p>
+        </div>
+        <div class="stat-card">
+          <h3>{{ pending_videos }}</h3>
+          <p>Ожидают</p>
+        </div>
+        <div class="stat-card">
+          <h3>{{ processing_videos }}</h3>
+          <p>Обрабатываются</p>
+        </div>
+        <div class="stat-card">
+          <h3>{{ done_videos }}</h3>
+          <p>Готово</p>
+        </div>
+        <div class="stat-card">
+          <h3>{{ error_videos }}</h3>
+          <p>Ошибки</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📤 Загрузка видео</h2>
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📹</div>
+        <h3>Перетащите видео сюда или нажмите для выбора</h3>
+        <p>Поддерживаются форматы: MP4, MOV, AVI</p>
+        <input type="file" id="fileInput" accept="video/*" multiple>
+      </div>
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar">0%</div>
+      </div>
+      <div style="text-align: center;">
+        <button class="btn btn-success" onclick="processAllVideos()">
+          ▶️ Обработать все видео
+        </button>
+        <button class="btn btn-danger" onclick="recreateAllLessons()">
+          🔄 Пересоздать все уроки
+        </button>
+      </div>
+      <div class="log-container" id="logContainer"></div>
+    </div>
+
+    <div class="section">
+      <h2>📹 Видео файлы ({{ videos.count }})</h2>
+      <table class="video-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Статус</th>
+            <th>Дата создания</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for video in videos %}
+          <tr>
+            <td>{{ video.id }}</td>
+            <td>{{ video.file_name }}</td>
+            <td>
+              <span class="status-badge status-{{ video.status }}">
+                {{ video.status }}
+              </span>
+            </td>
+            <td>{{ video.created_at|date:"d.m.Y H:i" }}</td>
+            <td>
+              {% if video.status != 'processing' %}
+              <button class="btn btn-primary" onclick="processVideo({{ video.id }})">
+                Обработать
+              </button>
+              {% endif %}
+              {% if video.status == 'done' %}
+              <button class="btn btn-success" onclick="processVideo({{ video.id }}, true)">
+                Пересоздать
+              </button>
+              {% endif %}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 40px;">
+              Нет загруженных видео
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>📚 Созданные уроки ({{ lessons.count }})</h2>
+      <table class="lesson-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Название</th>
+            <th>Карточек</th>
+            <th>Дата создания</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lesson in lessons %}
+          <tr>
+            <td>{{ lesson.id }}</td>
+            <td>{{ lesson.title }}</td>
+            <td>{{ lesson.cards.count }}</td>
+            <td>{{ lesson.created_at|date:"d.m.Y H:i" }}</td>
+            <td>
+              <a href="{% url 'view_lesson_topics' lesson.id %}" class="btn btn-primary">
+                Открыть
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 40px;">
+              Нет созданных уроков
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.getElementById('progressBar');
+    const logContainer = document.getElementById('logContainer');
+
+    // Drag and drop
+    uploadArea.addEventListener('click', () => fileInput.click());
+
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      handleFiles(files);
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      if (files.length === 0) return;
+
+      const formData = new FormData();
+      for (let file of files) {
+        formData.append('videos', file);
+      }
+
+      // TODO: Implement actual upload endpoint
+      alert(`Загружено ${files.length} файлов. Функция загрузки будет реализована.`);
+    }
+
+    async function processVideo(videoId, forceRecreate = false) {
+      try {
+        const response = await fetch(`/api/videos/${videoId}/process/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ force_recreate: forceRecreate })
+        });
+        const data = await response.json();
+        if (data.success) {
+          alert(`Видео обработано успешно! Урок: ${data.lesson_title}`);
+          location.reload();
+        } else {
+          alert(`Ошибка: ${data.error}`);
+        }
+      } catch (error) {
+        alert(`Ошибка: ${error.message}`);
+      }
+    }
+
+    async function processAllVideos() {
+      if (!confirm('Обработать все необработанные видео?')) return;
+
+      progressContainer.style.display = 'block';
+      logContainer.style.display = 'block';
+      logContainer.innerHTML = '<div class="log-entry">Начинаем обработку всех видео...</div>';
+
+      try {
+        const response = await fetch('/api/videos/process_all/', {
+          method: 'POST'
+        });
+        const data = await response.json();
+        
+        logContainer.innerHTML += `<div class="log-entry">✅ Обработано ${data.processed_count} из ${data.total_count} видео</div>`;
+        
+        if (data.errors && data.errors.length > 0) {
+          logContainer.innerHTML += '<div class="log-entry">❌ Ошибки:</div>';
+          data.errors.forEach(err => {
+            logContainer.innerHTML += `<div class="log-entry">  - ${err.file_name}: ${err.error}</div>`;
+          });
+        }
+
+        progressBar.style.width = '100%';
+        progressBar.textContent = '100%';
+        
+        setTimeout(() => location.reload(), 2000);
+      } catch (error) {
+        logContainer.innerHTML += `<div class="log-entry">❌ Ошибка: ${error.message}</div>`;
+      }
+    }
+
+    async function recreateAllLessons() {
+      if (!confirm('ВНИМАНИЕ! Это удалит все существующие уроки и создаст их заново. Продолжить?')) return;
+
+      progressContainer.style.display = 'block';
+      logContainer.style.display = 'block';
+      logContainer.innerHTML = '<div class="log-entry">Пересоздаём все уроки...</div>';
+
+      try {
+        const response = await fetch('/api/videos/recreate_all_lessons/', {
+          method: 'POST'
+        });
+        const data = await response.json();
+        
+        logContainer.innerHTML += `<div class="log-entry">🗑️ Удалено ${data.deleted_lessons} уроков</div>`;
+        logContainer.innerHTML += `<div class="log-entry">✅ Создано ${data.processed_count} из ${data.total_count} уроков</div>`;
+        
+        if (data.errors && data.errors.length > 0) {
+          logContainer.innerHTML += '<div class="log-entry">❌ Ошибки:</div>';
+          data.errors.forEach(err => {
+            logContainer.innerHTML += `<div class="log-entry">  - ${err.file_name}: ${err.error}</div>`;
+          });
+        }
+
+        progressBar.style.width = '100%';
+        progressBar.textContent = '100%';
+        
+        setTimeout(() => location.reload(), 2000);
+      } catch (error) {
+        logContainer.innerHTML += `<div class="log-entry">❌ Ошибка: ${error.message}</div>`;
+      }
+    }
+  </script>
+</body>
+</html>
+

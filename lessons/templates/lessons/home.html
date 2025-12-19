@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>English Lessons App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lessons/css/home.css' %}?v=2">
+</head>
+<body>
+    <div class="app-container">
+        <div class="user-header">
+            <div class="user-stats">
+                <div class="avatar-container">
+                    <div class="avatar">{{ avatar_data.emoji|default:"🎓" }}</div>
+                    <div class="avatar-info">
+                        <div class="avatar-name">{{ avatar_data.name|default:"Ученик" }}</div>
+                        <div class="avatar-score">Балл: <span id="user-score">{{ avatar_data.score|default:"0.0" }}</span></div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span id="user-xp">{{ user_progress.total_experience|default:0 }}</span> XP
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span id="user-level">{{ user_progress.current_level|default:1 }}</span> уровень
+                </div>
+            </div>
+            <h1>English Lessons App</h1>
+            <p>Сервер работает. Выберите действие:</p>
+        </div>
+        
+        <div class="content-section">
+            <div class="actions">
+            <button id="new-lesson-btn" class="btn-primary">
+                <span>Новый урок (обработать следующее видео)</span>
+            </button>
+            <button id="process-all-btn" class="btn-secondary">
+                <span>Обработать все видео по очереди</span>
+            </button>
+            <button id="recreate-all-lessons-btn" class="btn-secondary" style="background: #dc2626; margin-left: 12px;">
+                <span>🔄 Пересоздать все уроки</span>
+            </button>
+        </div>
+
+        <div class="progress-wrapper">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div id="progress-label" class="progress-label"></div>
+        </div>
+
+            <div id="status" class="status"></div>
+
+            <!-- Логи обработки -->
+            <div id="processing-logs" style="display: none; margin-top: 20px; padding: 16px; background: #f8f9fa; border-radius: 12px; border: 1px solid #e9ecef; max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 13px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-size: 16px; font-weight: 600; color: #1f2937; margin: 0;">📋 Логи обработки:</h3>
+                    <button id="clear-logs-btn" style="padding: 4px 12px; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 12px;">Очистить</button>
+                </div>
+                <div id="logs-content" style="color: #374151; line-height: 1.6;"></div>
+            </div>
+
+            <div id="lessons-list" style="margin-top: 24px;">
+                <h2 style="font-size: 20px; font-weight: 700; color: #1f2937; margin-bottom: 16px;">Доступные уроки:</h2>
+                <div id="lessons-container" style="display: grid; gap: 12px;">
+                    <p style="color: #6b7280;">Загрузка уроков...</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e9ecef;">
+                <p style="color: #6b7280; margin-bottom: 12px;">Полезные ссылки:</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 8px;"><a href="/admin/" style="color: #667eea; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#764ba2'" onmouseout="this.style.color='#667eea'">Админка Django</a></li>
+                    <li style="margin-bottom: 8px;"><a href="/api/lessons/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#764ba2'" onmouseout="this.style.color='#667eea'">API: список уроков (JSON)</a></li>
+                    <li style="margin-bottom: 8px;"><a href="/api/videos/" target="_blank" style="color: #667eea; text-decoration: none; font-weight: 600; transition: color 0.2s;" onmouseover="this.style.color='#764ba2'" onmouseout="this.style.color='#667eea'">API: список видео (JSON)</a></li>
+                </ul>
+            </div>
+            
+            <div id="last-lesson-link" style="margin-top: 24px; padding: 16px; background: #f0f9ff; border-radius: 12px; border-left: 4px solid #667eea; display: none;">
+                <strong style="color: #1f2937;">Последний созданный урок:</strong>
+                <div id="lesson-link-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'lessons/js/home.js' %}?v=2"></script>
+</body>
+</html>
+
