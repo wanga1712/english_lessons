@@ -36,8 +36,8 @@ def home_uchi(request):
         'avatar_data': avatar_data,
         'avatar_data_json': json.dumps(avatar_data)
     }
-    # Use game map template with Canvas
-    return render(request, 'lessons/home_uchi_game.html', context)
+    # Use hero map template with Canvas and character sprite
+    return render(request, 'lessons/home_uchi_hero.html', context)
 
 
 def lesson_topics_uchi(request, lesson_id):

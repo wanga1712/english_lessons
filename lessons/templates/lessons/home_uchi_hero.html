@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карта приключений</title>
+  {% load static %}
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+    }
+    
+    .teacher-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      text-decoration: none;
+      z-index: 1000;
+    }
+    
+    .game-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      min-height: 700px;
+    }
+    
+    .stats-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+    }
+    
+    .game-map-wrapper {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      background: linear-gradient(135deg, #87CEEB 0%, #98D8C8 50%, #F7DC6F 100%);
+      border-radius: 15px;
+      border: 5px solid #8b4513;
+      overflow: hidden;
+    }
+    
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .stars {
+      color: #FFD700;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <a href="/teacher/" class="teacher-button">👨‍🏫 Панель учителя</a>
+  
+  <div class="game-container">
+    <h1 style="text-align: center; color: #667eea; margin-bottom: 20px;">🗺️ Карта Приключений</h1>
+    
+    <div class="stats-panel">
+      <div class="stat-card">
+        <h3 id="completedLessons">0</h3>
+        <p>Пройдено уроков</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="totalStars">0</h3>
+        <p>⭐ Звёзд собрано</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="userScore">0</h3>
+        <p>Баллов</p>
+      </div>
+    </div>
+    
+    <div class="game-map-wrapper">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+    
+    <div style="margin-top: 20px; text-align: center; color: #666;">
+      <p><strong>Система звёзд:</strong></p>
+      <p>1⭐ = 50-69% | 2⭐ = 70-99% | 3⭐ = 100% без ошибок</p>
+      <p><em>Для открытия следующего урока нужно получить минимум 2⭐</em></p>
+    </div>
+  </div>
+  
+  <script>
+    console.log('=== HERO MAP INITIALIZATION ===');
+    
+    let lessons = [];
+    let completedLessons = new Set();
+    let lessonStars = {}; // {lessonId: stars}
+    let avatarData = {name: 'Ученик', emoji: '🎓', score: 0.0};
+    
+    {% if avatar_data_json %}
+    try {
+      avatarData = JSON.parse('{{ avatar_data_json|escapejs }}');
+    } catch(e) {
+      console.warn('Could not parse avatar data:', e);
+    }
+    {% endif %}
+    
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Hero sprite
+    const heroImg = new Image();
+    heroImg.src = '{% static "lessons/img/characters/glowsword_blue_male.png" %}';
+    let heroLoaded = false;
+    heroImg.onload = () => {
+      console.log('Hero sprite loaded');
+      heroLoaded = true;
+      renderMap();
+    };
+    
+    function resizeCanvas() {
+      const wrapper = canvas.parentElement;
+      canvas.width = wrapper.clientWidth;
+      canvas.height = wrapper.clientHeight;
+      if (lessons.length > 0) renderMap();
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // Lesson positions on map
+    const positions = [
+      {x: 0.1, y: 0.2}, {x: 0.25, y: 0.15}, {x: 0.4, y: 0.2}, {x: 0.55, y: 0.15},
+      {x: 0.7, y: 0.2}, {x: 0.85, y: 0.15}, {x: 0.9, y: 0.3}, {x: 0.75, y: 0.35},
+      {x: 0.6, y: 0.32}, {x: 0.45, y: 0.38}, {x: 0.3, y: 0.4}, {x: 0.15, y: 0.45},
+      {x: 0.2, y: 0.55}, {x: 0.35, y: 0.5}, {x: 0.5, y: 0.55}, {x: 0.65, y: 0.52},
+      {x: 0.8, y: 0.58}, {x: 0.85, y: 0.7}, {x: 0.7, y: 0.75}, {x: 0.55, y: 0.72},
+      {x: 0.4, y: 0.78}, {x: 0.25, y: 0.75}, {x: 0.15, y: 0.8}, {x: 0.3, y: 0.85},
+      {x: 0.5, y: 0.88}
+    ];
+    
+    async function loadLessons() {
+      console.log('Loading lessons...');
+      try {
+        const response = await fetch('/api/lessons/');
+        const data = await response.json();
+        lessons = data.lessons || [];
+        
+        lessons.forEach(lesson => {
+          if (lesson.progress && lesson.progress.completion_percent === 100) {
+            completedLessons.add(lesson.id);
+          }
+          // TODO: Load stars from API
+          lessonStars[lesson.id] = lesson.stars || 0;
+        });
+        
+        console.log('Lessons loaded:', lessons.length);
+        updateStats();
+        renderMap();
+      } catch (error) {
+        console.error('Error loading lessons:', error);
+      }
+    }
+    
+    function renderMap() {
+      if (!ctx || lessons.length === 0) return;
+      
+      const width = canvas.width;
+      const height = canvas.height;
+      
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw paths
+      lessons.forEach((lesson, index) => {
+        if (index > 0) {
+          const prev = positions[(index - 1) % positions.length];
+          const curr = positions[index % positions.length];
+          const isUnlocked = isLessonUnlocked(index);
+          
+          ctx.strokeStyle = isUnlocked ? '#8B4513' : '#CCCCCC';
+          ctx.lineWidth = isUnlocked ? 6 : 3;
+          ctx.setLineDash(isUnlocked ? [] : [10, 5]);
+          
+          ctx.beginPath();
+          ctx.moveTo(prev.x * width, prev.y * height);
+          const midX = (prev.x + curr.x) / 2 * width;
+          const midY = (prev.y + curr.y) / 2 * height - 20;
+          ctx.quadraticCurveTo(midX, midY, curr.x * width, curr.y * height);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+      });
+      
+      // Draw lessons
+      lessons.forEach((lesson, index) => {
+        const pos = positions[index % positions.length];
+        const x = pos.x * width;
+        const y = pos.y * height;
+        const isUnlocked = isLessonUnlocked(index);
+        const isCompleted = completedLessons.has(lesson.id);
+        const stars = lessonStars[lesson.id] || 0;
+        
+        // Draw island
+        ctx.fillStyle = isCompleted ? '#81C784' : (isUnlocked ? '#FFD54F' : '#9E9E9E');
+        ctx.beginPath();
+        ctx.arc(x, y, 40, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+        
+        // Draw lesson number
+        ctx.fillStyle = '#333';
+        ctx.font = 'bold 20px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(index + 1, x, y);
+        
+        // Draw stars
+        if (stars > 0) {
+          ctx.font = '16px Arial';
+          ctx.fillText('⭐'.repeat(stars), x, y + 50);
+        }
+        
+        // Draw lock if locked
+        if (!isUnlocked) {
+          ctx.font = '24px Arial';
+          ctx.fillText('🔒', x, y - 50);
+        }
+      });
+      
+      // Draw hero on current lesson
+      if (heroLoaded) {
+        const currentIndex = getCurrentLessonIndex();
+        if (currentIndex >= 0) {
+          const pos = positions[currentIndex % positions.length];
+          const heroX = pos.x * width - 25;
+          const heroY = pos.y * height - 80;
+          ctx.drawImage(heroImg, heroX, heroY, 50, 50);
+        }
+      }
+    }
+    
+    function isLessonUnlocked(index) {
+      if (index === 0) return true;
+      const prevLesson = lessons[index - 1];
+      const prevStars = lessonStars[prevLesson.id] || 0;
+      return prevStars >= 2; // Need 2+ stars to unlock next
+    }
+    
+    function getCurrentLessonIndex() {
+      for (let i = 0; i < lessons.length; i++) {
+        if (!completedLessons.has(lessons[i].id)) {
+          return i;
+        }
+      }
+      return lessons.length - 1;
+    }
+    
+    function updateStats() {
+      document.getElementById('completedLessons').textContent = completedLessons.size;
+      const totalStars = Object.values(lessonStars).reduce((a, b) => a + b, 0);
+      document.getElementById('totalStars').textContent = totalStars;
+      document.getElementById('userScore').textContent = Math.round(avatarData.score || 0);
+    }
+    
+    // Click handling
+    canvas.addEventListener('click', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      lessons.forEach((lesson, index) => {
+        const pos = positions[index % positions.length];
+        const lx = pos.x * canvas.width;
+        const ly = pos.y * canvas.height;
+        const dist = Math.sqrt((x - lx) ** 2 + (y - ly) ** 2);
+        
+        if (dist < 40 && isLessonUnlocked(index)) {
+          window.location.href = `/lesson/${lesson.id}/uchi/`;
+        }
+      });
+    });
+    
+    loadLessons();
+  </script>
+</body>
+</html>
+

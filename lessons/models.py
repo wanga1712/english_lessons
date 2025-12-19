@@ -253,6 +253,11 @@ class LessonAttempt(models.Model):
         verbose_name='Оценка (0-100)',
         help_text='Процент правильных ответов'
     )
+    stars = models.IntegerField(
+        default=0,
+        verbose_name='Звёзды',
+        help_text='Количество звёзд: 1★ = 50-69%, 2★ = 70-99%, 3★ = 100%'
+    )
     correct_cards = models.IntegerField(default=0, verbose_name='Правильных карточек')
     total_cards = models.IntegerField(default=0, verbose_name='Всего карточек')
     started_at = models.DateTimeField(auto_now_add=True, verbose_name='Начато')
@@ -273,6 +278,25 @@ class LessonAttempt(models.Model):
         self.score = (self.correct_cards / self.total_cards) * 100
         self.save()
         return self.score
+    
+    def calculate_stars(self):
+        """Рассчитать количество звёзд: 1★ = 50-69%, 2★ = 70-99%, 3★ = 100%"""
+        if not self.score:
+            self.calculate_score()
+        
+        if self.score >= 100:
+            return 3
+        elif self.score >= 70:
+            return 2
+        elif self.score >= 50:
+            return 1
+        else:
+            return 0
+    
+    def update_stars(self):
+        """Обновить звёзды при завершении попытки"""
+        self.stars = self.calculate_stars()
+        self.save()
 
 
 class CardAttempt(models.Model):
