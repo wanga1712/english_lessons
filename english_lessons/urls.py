@@ -15,9 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 from lessons.views import home
 from lessons.views_api import list_lessons, get_lesson, get_lesson_topics
 from lessons.views_video import (
@@ -90,13 +91,17 @@ urlpatterns = [
 # ВАЖНО: В продакшене используйте веб-сервер (nginx/apache) для статики!
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-# Всегда обслуживаем статику через staticfiles (работает из STATICFILES_DIRS)
+# Всегда обслуживаем статику через staticfiles
 urlpatterns += staticfiles_urlpatterns()
 
-# Также обслуживаем из STATIC_ROOT напрямую
+# Обслуживаем статику из STATICFILES_DIRS напрямую (приоритет над staticfiles)
+for static_dir in settings.STATICFILES_DIRS:
+    static_path = str(static_dir)
+    # Убираем ведущий /static/ из URL паттерна, так как он уже в STATIC_URL
+    urlpatterns += [
+        re_path(r'^' + settings.STATIC_URL.lstrip('/') + r'(?P<path>.*)$', serve, {'document_root': static_path}),
+    ]
+
+# Также обслуживаем из STATIC_ROOT
 if hasattr(settings, 'STATIC_ROOT') and settings.STATIC_ROOT:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-# Обслуживаем статику из STATICFILES_DIRS напрямую (приоритет)
-for static_dir in settings.STATICFILES_DIRS:
-    urlpatterns += static(settings.STATIC_URL, document_root=str(static_dir))
