@@ -472,23 +472,37 @@
             progressPercent.textContent = statusData.progress_percent + '%';
           }
           
-          if (timeCell && statusData.estimated_seconds_remaining !== undefined) {
-            // Обновляем время каждый раз, даже если оно не изменилось в API
-            // Это гарантирует, что время будет обновляться при каждом polling
-            if (statusData.estimated_seconds_remaining > 0) {
-              // Уменьшаем оставшееся время на 2 секунды (интервал polling)
-              const remaining = Math.max(0, statusData.estimated_seconds_remaining - 2);
-              timeCell.textContent = `Осталось: ${formatTime(remaining)}`;
-              // Сохраняем текущее значение для следующего обновления
+          if (timeCell) {
+            let remaining = 0;
+            
+            if (statusData.estimated_seconds_remaining !== undefined && statusData.estimated_seconds_remaining > 0) {
+              // Используем значение с сервера, но уменьшаем на прошедшее время с последнего обновления
+              const lastUpdate = timeCell.dataset.lastUpdate ? parseInt(timeCell.dataset.lastUpdate) : Date.now();
+              const secondsSinceUpdate = Math.floor((Date.now() - lastUpdate) / 1000);
+              remaining = Math.max(0, statusData.estimated_seconds_remaining - secondsSinceUpdate);
               timeCell.dataset.remaining = remaining;
+              timeCell.dataset.lastUpdate = Date.now();
+            } else if (timeCell.dataset.remaining !== undefined) {
+              // Если API не вернул время, уменьшаем сохраненное значение
+              const lastUpdate = timeCell.dataset.lastUpdate ? parseInt(timeCell.dataset.lastUpdate) : Date.now();
+              const secondsSinceUpdate = Math.floor((Date.now() - lastUpdate) / 1000);
+              remaining = Math.max(0, parseInt(timeCell.dataset.remaining) - secondsSinceUpdate);
+              timeCell.dataset.remaining = remaining;
+              timeCell.dataset.lastUpdate = Date.now();
             } else {
-              timeCell.textContent = 'Завершение...';
+              // Первое обновление
+              if (statusData.estimated_seconds_remaining !== undefined) {
+                remaining = statusData.estimated_seconds_remaining;
+                timeCell.dataset.remaining = remaining;
+                timeCell.dataset.lastUpdate = Date.now();
+              }
             }
-          } else if (timeCell && timeCell.dataset.remaining !== undefined) {
-            // Если API не вернул время, уменьшаем сохраненное значение
-            const remaining = Math.max(0, parseInt(timeCell.dataset.remaining) - 2);
-            timeCell.textContent = `Осталось: ${formatTime(remaining)}`;
-            timeCell.dataset.remaining = remaining;
+            
+            if (remaining > 0) {
+              timeCell.querySelector('.time-remaining').textContent = `Осталось: ${formatTime(remaining)}`;
+            } else {
+              timeCell.querySelector('.time-remaining').textContent = 'Завершение...';
+            }
           }
         }
         

@@ -51,9 +51,32 @@ def get_video_status(request, video_id):
         
         if video_file.status == 'processing':
             # Время с начала обработки
-            # Используем created_at, но для более точного расчета можно было бы использовать
-            # время когда статус изменился на processing
+            # Используем created_at как приближение времени начала обработки
+            # Для более точного расчета можно было бы добавить поле processing_started_at
             elapsed_seconds = int((timezone.now() - video_file.created_at).total_seconds())
+            
+            # Если видео обрабатывается слишком долго (более 30 минут), возможно оно застряло
+            # В этом случае показываем более реалистичное время
+            if elapsed_seconds > 1800:  # 30 минут
+                # Видео обрабатывается очень долго, возможно застряло
+                # Показываем минимальное оставшееся время
+                progress_percent = 30 if video_file.processing_status == 'transcribing' else 60
+                estimated_seconds_remaining = 300  # 5 минут как запас
+                return JsonResponse({
+                    'id': video_file.id,
+                    'file_name': video_file.file_name,
+                    'status': video_file.status,
+                    'processing_status': video_file.processing_status,
+                    'processing_message': video_file.processing_message,
+                    'error_message': video_file.error_message,
+                    'has_lesson': hasattr(video_file, 'lesson'),
+                    'lesson_id': video_file.lesson.id if hasattr(video_file, 'lesson') else None,
+                    'lesson_title': video_file.lesson.title if hasattr(video_file, 'lesson') else None,
+                    'progress_percent': progress_percent,
+                    'estimated_seconds_remaining': estimated_seconds_remaining,
+                    'elapsed_seconds': elapsed_seconds,
+                    'file_size_mb': round((video_file.file_size / (1024 * 1024)) if video_file.file_size else 0, 2),
+                })
             
             # Оценка времени на основе размера файла
             file_size_mb = (video_file.file_size / (1024 * 1024)) if video_file.file_size else 50
