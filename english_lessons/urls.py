@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from lessons.views import home
 from lessons.views_api import list_lessons, get_lesson, get_lesson_topics
 from lessons.views_video import (
@@ -83,3 +85,10 @@ urlpatterns = [
     path('api/attempts/<int:attempt_id>/complete/', complete_lesson_attempt, name='complete_lesson_attempt'),
     path('api/lessons/<int:lesson_id>/card_statuses/', get_card_statuses, name='get_card_statuses'),
 ]
+
+# Добавляем обработку статических файлов для разработки
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Также обслуживаем файлы из STATICFILES_DIRS
+    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+    urlpatterns += staticfiles_urlpatterns()
