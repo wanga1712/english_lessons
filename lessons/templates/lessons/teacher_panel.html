@@ -311,6 +311,7 @@
             <th>Название</th>
             <th>Статус</th>
             <th>Прогресс</th>
+            <th>Время</th>
             <th>Дата создания</th>
             <th>Действия</th>
           </tr>
@@ -325,9 +326,32 @@
                 {{ video.status }}
               </span>
             </td>
-            <td class="message-cell" style="font-size: 0.85rem; color: #667eea;">
-              {% if video.processing_message %}
-                {{ video.processing_message }}
+            <td class="progress-cell" style="min-width: 200px;">
+              {% if video.status == 'processing' %}
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 1; background: #e0e0e0; border-radius: 10px; height: 20px; overflow: hidden; position: relative;">
+                  <div class="video-progress-bar" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); height: 100%; width: 0%; transition: width 0.3s; border-radius: 10px;"></div>
+                </div>
+                <span class="progress-percent" style="font-size: 0.85rem; font-weight: 600; color: #667eea; min-width: 45px;">0%</span>
+              </div>
+              <div class="message-cell" style="font-size: 0.75rem; color: #667eea; margin-top: 5px;">
+                {% if video.processing_message %}
+                  {{ video.processing_message }}
+                {% endif %}
+              </div>
+              {% else %}
+              <div class="message-cell" style="font-size: 0.85rem; color: #667eea;">
+                {% if video.processing_message %}
+                  {{ video.processing_message }}
+                {% endif %}
+              </div>
+              {% endif %}
+            </td>
+            <td class="time-cell" style="font-size: 0.85rem; color: #666;">
+              {% if video.status == 'processing' %}
+                <span class="time-remaining">Расчет...</span>
+              {% else %}
+                -
               {% endif %}
             </td>
             <td>{{ video.created_at|date:"d.m.Y H:i" }}</td>
@@ -346,7 +370,7 @@
           </tr>
           {% empty %}
           <tr>
-            <td colspan="6" style="text-align: center; padding: 40px;">
+            <td colspan="7" style="text-align: center; padding: 40px;">
               Нет загруженных видео
             </td>
           </tr>
@@ -402,6 +426,21 @@
     // Автоматическое отслеживание прогресса для обрабатывающихся видео
     const processingVideoIntervals = new Map();
     
+    // Функция для форматирования времени
+    function formatTime(seconds) {
+      if (seconds < 60) {
+        return `${seconds} сек`;
+      } else if (seconds < 3600) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins} мин ${secs} сек`;
+      } else {
+        const hours = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds % 3600) / 60);
+        return `${hours} ч ${mins} мин`;
+      }
+    }
+    
     // Функция для обновления статуса видео в таблице
     async function updateVideoStatus(videoId) {
       try {
@@ -417,6 +456,29 @@
         if (statusCell) {
           statusCell.textContent = statusData.status;
           statusCell.className = `status-cell status-${statusData.status}`;
+        }
+        
+        // Обновляем прогресс-бар
+        if (statusData.status === 'processing') {
+          const progressBar = row.querySelector('.video-progress-bar');
+          const progressPercent = row.querySelector('.progress-percent');
+          const timeCell = row.querySelector('.time-cell .time-remaining');
+          
+          if (progressBar && statusData.progress_percent !== undefined) {
+            progressBar.style.width = statusData.progress_percent + '%';
+          }
+          
+          if (progressPercent && statusData.progress_percent !== undefined) {
+            progressPercent.textContent = statusData.progress_percent + '%';
+          }
+          
+          if (timeCell && statusData.estimated_seconds_remaining !== undefined) {
+            if (statusData.estimated_seconds_remaining > 0) {
+              timeCell.textContent = `Осталось: ${formatTime(statusData.estimated_seconds_remaining)}`;
+            } else {
+              timeCell.textContent = 'Завершение...';
+            }
+          }
         }
         
         // Добавляем сообщение о прогрессе

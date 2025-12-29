@@ -37,8 +37,40 @@ def list_videos(request):
 @require_http_methods(['GET'])
 def get_video_status(request, video_id):
     """Получить статус обработки конкретного видео"""
+    from django.utils import timezone
+    from datetime import timedelta
+    import os
+    
     try:
         video_file = VideoFile.objects.get(id=video_id)
+        
+        # Расчет прогресса и времени
+        progress_percent = 0
+        estimated_seconds_remaining = 0
+        elapsed_seconds = 0
+        
+        if video_file.status == 'processing':
+            # Время с начала обработки
+            elapsed_seconds = int((timezone.now() - video_file.created_at).total_seconds())
+            
+            # Оценка времени на основе размера файла
+            file_size_mb = (video_file.file_size / (1024 * 1024)) if video_file.file_size else 50
+            total_estimated_seconds = max(30, min(900, int(file_size_mb * 2.5)))
+            
+            # Прогресс на основе статуса обработки
+            if video_file.processing_status == 'transcribing':
+                progress_percent = min(30, int((elapsed_seconds / total_estimated_seconds) * 30))
+            elif video_file.processing_status == 'generating_lesson':
+                progress_percent = min(90, 30 + int((elapsed_seconds / total_estimated_seconds) * 60))
+            else:
+                progress_percent = 0
+            
+            # Оставшееся время
+            if progress_percent > 0:
+                estimated_seconds_remaining = max(0, int((total_estimated_seconds * (100 - progress_percent)) / 100))
+            else:
+                estimated_seconds_remaining = total_estimated_seconds
+        
         return JsonResponse({
             'id': video_file.id,
             'file_name': video_file.file_name,
@@ -49,6 +81,10 @@ def get_video_status(request, video_id):
             'has_lesson': hasattr(video_file, 'lesson'),
             'lesson_id': video_file.lesson.id if hasattr(video_file, 'lesson') else None,
             'lesson_title': video_file.lesson.title if hasattr(video_file, 'lesson') else None,
+            'progress_percent': progress_percent,
+            'estimated_seconds_remaining': estimated_seconds_remaining,
+            'elapsed_seconds': elapsed_seconds,
+            'file_size_mb': round((video_file.file_size / (1024 * 1024)) if video_file.file_size else 0, 2),
         })
     except VideoFile.DoesNotExist:
         return JsonResponse({'error': 'Видеофайл не найден'}, status=404)

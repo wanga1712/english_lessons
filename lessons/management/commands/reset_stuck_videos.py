@@ -35,7 +35,7 @@ class Command(BaseCommand):
         
         stuck_videos = VideoFile.objects.filter(
             status='processing',
-            updated_at__lt=cutoff_time
+            created_at__lt=cutoff_time
         )
         
         count = stuck_videos.count()
