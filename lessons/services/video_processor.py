@@ -74,6 +74,19 @@ class VideoProcessor:
             video_file.processing_message = f'Урок создан: {lesson.title}'
             video_file.processed_at = timezone.now()
             video_file.save()
+            
+            # Удаляем видеофайл после успешной обработки для экономии места
+            try:
+                if os.path.exists(video_file.file_path):
+                    file_size_mb = os.path.getsize(video_file.file_path) / (1024 * 1024)
+                    os.remove(video_file.file_path)
+                    logger.info(f'✅ Видеофайл удален: {video_file.file_path} ({file_size_mb:.2f} MB)')
+                else:
+                    logger.warning(f'⚠️ Видеофайл не найден для удаления: {video_file.file_path}')
+            except Exception as e:
+                logger.error(f'❌ Ошибка при удалении видеофайла {video_file.file_path}: {str(e)}')
+                # Не прерываем выполнение, так как урок уже создан
+            
             logger.info('')
             logger.info('=' * 80)
             logger.info('ОБРАБОТКА ВИДЕО ЗАВЕРШЕНА УСПЕШНО!')

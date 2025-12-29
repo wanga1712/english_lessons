@@ -1,0 +1,27 @@
+# Django Settings
+SECRET_KEY=your-secret-key-here-generate-with-python-secrets-token-urlsafe-32
+DEBUG=False
+ALLOWED_HOSTS=your-domain.com,your-server-ip
+
+# PostgreSQL Database (уже настроена на сервере)
+DB_NAME=english_lessons
+DB_USER=your_postgres_user
+DB_PASSWORD=your_postgres_password
+DB_HOST=localhost
+DB_PORT=5432
+USE_POSTGRES=True
+
+# OpenRouter AI
+OPENROUTER_API_KEY=your-openrouter-api-key-here
+OPENROUTER_MODEL=openai/gpt-4o-mini
+
+# Video Processing (на сервере)
+WATCHED_VIDEO_DIRECTORY=/var/www/english_lessons/uploads/videos
+TEMP_AUDIO_DIRECTORY=/tmp/english_lessons_audio
+
+# Whisper Model (CPU-only на сервере)
+WHISPER_MODEL=base
+
+# FFmpeg
+FFMPEG_BINARY=ffmpeg
+

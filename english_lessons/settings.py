@@ -188,8 +188,19 @@ OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions'
 USE_TWO_STAGE_PROCESS = env.bool('USE_TWO_STAGE_PROCESS', default=True)
 
 # Video Processing Settings
-WATCHED_VIDEO_DIRECTORY = env('WATCHED_VIDEO_DIRECTORY', default=str(BASE_DIR / 'videos'))
-TEMP_AUDIO_DIRECTORY = env('TEMP_AUDIO_DIRECTORY', default=str(BASE_DIR / 'temp_audio'))
+# На сервере используем /tmp для временных файлов и отдельную папку для загруженных видео
+if os.path.exists('/tmp'):
+    # Сервер (Linux)
+    WATCHED_VIDEO_DIRECTORY = env('WATCHED_VIDEO_DIRECTORY', default='/var/www/english_lessons/uploads/videos')
+    TEMP_AUDIO_DIRECTORY = env('TEMP_AUDIO_DIRECTORY', default='/tmp/english_lessons_audio')
+else:
+    # Локальная разработка (Windows)
+    WATCHED_VIDEO_DIRECTORY = env('WATCHED_VIDEO_DIRECTORY', default=str(BASE_DIR / 'videos'))
+    TEMP_AUDIO_DIRECTORY = env('TEMP_AUDIO_DIRECTORY', default=str(BASE_DIR / 'temp_audio'))
+
+# Создаем директории, если их нет
+os.makedirs(WATCHED_VIDEO_DIRECTORY, exist_ok=True)
+os.makedirs(TEMP_AUDIO_DIRECTORY, exist_ok=True)
 
 # Whisper Model Settings
 WHISPER_MODEL = env('WHISPER_MODEL', default='base')
