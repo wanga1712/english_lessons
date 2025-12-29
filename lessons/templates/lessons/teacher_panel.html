@@ -502,6 +502,61 @@
       logContainer.style.display = 'block';
       logContainer.innerHTML = '<div class="log-entry">🔄 Начинаем обработку видео...</div>';
       
+      let pollInterval = null;
+      let isProcessing = false;
+      
+      // Функция для обновления статуса
+      const updateStatus = async () => {
+        try {
+          const statusResponse = await fetch(`/api/videos/${videoId}/status/`);
+          if (!statusResponse.ok) return;
+          
+          const statusData = await statusResponse.json();
+          
+          // Обновляем прогресс-бар и логи
+          if (statusData.processing_message) {
+            progressBar.textContent = statusData.processing_message;
+            const lastLog = logContainer.querySelector('.log-entry:last-child');
+            if (!lastLog || !lastLog.textContent.includes(statusData.processing_message)) {
+              logContainer.innerHTML += `<div class="log-entry">📹 ${statusData.processing_message}</div>`;
+              logContainer.scrollTop = logContainer.scrollHeight;
+            }
+          }
+          
+          // Обновляем ширину прогресс-бара в зависимости от статуса
+          if (statusData.processing_status === 'transcribing') {
+            progressBar.style.width = '30%';
+          } else if (statusData.processing_status === 'generating_lesson') {
+            progressBar.style.width = '60%';
+          } else if (statusData.status === 'done') {
+            progressBar.style.width = '100%';
+            progressBar.textContent = '100% - Готово!';
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+            logContainer.innerHTML += '<div class="log-entry success">✅ Видео обработано успешно!</div>';
+            if (statusData.lesson_title) {
+              alert(`✅ Видео обработано успешно! Урок: ${statusData.lesson_title}`);
+            }
+            setTimeout(() => location.reload(), 2000);
+            return;
+          } else if (statusData.status === 'error') {
+            progressBar.style.width = '0%';
+            progressBar.textContent = 'Ошибка';
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+            logContainer.innerHTML += `<div class="log-entry error">❌ Ошибка: ${statusData.error_message || 'Неизвестная ошибка'}</div>`;
+            alert(`❌ Ошибка: ${statusData.error_message || 'Неизвестная ошибка'}`);
+            return;
+          }
+        } catch (error) {
+          console.error('Ошибка обновления статуса:', error);
+        }
+      };
+      
       try {
         progressBar.textContent = 'Отправка запроса...';
         const response = await fetch(`/api/videos/${videoId}/process/`, {
@@ -514,24 +569,23 @@
         fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:470',message:'processVideo response received',data:{status:response.status,ok:response.ok},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
         // #endregion
         
-        progressBar.textContent = 'Обработка ответа...';
-        const data = await response.json();
-        
-        // #region agent log
-        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:475',message:'processVideo data parsed',data:{success:data.success,hasError:!!data.error,error:data.error},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'G'})}).catch(()=>{});
-        // #endregion
-        
-        if (data.success) {
-          progressBar.style.width = '100%';
-          progressBar.textContent = '100%';
-          logContainer.innerHTML += '<div class="log-entry success">✅ Видео обработано успешно!</div>';
-          alert(`✅ Видео обработано успешно! Урок: ${data.lesson_title}`);
-          setTimeout(() => location.reload(), 2000);
-        } else {
+        if (!response.ok) {
+          const errorData = await response.json();
           progressBar.textContent = 'Ошибка';
-          logContainer.innerHTML += `<div class="log-entry error">❌ Ошибка: ${data.error}</div>`;
-          alert(`❌ Ошибка: ${data.error}`);
+          logContainer.innerHTML += `<div class="log-entry error">❌ Ошибка: ${errorData.error || 'Неизвестная ошибка'}</div>`;
+          alert(`❌ Ошибка: ${errorData.error || 'Неизвестная ошибка'}`);
+          return;
         }
+        
+        progressBar.textContent = 'Обработка начата...';
+        logContainer.innerHTML += '<div class="log-entry">✅ Запрос на обработку отправлен</div>';
+        
+        // Начинаем polling статуса каждые 2 секунды
+        isProcessing = true;
+        pollInterval = setInterval(updateStatus, 2000);
+        // Первое обновление сразу
+        updateStatus();
+        
       } catch (error) {
         // #region agent log
         fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:490',message:'processVideo exception',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'H'})}).catch(()=>{});
@@ -539,6 +593,9 @@
         progressBar.textContent = 'Ошибка';
         logContainer.innerHTML += `<div class="log-entry error">❌ Исключение: ${error.message}</div>`;
         alert(`❌ Ошибка: ${error.message}`);
+        if (pollInterval) {
+          clearInterval(pollInterval);
+        }
       }
     }
 

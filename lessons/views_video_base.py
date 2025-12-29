@@ -35,6 +35,30 @@ def list_videos(request):
 
 @csrf_exempt
 @require_http_methods(['GET'])
+def get_video_status(request, video_id):
+    """Получить статус обработки конкретного видео"""
+    try:
+        video_file = VideoFile.objects.get(id=video_id)
+        return JsonResponse({
+            'id': video_file.id,
+            'file_name': video_file.file_name,
+            'status': video_file.status,
+            'processing_status': video_file.processing_status,
+            'processing_message': video_file.processing_message,
+            'error_message': video_file.error_message,
+            'has_lesson': hasattr(video_file, 'lesson'),
+            'lesson_id': video_file.lesson.id if hasattr(video_file, 'lesson') else None,
+            'lesson_title': video_file.lesson.title if hasattr(video_file, 'lesson') else None,
+        })
+    except VideoFile.DoesNotExist:
+        return JsonResponse({'error': 'Видеофайл не найден'}, status=404)
+    except Exception as e:
+        logger.error(f'Ошибка получения статуса видео {video_id}: {str(e)}', exc_info=True)
+        return JsonResponse({'error': f'Ошибка: {str(e)}'}, status=500)
+
+
+@csrf_exempt
+@require_http_methods(['GET'])
 def get_next_pending_video_info(request):
     """Получить информацию о следующем видео для обработки"""
     try:

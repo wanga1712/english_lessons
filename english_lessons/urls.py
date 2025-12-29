@@ -26,6 +26,7 @@ from lessons.views_video import (
     get_next_pending_video_info, ProcessAllVideosView, RecreateAllLessonsView,
     get_processing_status
 )
+from lessons.views_video_base import get_video_status
 from lessons.views_progress import (
     get_user_progress, start_lesson_attempt,
     submit_card_answer, complete_lesson_attempt
@@ -49,6 +50,7 @@ urlpatterns = [
     path('api/lessons/<int:lesson_id>/', get_lesson, name='get_lesson'),
     path('api/lessons/<int:lesson_id>/topics/', get_lesson_topics, name='get_lesson_topics'),
     path('api/videos/', list_videos, name='list_videos'),
+    path('api/videos/<int:video_id>/status/', get_video_status, name='get_video_status'),
     path(
         'api/videos/<int:video_id>/process/',
         ProcessVideoView.as_view(),
