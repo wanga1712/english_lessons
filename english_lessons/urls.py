@@ -32,7 +32,7 @@ from lessons.views_progress import (
 )
 from lessons.views_lesson import view_lesson, view_lesson_topics, view_card_exercise, get_card_statuses
 from lessons.views_uchi import lesson_topics_uchi, home_uchi
-from lessons.views_teacher import teacher_panel
+from lessons.views_teacher import teacher_panel, upload_video
 
 urlpatterns = [
     path('', home, name='home'),
@@ -85,6 +85,8 @@ urlpatterns = [
     path('api/cards/answer/', submit_card_answer, name='submit_card_answer'),
     path('api/attempts/<int:attempt_id>/complete/', complete_lesson_attempt, name='complete_lesson_attempt'),
     path('api/lessons/<int:lesson_id>/card_statuses/', get_card_statuses, name='get_card_statuses'),
+    # Загрузка видео
+    path('api/videos/upload/', upload_video, name='upload_video'),
 ]
 
 # Добавляем обработку статических файлов для разработки

@@ -413,7 +413,7 @@
       handleFiles(e.target.files);
     });
 
-    function handleFiles(files) {
+    async function handleFiles(files) {
       if (files.length === 0) return;
 
       const formData = new FormData();
@@ -421,8 +421,34 @@
         formData.append('videos', file);
       }
 
-      // TODO: Implement actual upload endpoint
-      alert(`Загружено ${files.length} файлов. Функция загрузки будет реализована.`);
+      // Показываем прогресс
+      progressContainer.style.display = 'block';
+      progressBar.textContent = 'Загрузка...';
+      
+      try {
+        const response = await fetch('/api/videos/upload/', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          progressBar.textContent = '100%';
+          alert(`✅ ${data.message}`);
+          location.reload();
+        } else {
+          progressBar.textContent = 'Ошибка';
+          alert(`❌ Ошибка: ${data.error}`);
+        }
+      } catch (error) {
+        progressBar.textContent = 'Ошибка';
+        alert(`❌ Ошибка загрузки: ${error.message}`);
+      } finally {
+        setTimeout(() => {
+          progressContainer.style.display = 'none';
+        }, 2000);
+      }
     }
 
     async function processVideo(videoId, forceRecreate = false) {
