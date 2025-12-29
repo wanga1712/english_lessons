@@ -24,8 +24,6 @@ class ProcessVideoView(View):
     def post(self, request, video_id):
         """Обработать видео вручную"""
         # #region agent log
-        import os, json
-        from django.conf import settings
         log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
         os.makedirs(os.path.dirname(log_path), exist_ok=True)
         with open(log_path, 'a', encoding='utf-8') as f:
