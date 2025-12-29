@@ -747,6 +747,42 @@
         logContainer.innerHTML += `<div class="log-entry">❌ Ошибка: ${error.message}</div>`;
       }
     }
+
+    async function resetStuckVideos() {
+      if (!confirm('Сбросить все видео, которые застряли в статусе "processing" более 2 часов?\n\nВидео с несуществующими файлами будут помечены как "error", остальные вернутся в статус "pending".')) return;
+
+      progressContainer.style.display = 'block';
+      logContainer.style.display = 'block';
+      logContainer.innerHTML = '<div class="log-entry">🔧 Сброс застрявших видео...</div>';
+
+      try {
+        const formData = new FormData();
+        formData.append('hours', '2');
+        
+        const response = await fetch('/api/videos/reset_stuck/', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+          logContainer.innerHTML += `<div class="log-entry success">✅ ${data.message}</div>`;
+          if (data.errors && data.errors.length > 0) {
+            logContainer.innerHTML += '<div class="log-entry">❌ Ошибки при сбросе:</div>';
+            data.errors.forEach(err => {
+              logContainer.innerHTML += `<div class="log-entry">  - ID ${err.video_id}: ${err.error}</div>`;
+            });
+          }
+          progressBar.style.width = '100%';
+          progressBar.textContent = '100%';
+          setTimeout(() => location.reload(), 2000);
+        } else {
+          logContainer.innerHTML += `<div class="log-entry error">❌ Ошибка: ${data.error}</div>`;
+        }
+      } catch (error) {
+        logContainer.innerHTML += `<div class="log-entry error">❌ Ошибка: ${error.message}</div>`;
+      }
+    }
   </script>
 </body>
 </html>
