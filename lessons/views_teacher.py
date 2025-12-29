@@ -20,7 +20,9 @@ def teacher_panel(request):
     # #region agent log
     watched_dir = settings.WATCHED_VIDEO_DIRECTORY
     watched_dir_exists = os.path.exists(watched_dir)
-    with open('.cursor/debug.log', 'a', encoding='utf-8') as f:
+    log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    with open(log_path, 'a', encoding='utf-8') as f:
         f.write(json.dumps({
             'location': 'views_teacher.py:20',
             'message': 'teacher_panel called',
@@ -58,7 +60,9 @@ def upload_video(request):
     """Endpoint для загрузки видеофайлов"""
     # #region agent log
     watched_dir = settings.WATCHED_VIDEO_DIRECTORY
-    with open('.cursor/debug.log', 'a', encoding='utf-8') as f:
+    log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    with open(log_path, 'a', encoding='utf-8') as f:
         f.write(json.dumps({
             'location': 'views_teacher.py:45',
             'message': 'upload_video called',
@@ -86,7 +90,8 @@ def upload_video(request):
         
         for video_file in request.FILES.getlist('videos'):
             # #region agent log
-            with open('.cursor/debug.log', 'a', encoding='utf-8') as f:
+            log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+            with open(log_path, 'a', encoding='utf-8') as f:
                 f.write(json.dumps({
                     'location': 'views_teacher.py:65',
                     'message': 'Processing uploaded file',
@@ -120,7 +125,8 @@ def upload_video(request):
             
             # #region agent log
             file_size = os.path.getsize(file_path)
-            with open('.cursor/debug.log', 'a', encoding='utf-8') as f:
+            log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+            with open(log_path, 'a', encoding='utf-8') as f:
                 f.write(json.dumps({
                     'location': 'views_teacher.py:90',
                     'message': 'File saved',
@@ -158,7 +164,8 @@ def upload_video(request):
             )
             
             # #region agent log
-            with open('.cursor/debug.log', 'a', encoding='utf-8') as f:
+            log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+            with open(log_path, 'a', encoding='utf-8') as f:
                 f.write(json.dumps({
                     'location': 'views_teacher.py:115',
                     'message': 'VideoFile created',
@@ -188,7 +195,8 @@ def upload_video(request):
         
     except Exception as e:
         # #region agent log
-        with open('.cursor/debug.log', 'a', encoding='utf-8') as f:
+        log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+        with open(log_path, 'a', encoding='utf-8') as f:
             f.write(json.dumps({
                 'location': 'views_teacher.py:135',
                 'message': 'upload_video error',
