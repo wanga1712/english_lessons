@@ -39,6 +39,25 @@ class VideoProcessor:
         video_file.processing_message = 'Транскрипция видео...'
         video_file.save()
         try:
+            # #region agent log
+            log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+            os.makedirs(os.path.dirname(log_path), exist_ok=True)
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(json.dumps({
+                    'location': 'video_processor.py:42',
+                    'message': 'Starting video processing',
+                    'data': {
+                        'video_id': video_file.id,
+                        'file_path': video_file.file_path,
+                        'file_path_exists': os.path.exists(video_file.file_path),
+                        'WATCHED_VIDEO_DIRECTORY': settings.WATCHED_VIDEO_DIRECTORY
+                    },
+                    'timestamp': int(timezone.now().timestamp() * 1000),
+                    'sessionId': 'debug-session',
+                    'runId': 'run1',
+                    'hypothesisId': 'G'
+                }, ensure_ascii=False) + '\n')
+            # #endregion
             transcript_text = self.transcription_service.transcribe(video_file.file_path)
             if not transcript_text or len(transcript_text.strip()) < 50:
                 raise ValueError(f'Транскрипт слишком короткий или пустой: {len(transcript_text) if transcript_text else 0} символов')
