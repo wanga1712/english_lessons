@@ -520,6 +520,14 @@
           if (statusData.processing_message) {
             messageCell.textContent = statusData.processing_message;
             messageCell.style.display = '';
+            // Если видео застряло, выделяем сообщение
+            if (statusData.is_stuck) {
+              messageCell.style.color = '#ff9800';
+              messageCell.style.fontWeight = 'bold';
+            } else {
+              messageCell.style.color = '#667eea';
+              messageCell.style.fontWeight = 'normal';
+            }
           } else {
             messageCell.style.display = 'none';
           }
