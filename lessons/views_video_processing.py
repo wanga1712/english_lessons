@@ -23,11 +23,13 @@ class ProcessVideoView(View):
     
     def post(self, request, video_id):
         """Обработать видео вручную"""
+        # Убеждаемся, что json импортирован
+        import json as json_module
         # #region agent log
         log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
         os.makedirs(os.path.dirname(log_path), exist_ok=True)
         with open(log_path, 'a', encoding='utf-8') as f:
-            f.write(json.dumps({
+            f.write(json_module.dumps({
                 'location': 'views_video_processing.py:20',
                 'message': 'ProcessVideoView.post called',
                 'data': {'video_id': video_id},
@@ -42,7 +44,7 @@ class ProcessVideoView(View):
             
             # #region agent log
             with open(log_path, 'a', encoding='utf-8') as f:
-                f.write(json.dumps({
+                f.write(json_module.dumps({
                     'location': 'views_video_processing.py:25',
                     'message': 'VideoFile found',
                     'data': {
@@ -62,9 +64,9 @@ class ProcessVideoView(View):
             force_recreate = False
             if request.body:
                 try:
-                    body_data = json.loads(request.body)
+                    body_data = json_module.loads(request.body)
                     force_recreate = body_data.get('force_recreate', False)
-                except json.JSONDecodeError:
+                except json_module.JSONDecodeError:
                     pass
             
             if video_file.status == 'processing' and not force_recreate:
@@ -97,9 +99,10 @@ class ProcessVideoView(View):
             
         except VideoFile.DoesNotExist:
             # #region agent log
+            import json as json_module
             log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
             with open(log_path, 'a', encoding='utf-8') as f:
-                f.write(json.dumps({
+                f.write(json_module.dumps({
                     'location': 'views_video_processing.py:63',
                     'message': 'VideoFile not found',
                     'data': {'video_id': video_id},
@@ -112,9 +115,10 @@ class ProcessVideoView(View):
             return JsonResponse({'error': 'Видеофайл не найден'}, status=404)
         except Exception as e:
             # #region agent log
+            import json as json_module
             log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
             with open(log_path, 'a', encoding='utf-8') as f:
-                f.write(json.dumps({
+                f.write(json_module.dumps({
                     'location': 'views_video_processing.py:66',
                     'message': 'ProcessVideoView error',
                     'data': {
