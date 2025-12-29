@@ -26,6 +26,7 @@ from lessons.views_video import (
     get_next_pending_video_info, ProcessAllVideosView, RecreateAllLessonsView,
     get_processing_status
 )
+from lessons.views_video_processing import ResetStuckVideosView
 from lessons.views_video_base import get_video_status
 from lessons.views_progress import (
     get_user_progress, start_lesson_attempt,
@@ -75,6 +76,11 @@ urlpatterns = [
         'api/videos/processing_status/',
         get_processing_status,
         name='processing_status',
+    ),
+    path(
+        'api/videos/reset_stuck/',
+        ResetStuckVideosView.as_view(),
+        name='reset_stuck_videos',
     ),
     path(
         'api/videos/next_pending_info/',

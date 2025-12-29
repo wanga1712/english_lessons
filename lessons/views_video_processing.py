@@ -139,6 +139,66 @@ class ProcessVideoView(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
+class ResetStuckVideosView(View):
+    """API endpoint для сброса застрявших видео"""
+    
+    def post(self, request):
+        """Сбросить застрявшие видео в статусе processing"""
+        from datetime import timedelta
+        import os
+        
+        try:
+            hours = int(request.POST.get('hours', 2))
+            cutoff_time = timezone.now() - timedelta(hours=hours)
+            
+            stuck_videos = VideoFile.objects.filter(
+                status='processing',
+                updated_at__lt=cutoff_time
+            )
+            
+            reset_count = 0
+            errors = []
+            
+            for video in stuck_videos:
+                file_exists = os.path.exists(video.file_path) if video.file_path else False
+                
+                try:
+                    if not file_exists:
+                        video.status = 'error'
+                        video.processing_status = 'error'
+                        video.error_message = f'Видеофайл не найден: {video.file_path}'
+                        video.processing_message = None
+                    else:
+                        video.status = 'pending'
+                        video.processing_status = 'idle'
+                        video.processing_message = None
+                        video.error_message = None
+                    
+                    video.save()
+                    reset_count += 1
+                except Exception as e:
+                    errors.append({
+                        'video_id': video.id,
+                        'file_name': video.file_name,
+                        'error': str(e)
+                    })
+                    logger.error(f'Ошибка сброса видео {video.id}: {e}', exc_info=True)
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'Сброшено {reset_count} застрявших видео',
+                'reset_count': reset_count,
+                'errors': errors
+            })
+            
+        except Exception as e:
+            logger.error(f'Ошибка сброса застрявших видео: {str(e)}', exc_info=True)
+            return JsonResponse({
+                'error': f'Ошибка: {str(e)}'
+            }, status=500)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
 class ProcessNextPendingVideoView(View):
     """API endpoint для обработки следующего ожидающего видео"""
 
