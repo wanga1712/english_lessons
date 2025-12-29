@@ -55,19 +55,22 @@ def get_video_status(request, video_id):
             # Для более точного расчета можно было бы добавить поле processing_started_at
             elapsed_seconds = int((timezone.now() - video_file.created_at).total_seconds())
             
-            # Если видео обрабатывается слишком долго (более 30 минут), возможно оно застряло
-            # В этом случае показываем более реалистичное время
-            if elapsed_seconds > 1800:  # 30 минут
+            # Если видео обрабатывается слишком долго (более 20 минут), возможно оно застряло
+            # В этом случае показываем более реалистичное время и предупреждение
+            if elapsed_seconds > 1200:  # 20 минут
                 # Видео обрабатывается очень долго, возможно застряло
                 # Показываем минимальное оставшееся время
                 progress_percent = 30 if video_file.processing_status == 'transcribing' else 60
                 estimated_seconds_remaining = 300  # 5 минут как запас
+                # Добавляем предупреждение в сообщение
+                elapsed_minutes = elapsed_seconds // 60
+                warning_message = f'⚠️ Обработка идет очень долго ({elapsed_minutes} мин). Возможно, процесс завис.'
                 return JsonResponse({
                     'id': video_file.id,
                     'file_name': video_file.file_name,
                     'status': video_file.status,
                     'processing_status': video_file.processing_status,
-                    'processing_message': video_file.processing_message,
+                    'processing_message': warning_message + ' ' + (video_file.processing_message or ''),
                     'error_message': video_file.error_message,
                     'has_lesson': hasattr(video_file, 'lesson'),
                     'lesson_id': video_file.lesson.id if hasattr(video_file, 'lesson') else None,
@@ -76,6 +79,7 @@ def get_video_status(request, video_id):
                     'estimated_seconds_remaining': estimated_seconds_remaining,
                     'elapsed_seconds': elapsed_seconds,
                     'file_size_mb': round((video_file.file_size / (1024 * 1024)) if video_file.file_size else 0, 2),
+                    'is_stuck': True,  # Флаг для фронтенда
                 })
             
             # Оценка времени на основе размера файла
