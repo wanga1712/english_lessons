@@ -86,7 +86,7 @@ USE_POSTGRES = env.bool('USE_POSTGRES', default=True)
 
 if USE_POSTGRES:
     try:
-        # Test PostgreSQL connection
+        # Test PostgreSQL connection with longer timeout
         import psycopg2
         test_conn = psycopg2.connect(
             host=env('DB_HOST', default='localhost'),
@@ -94,7 +94,7 @@ if USE_POSTGRES:
             user=env('DB_USER', default='postgres'),
             password=env('DB_PASSWORD', default=''),
             database=env('DB_NAME', default='english_lessons'),
-            connect_timeout=5  # Увеличиваем timeout
+            connect_timeout=10  # Увеличиваем timeout до 10 секунд
         )
         test_conn.close()
         
@@ -107,6 +107,10 @@ if USE_POSTGRES:
                 'HOST': env('DB_HOST', default='localhost'),
                 'PORT': env('DB_PORT', default='5432'),
                 'CONN_MAX_AGE': 600,  # Keep connections alive
+                'OPTIONS': {
+                    'connect_timeout': 10,
+                    'options': '-c statement_timeout=30000'  # 30 секунд на выполнение запроса
+                },
             }
         }
         import logging

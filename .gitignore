@@ -37,6 +37,7 @@ db.sqlite3-journal
 # Environment variables
 .env
 .env.local
+.env.production
 
 # IDE
 .vscode/
@@ -63,3 +64,7 @@ videos/
 debug.log
 check_db.py
 
+# Deployment
+download_from_server/
+*.tar.gz
+deploy_script.sh

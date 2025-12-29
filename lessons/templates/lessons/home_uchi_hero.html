@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Карта приключений</title>
   {% load static %}
+  
+  <!-- Phaser 3 from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
@@ -13,7 +17,8 @@
       background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       min-height: 100vh;
       padding: 20px;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     
     .teacher-button {
@@ -31,6 +36,11 @@
       box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
       text-decoration: none;
       z-index: 1000;
+      transition: transform 0.2s;
+    }
+    
+    .teacher-button:hover {
+      transform: translateY(-2px);
     }
     
     .game-container {
@@ -41,6 +51,7 @@
       padding: 40px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       min-height: 700px;
+      overflow: visible;
     }
     
     .stats-panel {
@@ -66,16 +77,64 @@
       border-radius: 15px;
       border: 5px solid #8b4513;
       overflow: hidden;
+      cursor: grab;
     }
     
-    #gameCanvas {
+    .game-map-wrapper:active {
+      cursor: grabbing;
+    }
+    
+    #phaser-game {
       width: 100%;
       height: 100%;
+    }
+    
+    .zoom-controls {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .zoom-btn {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: 2px solid #667eea;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.2s;
+    }
+    
+    .zoom-btn:hover {
+      background: #667eea;
+      color: white;
     }
     
     .stars {
       color: #FFD700;
       font-size: 1.2rem;
+    }
+    
+    .map-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      z-index: 100;
     }
   </style>
 </head>
@@ -100,8 +159,14 @@
       </div>
     </div>
     
-    <div class="game-map-wrapper">
-      <canvas id="gameCanvas"></canvas>
+    <div class="game-map-wrapper" id="mapWrapper">
+      <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomIn">+</button>
+        <button class="zoom-btn" id="zoomOut">−</button>
+        <button class="zoom-btn" id="resetView">⌂</button>
+      </div>
+      <div id="phaser-game"></div>
+      <div class="map-hint">🖱️ Перетаскивайте карту мышью | 🔍 Колесико мыши для зума</div>
     </div>
     
     <div style="margin-top: 20px; text-align: center; color: #666;">
@@ -112,11 +177,32 @@
   </div>
   
   <script>
-    console.log('=== HERO MAP INITIALIZATION ===');
+    // #region agent log
+    const DEBUG_LOG_ENDPOINT = 'http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812';
+    function logDebug(location, message, data, hypothesisId) {
+      const logData = {
+        location: location,
+        message: message,
+        data: data || {},
+        timestamp: Date.now(),
+        sessionId: 'debug-session',
+        runId: 'run1',
+        hypothesisId: hypothesisId || 'A'
+      };
+      fetch(DEBUG_LOG_ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(logData)
+      }).catch(() => {});
+      console.log(`[${location}] ${message}`, data || '');
+    }
+    // #endregion
     
+    // Game data
+    let gameInstance = null;
     let lessons = [];
     let completedLessons = new Set();
-    let lessonStars = {}; // {lessonId: stars}
+    let lessonStars = {};
     let avatarData = {name: 'Ученик', emoji: '🎓', score: 0.0};
     
     {% if avatar_data_json %}
@@ -127,147 +213,881 @@
     }
     {% endif %}
     
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Hero sprite
-    const heroImg = new Image();
-    heroImg.src = '{% static "lessons/img/characters/glowsword_blue_male.png" %}';
-    let heroLoaded = false;
-    heroImg.onload = () => {
-      console.log('Hero sprite loaded');
-      heroLoaded = true;
-      renderMap();
-    };
-    
-    function resizeCanvas() {
-      const wrapper = canvas.parentElement;
-      canvas.width = wrapper.clientWidth;
-      canvas.height = wrapper.clientHeight;
-      if (lessons.length > 0) renderMap();
-    }
-    
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    
-    // Lesson positions on map
-    const positions = [
-      {x: 0.1, y: 0.2}, {x: 0.25, y: 0.15}, {x: 0.4, y: 0.2}, {x: 0.55, y: 0.15},
-      {x: 0.7, y: 0.2}, {x: 0.85, y: 0.15}, {x: 0.9, y: 0.3}, {x: 0.75, y: 0.35},
-      {x: 0.6, y: 0.32}, {x: 0.45, y: 0.38}, {x: 0.3, y: 0.4}, {x: 0.15, y: 0.45},
-      {x: 0.2, y: 0.55}, {x: 0.35, y: 0.5}, {x: 0.5, y: 0.55}, {x: 0.65, y: 0.52},
-      {x: 0.8, y: 0.58}, {x: 0.85, y: 0.7}, {x: 0.7, y: 0.75}, {x: 0.55, y: 0.72},
-      {x: 0.4, y: 0.78}, {x: 0.25, y: 0.75}, {x: 0.15, y: 0.8}, {x: 0.3, y: 0.85},
-      {x: 0.5, y: 0.88}
+    // Lesson positions on map - обновлены для увеличенного мира (3000x3000)
+    const lessonPositions = [
+      {x: 300, y: 300}, {x: 600, y: 250}, {x: 900, y: 300}, {x: 1200, y: 250},
+      {x: 1500, y: 300}, {x: 1800, y: 250}, {x: 2400, y: 450}, {x: 2100, y: 500},
+      {x: 1800, y: 480}, {x: 1350, y: 570}, {x: 900, y: 600}, {x: 450, y: 675},
+      {x: 600, y: 825}, {x: 1050, y: 750}, {x: 1500, y: 825}, {x: 1950, y: 780},
+      {x: 2400, y: 870}, {x: 2550, y: 1050}, {x: 2100, y: 1125}, {x: 1650, y: 1080},
+      {x: 1200, y: 1170}, {x: 750, y: 1125}, {x: 450, y: 1200}, {x: 900, y: 1275},
+      {x: 1500, y: 1320}
     ];
     
-    async function loadLessons() {
-      console.log('Loading lessons...');
-      try {
-        const response = await fetch('/api/lessons/');
-        const data = await response.json();
-        lessons = data.lessons || [];
-        
-        lessons.forEach(lesson => {
-          if (lesson.progress && lesson.progress.completion_percent === 100) {
-            completedLessons.add(lesson.id);
-          }
-          // TODO: Load stars from API
-          lessonStars[lesson.id] = lesson.stars || 0;
-        });
-        
-        console.log('Lessons loaded:', lessons.length);
-        updateStats();
-        renderMap();
-      } catch (error) {
-        console.error('Error loading lessons:', error);
+    // Phaser Game Configuration
+    const config = {
+      type: Phaser.AUTO,
+      parent: 'phaser-game',
+      width: 800,
+      height: 600,
+      backgroundColor: '#87CEEB',
+      physics: {
+        default: 'arcade',
+        arcade: {
+          debug: false
+        }
+      },
+      scene: {
+        preload: preload,
+        create: create,
+        update: update
+      },
+      scale: {
+        mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH
       }
-    }
+    };
     
-    function renderMap() {
-      if (!ctx || lessons.length === 0) return;
+    // Phaser Scene Functions
+    function preload() {
+      const scene = this;
       
-      const width = canvas.width;
-      const height = canvas.height;
+      // Load new hero sprite - 5 rows × 10 cols = 50 frames, 73×98px each
+      const heroPath = '{% static "lessons/img/characters/hero-new.jpg" %}';
+      console.log('🖼️ Loading new hero image from:', heroPath);
       
-      ctx.clearRect(0, 0, width, height);
+      // #region agent log
+      logDebug('home_uchi_hero.html:preload', 'Loading new hero as single image for grid extraction', {
+        heroPath,
+        imageSize: '735x490',
+        gridStructure: '5 rows × 10 cols = 50 frames',
+        frameSize: '73×98px',
+        approach: 'canvas_texture_extraction'
+      }, 'A');
+      // #endregion
       
-      // Draw paths
-      lessons.forEach((lesson, index) => {
-        if (index > 0) {
-          const prev = positions[(index - 1) % positions.length];
-          const curr = positions[index % positions.length];
-          const isUnlocked = isLessonUnlocked(index);
+      // Загружаем как одно изображение (не спрайт-лист)
+      scene.load.image('hero-full', heroPath);
+      
+      // Настройки для сетки спрайтов нового героя
+      // Спрайт-лист имеет структуру: 5 рядов × 10 колонок = 50 кадров
+      scene.heroImageKey = 'hero-full';
+      scene.heroImageWidth = 735;
+      scene.heroImageHeight = 490;
+      
+      // Структура сетки: 5 рядов × 10 колонок = 50 кадров
+      scene.heroGridRows = 5;
+      scene.heroGridCols = 10;
+      scene.heroFrameWidth = 73;  // 735 / 10 = 73.5, округляем до 73
+      scene.heroFrameHeight = 98; // 490 / 5 = 98
+      scene.heroTotalFrames = 50; // 5 × 10
+      
+      // #region agent log
+      logDebug('home_uchi_hero.html:preload', 'Grid spritesheet config set', {
+        gridRows: scene.heroGridRows,
+        gridCols: scene.heroGridCols,
+        frameWidth: scene.heroFrameWidth,
+        frameHeight: scene.heroFrameHeight,
+        totalFrames: scene.heroTotalFrames
+      }, 'A');
+      // #endregion
+      
+      // Логируем загрузку изображения
+      scene.load.on('filecomplete-image-hero-full', () => {
+        console.log('✅ hero-full image loaded (735x490, will create frame textures from grid)');
+        
+        // Создаем отдельные текстуры для каждого кадра из сетки
+        const gridRows = scene.heroGridRows || 5;
+        const gridCols = scene.heroGridCols || 10;
+        const frameWidth = scene.heroFrameWidth || 73;
+        const frameHeight = scene.heroFrameHeight || 98;
+        const totalFrames = scene.heroTotalFrames || 50;
+        
+        const sourceTexture = scene.textures.get('hero-full');
+        
+        if (sourceTexture && sourceTexture.source[0]) {
+          const sourceImage = sourceTexture.source[0].image;
           
-          ctx.strokeStyle = isUnlocked ? '#8B4513' : '#CCCCCC';
-          ctx.lineWidth = isUnlocked ? 6 : 3;
-          ctx.setLineDash(isUnlocked ? [] : [10, 5]);
+          console.log(`📐 Creating textures from grid: ${gridRows} rows × ${gridCols} cols = ${totalFrames} frames`);
+          console.log(`   Frame size: ${frameWidth}x${frameHeight}`);
           
-          ctx.beginPath();
-          ctx.moveTo(prev.x * width, prev.y * height);
-          const midX = (prev.x + curr.x) / 2 * width;
-          const midY = (prev.y + curr.y) / 2 * height - 20;
-          ctx.quadraticCurveTo(midX, midY, curr.x * width, curr.y * height);
-          ctx.stroke();
-          ctx.setLineDash([]);
+          // Создаем canvas для каждого кадра
+          let frameIndex = 0;
+          for (let row = 0; row < gridRows; row++) {
+            for (let col = 0; col < gridCols; col++) {
+              const canvas = document.createElement('canvas');
+              canvas.width = frameWidth;
+              canvas.height = frameHeight;
+              const ctx = canvas.getContext('2d');
+              
+              // Вычисляем координаты в исходном изображении
+              const sourceX = col * frameWidth;
+              const sourceY = row * frameHeight;
+              
+              // Рисуем нужную часть исходного изображения
+              ctx.drawImage(
+                sourceImage,
+                sourceX, sourceY, frameWidth, frameHeight,  // source (из сетки)
+                0, 0, frameWidth, frameHeight  // destination
+              );
+              
+              // Добавляем как текстуру в Phaser
+              scene.textures.addCanvas(`hero-frame-${frameIndex}`, canvas);
+              
+              if (frameIndex < 5 || frameIndex >= totalFrames - 5) {
+                console.log(`   Created texture: hero-frame-${frameIndex} (row ${row}, col ${col}, pos ${sourceX},${sourceY})`);
+              }
+              
+              frameIndex++;
+            }
+          }
+          
+          console.log(`✅ Created ${totalFrames} frame textures from grid`);
+          
+          // #region agent log
+          logDebug('home_uchi_hero.html:preload', 'Frame textures created from grid', {
+            imageWidth: 735,
+            imageHeight: 490,
+            gridRows,
+            gridCols,
+            frameWidth,
+            frameHeight,
+            totalFrames,
+            texturesCreated: totalFrames
+          }, 'A');
+          // #endregion
+        } else {
+          console.error('❌ Cannot create frame textures: source texture not found');
         }
       });
       
-      // Draw lessons
+      // Load tileset for map background
+      scene.load.image('tileset', '{% static "lessons/img/tileset/all.png" %}');
+      
+      // Add load error listener
+      scene.load.on('loaderror', (file) => {
+        console.error('❌ Error loading file:', file.key, file.src);
+      });
+      
+      console.log('✅ Phaser preload started');
+    }
+    
+    function create() {
+      const scene = this;
+      
+      // Get canvas dimensions
+      const mapWrapper = document.getElementById('mapWrapper');
+      const width = mapWrapper.clientWidth;
+      const height = mapWrapper.clientHeight;
+      
+      // Resize game
+      scene.scale.resize(width, height);
+      
+      // Create camera with bounds - увеличенный размер мира для лучшего разрешения
+      const worldWidth = 3000;
+      const worldHeight = 3000;
+      scene.cameras.main.setBounds(0, 0, worldWidth, worldHeight);
+      scene.cameras.main.setZoom(1);
+      
+      // Create map background - Heroes 3 style with grass/earth tiles
+      createMapBackground(scene);
+      
+      // Store scene reference for later use
+      scene.lessonSprites = [];
+      scene.heroSprite = null;
+      scene.paths = [];
+      
+      // Create hero animations from spritesheet
+      createHeroAnimations(scene);
+      
+      // Load lessons from API
+      loadLessons(scene);
+      
+      // Setup camera controls
+      setupCameraControls(scene);
+      
+      console.log('✅ Phaser scene created');
+    }
+    
+    // Create hero animations - не нужны, так как используем ручную обрезку через crop
+    function createHeroAnimations(scene) {
+      // Не создаем анимации, так как используем ручную обрезку через setCrop()
+      console.log('✅ Using manual crop approach - no animations needed');
+      
+      // #region agent log
+      logDebug('home_uchi_hero.html:createHeroAnimations', 'Using manual crop', {
+        approach: 'manual_crop',
+        frameWidth: scene.heroFrameWidth,
+        frameHeight: scene.heroFrameHeight,
+        frameCount: scene.heroFrameCount
+      }, 'B');
+      // #endregion
+    }
+    
+    function update() {
+      // Update animations, etc.
+    }
+    
+    // Create map background - красивый фон с градиентом и спрайтами деревьев
+    function createMapBackground(scene) {
+      const worldWidth = 3000;
+      const worldHeight = 3000;
+      const centerX = worldWidth / 2;
+      const centerY = worldHeight / 2;
+      
+      // Создаем красивый градиентный фон (небо → трава)
+      const skyColor = 0x87CEEB; // Небесно-голубой
+      const grassColor = 0x7CB342; // Свежая зеленая трава
+      const earthColor = 0x8D6E63; // Коричневая земля
+      
+      // Базовый слой неба
+      const skyBg = scene.add.rectangle(centerX, centerY, worldWidth, worldHeight, skyColor);
+      skyBg.setDepth(-100);
+      
+      // Градиентный переход к траве (создаем несколько слоев)
+      const gradientLayers = 20;
+      for (let i = 0; i < gradientLayers; i++) {
+        const yPos = (worldHeight / gradientLayers) * i;
+        const ratio = i / gradientLayers;
+        const color = Phaser.Display.Color.Interpolate.ColorWithColor(
+          Phaser.Display.Color.ValueToColor(skyColor),
+          Phaser.Display.Color.ValueToColor(grassColor),
+          gradientLayers,
+          i
+        );
+        const layerColor = Phaser.Display.Color.GetColor(color.r, color.g, color.b);
+        
+        const layer = scene.add.rectangle(
+          centerX,
+          yPos + (worldHeight / gradientLayers) / 2,
+          worldWidth,
+          worldHeight / gradientLayers,
+          layerColor
+        );
+        layer.setDepth(-99);
+      }
+      
+      // Добавляем текстурированную траву (тайлы)
+      const grassTileSize = 128;
+      for (let y = 0; y < worldHeight; y += grassTileSize) {
+        for (let x = 0; x < worldWidth; x += grassTileSize) {
+          // Вариация цвета для естественного вида
+          const variation = Math.random() * 0.15;
+          const tileColor = Phaser.Display.Color.ValueToColor(grassColor);
+          if (Math.random() > 0.5) {
+            tileColor.brighten(10 * variation);
+          } else {
+            tileColor.darken(10 * variation);
+          }
+          
+          const tile = scene.add.rectangle(
+            x + grassTileSize / 2,
+            y + grassTileSize / 2,
+            grassTileSize,
+            grassTileSize,
+            tileColor.color
+          );
+          tile.setDepth(-98);
+          tile.setAlpha(0.4 + variation * 0.3);
+        }
+      }
+      
+      // Добавляем участки земли
+      for (let i = 0; i < 20; i++) {
+        const patchX = Phaser.Math.Between(150, worldWidth - 150);
+        const patchY = Phaser.Math.Between(150, worldHeight - 150);
+        const patchSize = Phaser.Math.Between(100, 200);
+        
+        const patch = scene.add.ellipse(patchX, patchY, patchSize, patchSize * 0.7, earthColor);
+        patch.setDepth(-97);
+        patch.setAlpha(0.3);
+      }
+      
+      // Добавляем красивые деревья (улучшенные спрайты)
+      for (let i = 0; i < 80; i++) {
+        const treeX = Phaser.Math.Between(100, worldWidth - 100);
+        const treeY = Phaser.Math.Between(100, worldHeight - 100);
+        const treeScale = Phaser.Math.FloatBetween(0.8, 1.3);
+        const treeType = Phaser.Math.Between(0, 2); // 3 типа деревьев
+        
+        // Ствол дерева
+        const trunkHeight = 20 * treeScale;
+        const trunkWidth = 6 * treeScale;
+        const trunk = scene.add.rectangle(
+          treeX,
+          treeY + trunkHeight / 2,
+          trunkWidth,
+          trunkHeight,
+          0x5D4037
+        );
+        trunk.setDepth(-96);
+        
+        // Крона дерева (разные типы)
+        let crownColor, crownSize;
+        if (treeType === 0) {
+          // Хвойное дерево (темно-зеленое)
+          crownColor = 0x2E7D32;
+          crownSize = 25 * treeScale;
+          const crown = scene.add.circle(treeX, treeY - 5, crownSize, crownColor);
+          crown.setDepth(-96);
+        } else if (treeType === 1) {
+          // Лиственное дерево (светло-зеленое)
+          crownColor = 0x66BB6A;
+          crownSize = 30 * treeScale;
+          const crown = scene.add.circle(treeX, treeY - 8, crownSize, crownColor);
+          crown.setDepth(-96);
+          // Добавляем второй слой для объема
+          const crown2 = scene.add.circle(treeX + 5, treeY - 10, crownSize * 0.7, 0x81C784);
+          crown2.setDepth(-96);
+          crown2.setAlpha(0.7);
+        } else {
+          // Пальма (высокая)
+          crownColor = 0x558B2F;
+          crownSize = 20 * treeScale;
+          const crown = scene.add.circle(treeX, treeY - 15, crownSize, crownColor);
+          crown.setDepth(-96);
+          // Листья пальмы
+          for (let leaf = 0; leaf < 4; leaf++) {
+            const angle = (leaf * Math.PI * 2) / 4;
+            const leafX = treeX + Math.cos(angle) * 15;
+            const leafY = treeY - 20 + Math.sin(angle) * 10;
+            const leafSprite = scene.add.ellipse(leafX, leafY, 12, 25, crownColor);
+            leafSprite.setDepth(-96);
+            leafSprite.setRotation(angle);
+          }
+        }
+      }
+      
+      // Добавляем водоемы
+      for (let i = 0; i < 8; i++) {
+        const waterX = Phaser.Math.Between(200, worldWidth - 200);
+        const waterY = Phaser.Math.Between(200, worldHeight - 200);
+        const waterSize = Phaser.Math.Between(120, 250);
+        const waterColor = 0x42A5F5; // Голубая вода
+        
+        const water = scene.add.ellipse(waterX, waterY, waterSize, waterSize * 0.85, waterColor);
+        water.setDepth(-95);
+        water.setAlpha(0.65);
+        
+        // Эффект волн
+        const waveGraphics = scene.add.graphics();
+        waveGraphics.lineStyle(2, 0xFFFFFF, 0.4);
+        for (let w = 0; w < waterSize; w += 20) {
+          const waveY = waterY + Math.sin(w / 15) * 8;
+          waveGraphics.beginPath();
+          waveGraphics.moveTo(waterX - waterSize / 2 + w, waveY);
+          waveGraphics.lineTo(waterX - waterSize / 2 + w + 15, waveY);
+          waveGraphics.strokePath();
+        }
+        waveGraphics.setDepth(-94);
+      }
+      
+      // Добавляем декоративные камни
+      for (let i = 0; i < 25; i++) {
+        const rockX = Phaser.Math.Between(80, worldWidth - 80);
+        const rockY = Phaser.Math.Between(80, worldHeight - 80);
+        const rockSize = Phaser.Math.Between(8, 18);
+        const rockColor = 0x757575;
+        
+        const rock = scene.add.circle(rockX, rockY, rockSize, rockColor);
+        rock.setDepth(-93);
+        rock.setAlpha(0.6);
+      }
+      
+      console.log('✅ Enhanced map background created with trees and gradient');
+    }
+    
+    // Load lessons from API
+    async function loadLessons(scene) {
+      try {
+        console.log('📡 Loading lessons from API...');
+        const response = await fetch('/api/lessons/');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.error) {
+          console.error('API error:', data.error_message);
+          showErrorMessage(scene, data.error_message);
+          return;
+        }
+        
+        lessons = data.lessons || [];
+        console.log(`✅ Loaded ${lessons.length} lessons`);
+        
+        // Process lessons
+        lessons.forEach(lesson => {
+          if (lesson.user_completed) {
+            completedLessons.add(lesson.id);
+          }
+          lessonStars[lesson.id] = lesson.stars || 0;
+        });
+        
+        updateStats();
+        
+        // Create lesson sprites
+        createLessonSprites(scene);
+        
+        // Position camera to show all lessons
+        fitCameraToLessons(scene);
+        
+      } catch (error) {
+        console.error('Error loading lessons:', error);
+        showErrorMessage(scene, 'Ошибка загрузки уроков. Проверьте подключение к серверу.');
+      }
+    }
+    
+    // Create lesson sprites (islands)
+    function createLessonSprites(scene) {
+      // Clear existing sprites
+      scene.lessonSprites.forEach(sprite => sprite.destroy());
+      scene.lessonSprites = [];
+      scene.paths.forEach(path => path.destroy());
+      scene.paths = [];
+      
       lessons.forEach((lesson, index) => {
-        const pos = positions[index % positions.length];
-        const x = pos.x * width;
-        const y = pos.y * height;
+        const pos = lessonPositions[index % lessonPositions.length];
         const isUnlocked = isLessonUnlocked(index);
         const isCompleted = completedLessons.has(lesson.id);
         const stars = lessonStars[lesson.id] || 0;
         
-        // Draw island
-        ctx.fillStyle = isCompleted ? '#81C784' : (isUnlocked ? '#FFD54F' : '#9E9E9E');
-        ctx.beginPath();
-        ctx.arc(x, y, 40, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-        
-        // Draw lesson number
-        ctx.fillStyle = '#333';
-        ctx.font = 'bold 20px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(index + 1, x, y);
-        
-        // Draw stars
-        if (stars > 0) {
-          ctx.font = '16px Arial';
-          ctx.fillText('⭐'.repeat(stars), x, y + 50);
+        // Draw path to previous lesson
+        if (index > 0) {
+          const prevPos = lessonPositions[(index - 1) % lessonPositions.length];
+          const path = scene.add.graphics();
+          
+          const lineWidth = isUnlocked ? 6 : 3;
+          const lineColor = isUnlocked ? 0x8B4513 : 0xCCCCCC;
+          
+          if (isUnlocked) {
+            // Solid line for unlocked path
+            path.lineStyle(lineWidth, lineColor);
+            path.beginPath();
+            path.moveTo(prevPos.x, prevPos.y);
+            const midX = (prevPos.x + pos.x) / 2;
+            const midY = (prevPos.y + pos.y) / 2 - 20;
+            path.quadraticCurveTo(midX, midY, pos.x, pos.y);
+            path.strokePath();
+          } else {
+            // Dashed line for locked path - draw manually
+            const dx = pos.x - prevPos.x;
+            const dy = pos.y - prevPos.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const dashLength = 10;
+            const gapLength = 5;
+            const segments = Math.floor(distance / (dashLength + gapLength));
+            
+            path.lineStyle(lineWidth, lineColor);
+            for (let i = 0; i < segments; i++) {
+              const t1 = (i * (dashLength + gapLength)) / distance;
+              const t2 = ((i * (dashLength + gapLength)) + dashLength) / distance;
+              
+              // Calculate points on quadratic curve
+              const getPointOnCurve = (t) => {
+                const x1 = prevPos.x;
+                const y1 = prevPos.y;
+                const x2 = (prevPos.x + pos.x) / 2;
+                const y2 = (prevPos.y + pos.y) / 2 - 20;
+                const x3 = pos.x;
+                const y3 = pos.y;
+                
+                const mt = 1 - t;
+                return {
+                  x: mt * mt * x1 + 2 * mt * t * x2 + t * t * x3,
+                  y: mt * mt * y1 + 2 * mt * t * y2 + t * t * y3
+                };
+              };
+              
+              const p1 = getPointOnCurve(t1);
+              const p2 = getPointOnCurve(t2);
+              
+              path.moveTo(p1.x, p1.y);
+              path.lineTo(p2.x, p2.y);
+            }
+            path.strokePath();
+          }
+          
+          path.setDepth(0);
+          scene.paths.push(path);
         }
         
-        // Draw lock if locked
+        // Create island (circle) - larger for Heroes 3 style
+        const islandColor = isCompleted ? 0x66BB6A : (isUnlocked ? 0xFFC107 : 0x757575);
+        const islandRadius = 50; // Larger island
+        const island = scene.add.circle(pos.x, pos.y, islandRadius, islandColor);
+        island.setStrokeStyle(4, 0xFFFFFF);
+        island.setDepth(1);
+        island.setInteractive({ useHandCursor: true });
+        
+        // Add shadow under island
+        const shadow = scene.add.ellipse(pos.x + 3, pos.y + 3, islandRadius * 2, islandRadius * 1.2, 0x000000);
+        shadow.setAlpha(0.3);
+        shadow.setDepth(0);
+        
+        // Add lesson number text
+        const numberText = scene.add.text(pos.x, pos.y, (index + 1).toString(), {
+          fontSize: '20px',
+          fontWeight: 'bold',
+          color: '#333',
+          align: 'center'
+        });
+        numberText.setOrigin(0.5);
+        numberText.setDepth(2);
+        
+        // Add stars text below island (further down for larger island)
+        const starText = stars > 0 ? '⭐'.repeat(stars) : '☆☆☆';
+        const starsDisplay = scene.add.text(pos.x, pos.y + 80, starText, {
+          fontSize: '18px',
+          color: stars > 0 ? '#FFD700' : '#CCCCCC',
+          align: 'center',
+          fontStyle: 'bold'
+        });
+        starsDisplay.setOrigin(0.5);
+        starsDisplay.setDepth(2);
+        
+        // Add lock icon if locked
         if (!isUnlocked) {
-          ctx.font = '24px Arial';
-          ctx.fillText('🔒', x, y - 50);
+          const lockIcon = scene.add.text(pos.x, pos.y - 70, '🔒', {
+            fontSize: '24px',
+            align: 'center'
+          });
+          lockIcon.setOrigin(0.5);
+          lockIcon.setDepth(2);
         }
+        
+        // Click handler
+        island.on('pointerdown', () => {
+          if (isUnlocked) {
+            window.location.href = `/uchi/lesson/${lesson.id}/topics/`;
+          } else {
+            console.log('Lesson locked! Need 2+ stars on previous lesson.');
+          }
+        });
+        
+        // Store sprite reference
+        scene.lessonSprites.push({
+          island,
+          numberText,
+          starsDisplay,
+          lessonId: lesson.id,
+          index
+        });
       });
       
-      // Draw hero on current lesson
-      if (heroLoaded) {
+      // Create hero sprite on current lesson
+      createHeroSprite(scene);
+    }
+    
+    // Create hero sprite - Heroes 3 style (large, standing on location)
+    // Using spritesheet from GIF
+    function createHeroSprite(scene) {
+      // Remove existing hero
+      if (scene.heroSprite) {
+        if (scene.heroIdleTween) scene.heroIdleTween.destroy();
+        if (scene.heroWarmupTimer) clearTimeout(scene.heroWarmupTimer);
+        scene.heroSprite.destroy();
+      }
+      
         const currentIndex = getCurrentLessonIndex();
         if (currentIndex >= 0) {
-          const pos = positions[currentIndex % positions.length];
-          const heroX = pos.x * width - 25;
-          const heroY = pos.y * height - 80;
-          ctx.drawImage(heroImg, heroX, heroY, 50, 50);
-        }
+        const pos = lessonPositions[currentIndex % lessonPositions.length];
+        
+        // Create hero sprite from frame texture
+        const frameWidth = scene.heroFrameWidth || 73;
+        const frameHeight = scene.heroFrameHeight || 98;
+        const totalFrames = scene.heroTotalFrames || 50;
+        
+        // Scale hero to fit on island (diameter 100px)
+        // Target height: ~90-110px для нового героя
+        const scale = 100 / frameHeight;
+        
+        console.log(`🎨 Creating hero sprite from frame texture:`);
+        console.log(`   Frame size: ${frameWidth}x${frameHeight}`);
+        console.log(`   Total frames: ${totalFrames}`);
+        console.log(`   Scale: ${scale.toFixed(2)}`);
+        
+        // #region agent log
+        logDebug('home_uchi_hero.html:createHeroSprite', 'Creating sprite with frame texture', {
+          frameWidth,
+          frameHeight,
+          totalFrames,
+          scale,
+          position: { x: pos.x, y: pos.y - 60 }
+        }, 'C');
+        // #endregion
+        
+        // Создаем спрайт из первого кадра (используем отдельную текстуру)
+        const firstFrameKey = 'hero-frame-0';
+        scene.heroSprite = scene.add.image(pos.x, pos.y - 60, firstFrameKey);
+        scene.heroSprite.setScale(scale);
+        scene.heroSprite.setDepth(15); // Above everything
+        scene.heroSprite.setOrigin(0.5, 1); // Anchor at bottom center (feet on island)
+        
+        console.log(`   Using texture: ${firstFrameKey}`);
+        console.log(`   Sprite display size: ${(frameWidth * scale).toFixed(1)}x${(frameHeight * scale).toFixed(1)}`);
+        
+        // #region agent log
+        logDebug('home_uchi_hero.html:createHeroSprite', 'Sprite created with frame texture', {
+          textureKey: firstFrameKey,
+          frameWidth,
+          frameHeight,
+          spriteScale: scale,
+          spriteDepth: 15
+        }, 'C');
+        // #endregion
+        
+        // Store position for animations
+        scene.heroBasePos = { x: pos.x, y: pos.y - 60 };
+        scene.heroState = 'idle';
+        scene.heroCurrentPose = 0;
+        // Используем первые 3-4 кадра для idle поз (первый ряд)
+        scene.heroIdlePoseCount = Math.min(3, scene.heroGridCols - 1); // Первый ряд, первые 4 кадра
+        scene.heroTotalFrames = totalFrames;
+        scene.heroFrameWidth = frameWidth;
+        scene.heroFrameHeight = frameHeight;
+        scene.heroGridRows = scene.heroGridRows || 4;
+        scene.heroGridCols = scene.heroGridCols || 10;
+        
+        // Start switching idle poses every 2 seconds
+        startIdlePoseSwitching(scene);
+        
+        // Start periodic warmup (attack animation)
+        startHeroWarmupCycle(scene);
+        
+        console.log(`✅ Hero sprite created from hero-frame-0 at lesson ${currentIndex + 1}`);
+        console.log(`   Total frames: ${totalFrames}, Idle poses: ${scene.heroIdlePoseCount + 1}`);
       }
     }
     
+    // Switch between idle poses every 2 seconds - меняем cropX вручную
+    function startIdlePoseSwitching(scene) {
+      if (!scene.heroSprite || scene.heroState !== 'idle') return;
+      
+      // Clear existing timer
+      if (scene.idlePoseTimer) {
+        clearTimeout(scene.idlePoseTimer);
+      }
+      
+      // Switch to next pose (используем кадры из первого ряда для idle)
+      // Новый герой: 5 рядов × 10 колонок, первые 4 кадра первого ряда (0-3) для idle
+      const gridCols = scene.heroGridCols || 10;
+      const availablePoses = 3; // Первые 4 кадра первого ряда (0, 1, 2, 3)
+      scene.heroCurrentPose = (scene.heroCurrentPose + 1) % (availablePoses + 1);
+      
+      // Переключаемся на текстуру нужного кадра
+      const frameKey = `hero-frame-${scene.heroCurrentPose}`;
+      
+      console.log(`🔄 Switching to pose ${scene.heroCurrentPose}:`);
+      console.log(`   Texture: ${frameKey}`);
+      
+      // Проверяем, существует ли текстура
+      if (scene.textures.exists(frameKey)) {
+        // Меняем текстуру спрайта
+        scene.heroSprite.setTexture(frameKey);
+        console.log(`   ✅ Texture switched to ${frameKey}`);
+      } else {
+        console.error(`❌ Texture ${frameKey} doesn't exist!`);
+      }
+      
+      // #region agent log
+      logDebug('home_uchi_hero.html:startIdlePoseSwitching', 'Pose switched with texture', {
+        newPose: scene.heroCurrentPose,
+        availablePoses: availablePoses + 1,
+        textureKey: frameKey,
+        textureExists: scene.textures.exists(frameKey)
+      }, 'D');
+      // #endregion
+      
+      // Schedule next switch in 2 seconds
+      scene.idlePoseTimer = setTimeout(() => {
+        startIdlePoseSwitching(scene);
+      }, 2000);
+    }
+    
+    // Idle animation - just switch poses, no continuous animation
+    function startHeroIdleAnimation(scene) {
+      if (!scene.heroSprite) return;
+      scene.heroState = 'idle';
+      // Poses are switched by startIdlePoseSwitching()
+    }
+    
+    // Periodic warmup - draw sword and practice swings
+    function startHeroWarmupCycle(scene) {
+      if (!scene.heroSprite) return;
+      
+      // Random interval between 8-15 seconds
+      const interval = Phaser.Math.Between(8000, 15000);
+      
+      scene.heroWarmupTimer = setTimeout(() => {
+        performHeroWarmup(scene);
+      }, interval);
+    }
+    
+    // Perform warmup sequence: show attack frame
+    function performHeroWarmup(scene) {
+      if (!scene.heroSprite || scene.heroState !== 'idle') {
+        startHeroWarmupCycle(scene); // Try again later
+        return;
+      }
+      
+      scene.heroState = 'attacking';
+      
+      // Stop pose switching
+      if (scene.idlePoseTimer) {
+        clearTimeout(scene.idlePoseTimer);
+        scene.idlePoseTimer = null;
+      }
+      
+      // Show attack frame - используем кадры из последнего ряда (5-й ряд)
+      
+      // Используем кадры из последнего ряда (5-й ряд, индексы с атаками)
+      // Последний ряд начинается с индекса: (gridRows - 1) * gridCols
+      const gridRows = scene.heroGridRows || 5;
+      const gridCols = scene.heroGridCols || 10;
+      const lastRowStart = (gridRows - 1) * gridCols; // 4 * 10 = 40
+      // Берем один из кадров последнего ряда (например, первый кадр последнего ряда)
+      const attackFrame = lastRowStart; // Кадр 40 (первый кадр 5-го ряда)
+      const attackFrameKey = `hero-frame-${attackFrame}`;
+      
+      // Меняем текстуру на кадр с мечом
+      if (scene.textures.exists(attackFrameKey)) {
+        scene.heroSprite.setTexture(attackFrameKey);
+        console.log(`⚔️ Showing attack frame ${attackFrame} (row ${gridRows - 1}, col 0)`);
+        console.log(`   Texture: ${attackFrameKey}`);
+        console.log(`   Grid: ${gridRows} rows × ${gridCols} cols`);
+      } else {
+        console.error(`❌ Attack texture ${attackFrameKey} doesn't exist!`);
+      }
+      
+      // #region agent log
+      logDebug('home_uchi_hero.html:performHeroWarmup', 'Showing attack frame with texture', {
+        attackFrame,
+        lastRowStart,
+        gridRows: gridRows,
+        gridCols: gridCols,
+        totalFrames: scene.heroTotalFrames,
+        textureKey: attackFrameKey,
+        textureExists: scene.textures.exists(attackFrameKey)
+      }, 'D');
+      // #endregion
+      
+      // After 1 second, return to idle
+      setTimeout(() => {
+        // Возвращаемся к текущей idle позе через текстуру
+        const currentPoseKey = `hero-frame-${scene.heroCurrentPose}`;
+        if (scene.textures.exists(currentPoseKey)) {
+          scene.heroSprite.setTexture(currentPoseKey);
+        }
+        scene.heroState = 'idle';
+        startIdlePoseSwitching(scene); // Resume pose switching
+        startHeroWarmupCycle(scene); // Schedule next warmup
+      }, 1000);
+    }
+    
+    // Fit camera to show all lessons
+    function fitCameraToLessons(scene) {
+      if (lessons.length === 0) return;
+      
+      const usedPositions = lessons.map((_, index) => lessonPositions[index % lessonPositions.length]);
+      
+      let minX = Infinity, maxX = -Infinity;
+      let minY = Infinity, maxY = -Infinity;
+      
+      usedPositions.forEach(pos => {
+        minX = Math.min(minX, pos.x);
+        maxX = Math.max(maxX, pos.x);
+        minY = Math.min(minY, pos.y);
+        maxY = Math.max(maxY, pos.y);
+      });
+      
+      const padding = 150;
+      const centerX = (minX + maxX) / 2;
+      const centerY = (minY + maxY) / 2;
+      const worldWidth = (maxX - minX) + padding * 2;
+      const worldHeight = (maxY - minY) + padding * 2;
+      
+      const zoomX = scene.cameras.main.width / worldWidth;
+      const zoomY = scene.cameras.main.height / worldHeight;
+      const fitZoom = Math.min(zoomX, zoomY) * 0.9;
+      
+      scene.cameras.main.setZoom(Math.max(0.5, Math.min(2.0, fitZoom)));
+      scene.cameras.main.centerOn(centerX, centerY);
+      
+      console.log('📹 Camera fitted to lessons:', {centerX, centerY, zoom: fitZoom});
+    }
+    
+    // Setup camera controls
+    function setupCameraControls(scene) {
+      let isDragging = false;
+      let dragStart = { x: 0, y: 0 };
+      let cameraStart = { x: 0, y: 0 };
+      
+      // Mouse drag
+      scene.input.on('pointerdown', (pointer) => {
+        if (pointer.leftButtonDown()) {
+          isDragging = true;
+          dragStart.x = pointer.x;
+          dragStart.y = pointer.y;
+          cameraStart.x = scene.cameras.main.scrollX;
+          cameraStart.y = scene.cameras.main.scrollY;
+        }
+      });
+      
+      scene.input.on('pointermove', (pointer) => {
+        if (isDragging && pointer.isDown) {
+          const dx = (pointer.x - dragStart.x) / scene.cameras.main.zoom;
+          const dy = (pointer.y - dragStart.y) / scene.cameras.main.zoom;
+          scene.cameras.main.setScroll(
+            cameraStart.x - dx,
+            cameraStart.y - dy
+          );
+        }
+      });
+      
+      scene.input.on('pointerup', () => {
+        isDragging = false;
+      });
+      
+      // Zoom with mouse wheel (Ctrl + wheel)
+      const mapWrapper = document.getElementById('mapWrapper');
+      mapWrapper.addEventListener('wheel', (e) => {
+        if (e.ctrlKey) {
+          e.preventDefault();
+          const delta = e.deltaY > 0 ? 0.9 : 1.1;
+          const newZoom = Phaser.Math.Clamp(
+            scene.cameras.main.zoom * delta,
+            0.5,
+            2.0
+          );
+          scene.cameras.main.setZoom(newZoom);
+        }
+      });
+      
+      // Zoom buttons
+      document.getElementById('zoomIn').addEventListener('click', () => {
+        const newZoom = Math.min(2.0, scene.cameras.main.zoom * 1.2);
+        scene.cameras.main.setZoom(newZoom);
+      });
+      
+      document.getElementById('zoomOut').addEventListener('click', () => {
+        const newZoom = Math.max(0.5, scene.cameras.main.zoom * 0.8);
+        scene.cameras.main.setZoom(newZoom);
+      });
+      
+      document.getElementById('resetView').addEventListener('click', () => {
+        fitCameraToLessons(scene);
+      });
+    }
+    
+    // Helper functions
     function isLessonUnlocked(index) {
       if (index === 0) return true;
       const prevLesson = lessons[index - 1];
       const prevStars = lessonStars[prevLesson.id] || 0;
-      return prevStars >= 2; // Need 2+ stars to unlock next
+      return prevStars >= 2;
     }
     
     function getCurrentLessonIndex() {
@@ -286,26 +1106,39 @@
       document.getElementById('userScore').textContent = Math.round(avatarData.score || 0);
     }
     
-    // Click handling
-    canvas.addEventListener('click', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      lessons.forEach((lesson, index) => {
-        const pos = positions[index % positions.length];
-        const lx = pos.x * canvas.width;
-        const ly = pos.y * canvas.height;
-        const dist = Math.sqrt((x - lx) ** 2 + (y - ly) ** 2);
-        
-        if (dist < 40 && isLessonUnlocked(index)) {
-          window.location.href = `/lesson/${lesson.id}/uchi/`;
+    function showErrorMessage(scene, message) {
+      const text = scene.add.text(
+        scene.cameras.main.centerX,
+        scene.cameras.main.centerY,
+        message,
+        {
+          fontSize: '28px',
+          color: '#c62828',
+          align: 'center',
+          wordWrap: { width: 600 }
         }
-      });
+      );
+      text.setOrigin(0.5);
+      text.setDepth(100);
+    }
+    
+    // Initialize game when Phaser is loaded
+    window.addEventListener('load', () => {
+      if (typeof Phaser !== 'undefined') {
+        gameInstance = new Phaser.Game(config);
+        console.log('🎮 Phaser game initialized');
+      } else {
+        console.error('❌ Phaser library not loaded!');
+      }
     });
     
-    loadLessons();
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      if (gameInstance && gameInstance.scene.scenes[0]) {
+        const mapWrapper = document.getElementById('mapWrapper');
+        gameInstance.scale.resize(mapWrapper.clientWidth, mapWrapper.clientHeight);
+      }
+    });
   </script>
 </body>
 </html>
-

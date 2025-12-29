@@ -213,3 +213,43 @@ english_lessons/
 - `POST /api/lessons/<id>/start/` - Начать урок
 - `POST /api/cards/answer/` - Отправить ответ на карточку
 
+## Деплой на сервер
+
+Для деплоя на Linux сервер используйте скрипты в корне проекта:
+
+### Быстрый старт
+
+1. **Первоначальная настройка сервера:**
+   ```powershell
+   .\setup_server.ps1
+   ```
+
+2. **Деплой проекта:**
+   ```powershell
+   .\deploy_to_server.ps1
+   ```
+
+3. **Выполнение команд на сервере:**
+   ```powershell
+   .\run_on_server.ps1 "cd ~/english_lessons/english_lessons && source venv/bin/activate && python manage.py migrate"
+   ```
+
+4. **Синхронизация файлов:**
+   ```powershell
+   .\sync_files.ps1 -Direction push
+   ```
+
+Подробная инструкция в файле [DEPLOYMENT.md](DEPLOYMENT.md)
+
+### Работа с проектом на сервере
+
+Чтобы я (AI) мог работать с проектом на сервере, используйте **Remote SSH** в Cursor:
+
+1. Установите расширение "Remote - SSH" в Cursor
+2. Подключитесь к серверу: `F1` → `Remote-SSH: Connect to Host` → `nyx`
+3. Откройте папку: `~/english_lessons/english_lessons`
+
+Теперь я смогу работать с проектом напрямую на сервере!
+
+Подробная инструкция в файле [WORK_ON_SERVER.md](WORK_ON_SERVER.md)
+
