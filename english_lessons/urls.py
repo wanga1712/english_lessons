@@ -90,9 +90,13 @@ urlpatterns = [
 # ВАЖНО: В продакшене используйте веб-сервер (nginx/apache) для статики!
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-# Всегда обслуживаем статику через staticfiles (работает и при DEBUG=False)
+# Всегда обслуживаем статику через staticfiles
 urlpatterns += staticfiles_urlpatterns()
 
-# Также обслуживаем из STATIC_ROOT, если он настроен
+# Также обслуживаем из STATIC_ROOT и STATICFILES_DIRS напрямую
 if hasattr(settings, 'STATIC_ROOT') and settings.STATIC_ROOT:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# Обслуживаем статику из STATICFILES_DIRS
+for static_dir in settings.STATICFILES_DIRS:
+    urlpatterns += static(settings.STATIC_URL, document_root=static_dir)
