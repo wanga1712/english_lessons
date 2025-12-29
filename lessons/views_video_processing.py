@@ -3,10 +3,14 @@ Views для обработки видео
 Размер: ~200 строк
 """
 import logging
+import os
+import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 from django.views import View
+from django.conf import settings
 from lessons.models import VideoFile, Lesson
 from lessons.services.video_processor import VideoProcessor
 
@@ -19,9 +23,42 @@ class ProcessVideoView(View):
     
     def post(self, request, video_id):
         """Обработать видео вручную"""
+        # #region agent log
+        import os, json
+        from django.conf import settings
+        log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+        os.makedirs(os.path.dirname(log_path), exist_ok=True)
+        with open(log_path, 'a', encoding='utf-8') as f:
+            f.write(json.dumps({
+                'location': 'views_video_processing.py:20',
+                'message': 'ProcessVideoView.post called',
+                'data': {'video_id': video_id},
+                'timestamp': int(timezone.now().timestamp() * 1000),
+                'sessionId': 'debug-session',
+                'runId': 'run1',
+                'hypothesisId': 'I'
+            }, ensure_ascii=False) + '\n')
+        # #endregion
         try:
-            import json
             video_file = VideoFile.objects.get(id=video_id)
+            
+            # #region agent log
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(json.dumps({
+                    'location': 'views_video_processing.py:25',
+                    'message': 'VideoFile found',
+                    'data': {
+                        'video_id': video_file.id,
+                        'file_path': video_file.file_path,
+                        'file_path_exists': os.path.exists(video_file.file_path),
+                        'status': video_file.status
+                    },
+                    'timestamp': int(timezone.now().timestamp() * 1000),
+                    'sessionId': 'debug-session',
+                    'runId': 'run1',
+                    'hypothesisId': 'J'
+                }, ensure_ascii=False) + '\n')
+            # #endregion
             
             # Проверяем параметр force_recreate из тела запроса
             force_recreate = False
@@ -61,8 +98,38 @@ class ProcessVideoView(View):
             })
             
         except VideoFile.DoesNotExist:
+            # #region agent log
+            log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(json.dumps({
+                    'location': 'views_video_processing.py:63',
+                    'message': 'VideoFile not found',
+                    'data': {'video_id': video_id},
+                    'timestamp': int(timezone.now().timestamp() * 1000),
+                    'sessionId': 'debug-session',
+                    'runId': 'run1',
+                    'hypothesisId': 'K'
+                }, ensure_ascii=False) + '\n')
+            # #endregion
             return JsonResponse({'error': 'Видеофайл не найден'}, status=404)
         except Exception as e:
+            # #region agent log
+            log_path = os.path.join(settings.BASE_DIR, '.cursor', 'debug.log')
+            with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(json.dumps({
+                    'location': 'views_video_processing.py:66',
+                    'message': 'ProcessVideoView error',
+                    'data': {
+                        'error': str(e),
+                        'error_type': type(e).__name__,
+                        'video_id': video_id
+                    },
+                    'timestamp': int(timezone.now().timestamp() * 1000),
+                    'sessionId': 'debug-session',
+                    'runId': 'run1',
+                    'hypothesisId': 'L'
+                }, ensure_ascii=False) + '\n')
+            # #endregion
             logger.error(f'Ошибка обработки видео {video_id}: {str(e)}', exc_info=True)
             return JsonResponse({
                 'error': f'Ошибка обработки: {str(e)}'

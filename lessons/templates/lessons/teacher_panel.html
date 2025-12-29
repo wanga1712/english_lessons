@@ -417,56 +417,128 @@
       if (files.length === 0) return;
 
       const formData = new FormData();
+      let totalSize = 0;
       for (let file of files) {
         formData.append('videos', file);
+        totalSize += file.size;
       }
 
       // Показываем прогресс
       progressContainer.style.display = 'block';
-      progressBar.textContent = 'Загрузка...';
+      progressBar.style.width = '0%';
+      progressBar.textContent = '0%';
+      
+      // #region agent log
+      fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:416',message:'Starting file upload',data:{filesCount:files.length,totalSize,fileNames:Array.from(files).map(f=>f.name)},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      // #endregion
       
       try {
-        const response = await fetch('/api/videos/upload/', {
-          method: 'POST',
-          body: formData
+        const xhr = new XMLHttpRequest();
+        
+        // Отслеживаем прогресс загрузки
+        xhr.upload.addEventListener('progress', (e) => {
+          if (e.lengthComputable) {
+            const percentComplete = (e.loaded / e.total) * 100;
+            progressBar.style.width = percentComplete + '%';
+            progressBar.textContent = Math.round(percentComplete) + '%';
+          }
         });
         
-        const data = await response.json();
+        xhr.addEventListener('load', () => {
+          if (xhr.status === 200) {
+            try {
+              const data = JSON.parse(xhr.responseText);
+              // #region agent log
+              fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:445',message:'Upload completed',data:{success:data.success,message:data.message,files:data.files},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+              // #endregion
+              if (data.success) {
+                progressBar.style.width = '100%';
+                progressBar.textContent = '100%';
+                alert(`✅ ${data.message}`);
+                location.reload();
+              } else {
+                progressBar.textContent = 'Ошибка';
+                alert(`❌ Ошибка: ${data.error}`);
+              }
+            } catch (e) {
+              progressBar.textContent = 'Ошибка парсинга';
+              alert(`❌ Ошибка: ${e.message}`);
+            }
+          } else {
+            progressBar.textContent = 'Ошибка ' + xhr.status;
+            alert(`❌ Ошибка загрузки: ${xhr.status} ${xhr.statusText}`);
+          }
+        });
         
-        if (data.success) {
-          progressBar.textContent = '100%';
-          alert(`✅ ${data.message}`);
-          location.reload();
-        } else {
-          progressBar.textContent = 'Ошибка';
-          alert(`❌ Ошибка: ${data.error}`);
-        }
+        xhr.addEventListener('error', () => {
+          // #region agent log
+          fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:465',message:'Upload error',data:{status:xhr.status,statusText:xhr.statusText},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+          // #endregion
+          progressBar.textContent = 'Ошибка сети';
+          alert(`❌ Ошибка сети при загрузке`);
+        });
+        
+        xhr.open('POST', '/api/videos/upload/');
+        xhr.send(formData);
+        
       } catch (error) {
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:475',message:'Upload exception',data:{error:error.message},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+        // #endregion
         progressBar.textContent = 'Ошибка';
         alert(`❌ Ошибка загрузки: ${error.message}`);
-      } finally {
-        setTimeout(() => {
-          progressContainer.style.display = 'none';
-        }, 2000);
       }
     }
 
     async function processVideo(videoId, forceRecreate = false) {
+      // #region agent log
+      fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:454',message:'processVideo called',data:{videoId,forceRecreate},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
+      // #endregion
+      
+      // Показываем прогресс
+      progressContainer.style.display = 'block';
+      progressBar.style.width = '0%';
+      progressBar.textContent = 'Начинаем обработку...';
+      logContainer.style.display = 'block';
+      logContainer.innerHTML = '<div class="log-entry">🔄 Начинаем обработку видео...</div>';
+      
       try {
+        progressBar.textContent = 'Отправка запроса...';
         const response = await fetch(`/api/videos/${videoId}/process/`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ force_recreate: forceRecreate })
         });
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:470',message:'processVideo response received',data:{status:response.status,ok:response.ok},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
+        // #endregion
+        
+        progressBar.textContent = 'Обработка ответа...';
         const data = await response.json();
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:475',message:'processVideo data parsed',data:{success:data.success,hasError:!!data.error,error:data.error},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'G'})}).catch(()=>{});
+        // #endregion
+        
         if (data.success) {
-          alert(`Видео обработано успешно! Урок: ${data.lesson_title}`);
-          location.reload();
+          progressBar.style.width = '100%';
+          progressBar.textContent = '100%';
+          logContainer.innerHTML += '<div class="log-entry success">✅ Видео обработано успешно!</div>';
+          alert(`✅ Видео обработано успешно! Урок: ${data.lesson_title}`);
+          setTimeout(() => location.reload(), 2000);
         } else {
-          alert(`Ошибка: ${data.error}`);
+          progressBar.textContent = 'Ошибка';
+          logContainer.innerHTML += `<div class="log-entry error">❌ Ошибка: ${data.error}</div>`;
+          alert(`❌ Ошибка: ${data.error}`);
         }
       } catch (error) {
-        alert(`Ошибка: ${error.message}`);
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'teacher_panel.html:490',message:'processVideo exception',data:{error:error.message,stack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'H'})}).catch(()=>{});
+        // #endregion
+        progressBar.textContent = 'Ошибка';
+        logContainer.innerHTML += `<div class="log-entry error">❌ Исключение: ${error.message}</div>`;
+        alert(`❌ Ошибка: ${error.message}`);
       }
     }
 
