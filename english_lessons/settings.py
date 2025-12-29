@@ -198,9 +198,21 @@ else:
     WATCHED_VIDEO_DIRECTORY = env('WATCHED_VIDEO_DIRECTORY', default=str(BASE_DIR / 'videos'))
     TEMP_AUDIO_DIRECTORY = env('TEMP_AUDIO_DIRECTORY', default=str(BASE_DIR / 'temp_audio'))
 
-# Создаем директории, если их нет
-os.makedirs(WATCHED_VIDEO_DIRECTORY, exist_ok=True)
-os.makedirs(TEMP_AUDIO_DIRECTORY, exist_ok=True)
+# Создаем директории, если их нет (с обработкой ошибок прав доступа)
+try:
+    os.makedirs(WATCHED_VIDEO_DIRECTORY, exist_ok=True)
+except PermissionError:
+    # Если нет прав, логируем предупреждение, но не прерываем запуск
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.warning(f'Не удалось создать директорию {WATCHED_VIDEO_DIRECTORY}. Создайте её вручную с sudo.')
+
+try:
+    os.makedirs(TEMP_AUDIO_DIRECTORY, exist_ok=True)
+except PermissionError:
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.warning(f'Не удалось создать директорию {TEMP_AUDIO_DIRECTORY}. Создайте её вручную.')
 
 # Whisper Model Settings
 WHISPER_MODEL = env('WHISPER_MODEL', default='base')
