@@ -462,7 +462,7 @@
         if (statusData.status === 'processing') {
           const progressBar = row.querySelector('.video-progress-bar');
           const progressPercent = row.querySelector('.progress-percent');
-          const timeCell = row.querySelector('.time-cell .time-remaining');
+          const timeRemaining = row.querySelector('.time-cell .time-remaining');
           
           if (progressBar && statusData.progress_percent !== undefined) {
             progressBar.style.width = statusData.progress_percent + '%';
@@ -472,36 +472,36 @@
             progressPercent.textContent = statusData.progress_percent + '%';
           }
           
-          if (timeCell) {
+          if (timeRemaining) {
             let remaining = 0;
             
             if (statusData.estimated_seconds_remaining !== undefined && statusData.estimated_seconds_remaining > 0) {
               // Используем значение с сервера, но уменьшаем на прошедшее время с последнего обновления
-              const lastUpdate = timeCell.dataset.lastUpdate ? parseInt(timeCell.dataset.lastUpdate) : Date.now();
+              const lastUpdate = timeRemaining.dataset.lastUpdate ? parseInt(timeRemaining.dataset.lastUpdate) : Date.now();
               const secondsSinceUpdate = Math.floor((Date.now() - lastUpdate) / 1000);
               remaining = Math.max(0, statusData.estimated_seconds_remaining - secondsSinceUpdate);
-              timeCell.dataset.remaining = remaining;
-              timeCell.dataset.lastUpdate = Date.now();
-            } else if (timeCell.dataset.remaining !== undefined) {
+              timeRemaining.dataset.remaining = remaining;
+              timeRemaining.dataset.lastUpdate = Date.now();
+            } else if (timeRemaining.dataset.remaining !== undefined) {
               // Если API не вернул время, уменьшаем сохраненное значение
-              const lastUpdate = timeCell.dataset.lastUpdate ? parseInt(timeCell.dataset.lastUpdate) : Date.now();
+              const lastUpdate = timeRemaining.dataset.lastUpdate ? parseInt(timeRemaining.dataset.lastUpdate) : Date.now();
               const secondsSinceUpdate = Math.floor((Date.now() - lastUpdate) / 1000);
-              remaining = Math.max(0, parseInt(timeCell.dataset.remaining) - secondsSinceUpdate);
-              timeCell.dataset.remaining = remaining;
-              timeCell.dataset.lastUpdate = Date.now();
+              remaining = Math.max(0, parseInt(timeRemaining.dataset.remaining) - secondsSinceUpdate);
+              timeRemaining.dataset.remaining = remaining;
+              timeRemaining.dataset.lastUpdate = Date.now();
             } else {
               // Первое обновление
               if (statusData.estimated_seconds_remaining !== undefined) {
                 remaining = statusData.estimated_seconds_remaining;
-                timeCell.dataset.remaining = remaining;
-                timeCell.dataset.lastUpdate = Date.now();
+                timeRemaining.dataset.remaining = remaining;
+                timeRemaining.dataset.lastUpdate = Date.now();
               }
             }
             
             if (remaining > 0) {
-              timeCell.querySelector('.time-remaining').textContent = `Осталось: ${formatTime(remaining)}`;
+              timeRemaining.textContent = `Осталось: ${formatTime(remaining)}`;
             } else {
-              timeCell.querySelector('.time-remaining').textContent = 'Завершение...';
+              timeRemaining.textContent = 'Завершение...';
             }
           }
         }
