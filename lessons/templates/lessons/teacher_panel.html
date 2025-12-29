@@ -425,6 +425,7 @@
     
     // Автоматическое отслеживание прогресса для обрабатывающихся видео
     const processingVideoIntervals = new Map();
+    const timeUpdateIntervals = new Map(); // Таймеры для обновления времени
     
     // Функция для форматирования времени
     function formatTime(seconds) {
@@ -473,35 +474,35 @@
           }
           
           if (timeRemaining) {
-            let remaining = 0;
-            
+            // Обновляем значение с сервера
             if (statusData.estimated_seconds_remaining !== undefined && statusData.estimated_seconds_remaining > 0) {
-              // Используем значение с сервера, но уменьшаем на прошедшее время с последнего обновления
-              const lastUpdate = timeRemaining.dataset.lastUpdate ? parseInt(timeRemaining.dataset.lastUpdate) : Date.now();
-              const secondsSinceUpdate = Math.floor((Date.now() - lastUpdate) / 1000);
-              remaining = Math.max(0, statusData.estimated_seconds_remaining - secondsSinceUpdate);
-              timeRemaining.dataset.remaining = remaining;
-              timeRemaining.dataset.lastUpdate = Date.now();
-            } else if (timeRemaining.dataset.remaining !== undefined) {
-              // Если API не вернул время, уменьшаем сохраненное значение
-              const lastUpdate = timeRemaining.dataset.lastUpdate ? parseInt(timeRemaining.dataset.lastUpdate) : Date.now();
-              const secondsSinceUpdate = Math.floor((Date.now() - lastUpdate) / 1000);
-              remaining = Math.max(0, parseInt(timeRemaining.dataset.remaining) - secondsSinceUpdate);
-              timeRemaining.dataset.remaining = remaining;
-              timeRemaining.dataset.lastUpdate = Date.now();
-            } else {
-              // Первое обновление
-              if (statusData.estimated_seconds_remaining !== undefined) {
-                remaining = statusData.estimated_seconds_remaining;
-                timeRemaining.dataset.remaining = remaining;
-                timeRemaining.dataset.lastUpdate = Date.now();
-              }
+              timeRemaining.dataset.remaining = statusData.estimated_seconds_remaining;
             }
             
-            if (remaining > 0) {
-              timeRemaining.textContent = `Осталось: ${formatTime(remaining)}`;
-            } else {
-              timeRemaining.textContent = 'Завершение...';
+            // Запускаем таймер для обновления времени каждую секунду
+            if (!timeUpdateIntervals.has(videoId)) {
+              const timeInterval = setInterval(() => {
+                const timeEl = row.querySelector('.time-cell .time-remaining');
+                if (timeEl && timeEl.dataset.remaining !== undefined) {
+                  let remaining = parseInt(timeEl.dataset.remaining);
+                  if (remaining > 0) {
+                    remaining--;
+                    timeEl.dataset.remaining = remaining;
+                    timeEl.textContent = `Осталось: ${formatTime(remaining)}`;
+                  } else {
+                    timeEl.textContent = 'Завершение...';
+                    clearInterval(timeInterval);
+                    timeUpdateIntervals.delete(videoId);
+                  }
+                }
+              }, 1000);
+              timeUpdateIntervals.set(videoId, timeInterval);
+              
+              // Первое обновление
+              const initialRemaining = timeRemaining.dataset.remaining ? parseInt(timeRemaining.dataset.remaining) : (statusData.estimated_seconds_remaining || 0);
+              if (initialRemaining > 0) {
+                timeRemaining.textContent = `Осталось: ${formatTime(initialRemaining)}`;
+              }
             }
           }
         }
@@ -517,11 +518,15 @@
           }
         }
         
-        // Если обработка завершена, останавливаем polling
+        // Если обработка завершена, останавливаем polling и таймер времени
         if (statusData.status === 'done' || statusData.status === 'error') {
           if (processingVideoIntervals.has(videoId)) {
             clearInterval(processingVideoIntervals.get(videoId));
             processingVideoIntervals.delete(videoId);
+          }
+          if (timeUpdateIntervals.has(videoId)) {
+            clearInterval(timeUpdateIntervals.get(videoId));
+            timeUpdateIntervals.delete(videoId);
           }
           // Перезагружаем страницу через 2 секунды после завершения
           setTimeout(() => location.reload(), 2000);
