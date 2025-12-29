@@ -88,13 +88,11 @@ urlpatterns = [
 
 # Добавляем обработку статических файлов для разработки
 # ВАЖНО: В продакшене используйте веб-сервер (nginx/apache) для статики!
-if settings.DEBUG:
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+# Всегда обслуживаем статику через staticfiles (работает и при DEBUG=False)
+urlpatterns += staticfiles_urlpatterns()
+
+# Также обслуживаем из STATIC_ROOT, если он настроен
+if hasattr(settings, 'STATIC_ROOT') and settings.STATIC_ROOT:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    # Также обслуживаем файлы из STATICFILES_DIRS
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns()
-else:
-    # Даже при DEBUG=False обслуживаем статику для разработки (НЕ для продакшена!)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns()
