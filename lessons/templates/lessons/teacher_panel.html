@@ -474,9 +474,16 @@
           }
           
           if (timeRemaining) {
-            // Обновляем значение с сервера
+            // Обновляем значение с сервера только если оно изменилось значительно
+            // Это предотвращает прыжки времени из-за небольших расхождений в расчетах
             if (statusData.estimated_seconds_remaining !== undefined && statusData.estimated_seconds_remaining > 0) {
-              timeRemaining.dataset.remaining = statusData.estimated_seconds_remaining;
+              const currentRemaining = timeRemaining.dataset.remaining ? parseInt(timeRemaining.dataset.remaining) : 0;
+              const serverRemaining = statusData.estimated_seconds_remaining;
+              
+              // Обновляем только если разница больше 5 секунд (чтобы избежать прыжков)
+              if (Math.abs(currentRemaining - serverRemaining) > 5 || currentRemaining === 0) {
+                timeRemaining.dataset.remaining = serverRemaining;
+              }
             }
             
             // Запускаем таймер для обновления времени каждую секунду

@@ -93,12 +93,22 @@ def get_video_status(request, video_id):
                 if elapsed_seconds < transcribe_estimated:
                     progress_percent = min(30, int((elapsed_seconds / transcribe_estimated) * 30))
                     # Оставшееся время = оставшееся время транскрипции + время генерации
-                    estimated_seconds_remaining = (transcribe_estimated - elapsed_seconds) + int(total_estimated_seconds * 0.6)
+                    # Если транскрипция идет слишком долго, показываем реалистичное время
+                    if elapsed_seconds > transcribe_estimated * 2:
+                        # Транскрипция идет в 2 раза дольше ожидаемого - возможно застряла
+                        estimated_seconds_remaining = 300  # 5 минут как запас
+                    else:
+                        estimated_seconds_remaining = (transcribe_estimated - elapsed_seconds) + int(total_estimated_seconds * 0.6)
                 else:
                     # Транскрипция должна была завершиться, но статус еще transcribing
-                    # Показываем минимальный прогресс и оставшееся время
+                    # Возможно, транскрипция застряла или идет очень медленно
                     progress_percent = 30
-                    estimated_seconds_remaining = int(total_estimated_seconds * 0.6) + 30  # Генерация + запас
+                    # Показываем реалистичное оставшееся время на основе прошедшего времени
+                    # Если прошло больше времени, чем ожидалось, показываем меньше оставшегося
+                    if elapsed_seconds > transcribe_estimated * 3:
+                        estimated_seconds_remaining = 180  # 3 минуты
+                    else:
+                        estimated_seconds_remaining = int(total_estimated_seconds * 0.6) + 60  # Генерация + запас
                     
             elif video_file.processing_status == 'generating_lesson':
                 # Генерация урока: 30-90% прогресса
