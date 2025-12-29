@@ -50,6 +50,12 @@
         const topicsList = {{ topics_list|safe }};
         const avatarData = {{ avatar_data_json|safe }};
         const userProgress = {{ user_progress_json|safe }};
+        
+        // Отладочная информация
+        console.log('Lesson ID:', lessonId);
+        console.log('Cards data:', cardsData);
+        console.log('Topics data:', topicsData);
+        console.log('Topics list:', topicsList);
     </script>
     <script src="{% static 'lessons/js/lesson-grid.js' %}"></script>
 </body>
