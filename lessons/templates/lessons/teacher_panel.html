@@ -473,11 +473,22 @@
           }
           
           if (timeCell && statusData.estimated_seconds_remaining !== undefined) {
+            // Обновляем время каждый раз, даже если оно не изменилось в API
+            // Это гарантирует, что время будет обновляться при каждом polling
             if (statusData.estimated_seconds_remaining > 0) {
-              timeCell.textContent = `Осталось: ${formatTime(statusData.estimated_seconds_remaining)}`;
+              // Уменьшаем оставшееся время на 2 секунды (интервал polling)
+              const remaining = Math.max(0, statusData.estimated_seconds_remaining - 2);
+              timeCell.textContent = `Осталось: ${formatTime(remaining)}`;
+              // Сохраняем текущее значение для следующего обновления
+              timeCell.dataset.remaining = remaining;
             } else {
               timeCell.textContent = 'Завершение...';
             }
+          } else if (timeCell && timeCell.dataset.remaining !== undefined) {
+            // Если API не вернул время, уменьшаем сохраненное значение
+            const remaining = Math.max(0, parseInt(timeCell.dataset.remaining) - 2);
+            timeCell.textContent = `Осталось: ${formatTime(remaining)}`;
+            timeCell.dataset.remaining = remaining;
           }
         }
         

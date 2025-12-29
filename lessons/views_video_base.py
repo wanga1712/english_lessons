@@ -50,26 +50,40 @@ def get_video_status(request, video_id):
         elapsed_seconds = 0
         
         if video_file.status == 'processing':
-            # Время с начала обработки
+            # Время с начала обработки (используем created_at как приближение, если нет отдельного поля)
+            # Для более точного расчета можно использовать время последнего обновления статуса
             elapsed_seconds = int((timezone.now() - video_file.created_at).total_seconds())
             
             # Оценка времени на основе размера файла
             file_size_mb = (video_file.file_size / (1024 * 1024)) if video_file.file_size else 50
             total_estimated_seconds = max(30, min(900, int(file_size_mb * 2.5)))
             
-            # Прогресс на основе статуса обработки
+            # Прогресс на основе статуса обработки и прошедшего времени
             if video_file.processing_status == 'transcribing':
+                # Транскрипция: 0-30% прогресса
+                # Используем реальное прошедшее время для расчета прогресса
                 progress_percent = min(30, int((elapsed_seconds / total_estimated_seconds) * 30))
+                # Оставшееся время для транскрипции
+                transcribe_estimated = int(total_estimated_seconds * 0.3)
+                if elapsed_seconds < transcribe_estimated:
+                    estimated_seconds_remaining = transcribe_estimated - elapsed_seconds + int(total_estimated_seconds * 0.7)
+                else:
+                    # Транскрипция завершена, осталось генерация урока
+                    estimated_seconds_remaining = int(total_estimated_seconds * 0.7) - (elapsed_seconds - transcribe_estimated)
             elif video_file.processing_status == 'generating_lesson':
-                progress_percent = min(90, 30 + int((elapsed_seconds / total_estimated_seconds) * 60))
+                # Генерация урока: 30-90% прогресса
+                transcribe_estimated = int(total_estimated_seconds * 0.3)
+                elapsed_after_transcribe = max(0, elapsed_seconds - transcribe_estimated)
+                generate_estimated = int(total_estimated_seconds * 0.6)
+                progress_percent = min(90, 30 + int((elapsed_after_transcribe / generate_estimated) * 60))
+                # Оставшееся время для генерации
+                estimated_seconds_remaining = max(0, generate_estimated - elapsed_after_transcribe)
             else:
                 progress_percent = 0
-            
-            # Оставшееся время
-            if progress_percent > 0:
-                estimated_seconds_remaining = max(0, int((total_estimated_seconds * (100 - progress_percent)) / 100))
-            else:
                 estimated_seconds_remaining = total_estimated_seconds
+            
+            # Убеждаемся, что оставшееся время не отрицательное
+            estimated_seconds_remaining = max(0, estimated_seconds_remaining)
         
         return JsonResponse({
             'id': video_file.id,
