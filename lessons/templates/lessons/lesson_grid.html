@@ -56,6 +56,10 @@
         console.log('Cards data:', cardsData);
         console.log('Topics data:', topicsData);
         console.log('Topics list:', topicsList);
+        
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson_grid.html:46',message:'Script data initialized',data:{lessonId,hasCardsData:!!cardsData,cardsDataLength:cardsData?.length,hasTopicsData:!!topicsData,topicsDataType:typeof topicsData,topicsDataKeys:topicsData?Object.keys(topicsData):[],topicsList},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'J'})}).catch(()=>{});
+        // #endregion
     </script>
     <script src="{% static 'lessons/js/lesson-grid.js' %}"></script>
 </body>

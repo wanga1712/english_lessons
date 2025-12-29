@@ -21,6 +21,9 @@ const cleanText = (text) => {
 
 // Инициализация
 document.addEventListener('DOMContentLoaded', async () => {
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:23',message:'DOMContentLoaded fired',data:{hasCardsData:!!cardsData,hasTopicsData:!!topicsData,cardsDataLength:cardsData?.length,topicsDataKeys:topicsData?Object.keys(topicsData):[]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     await initLesson();
     // renderTopicsGrid вызывается внутри initLesson после загрузки статусов
     updateAvatar();
@@ -28,6 +31,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Инициализация урока
 async function initLesson() {
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:30',message:'initLesson called',data:{lessonId,hasCardsData:!!cardsData,hasTopicsData:!!topicsData,cardsDataType:typeof cardsData,topicsDataType:typeof topicsData},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
     try {
         // Сначала загружаем статусы из переданных данных карточек
         if (cardsData && Array.isArray(cardsData)) {
@@ -66,8 +72,14 @@ async function initLesson() {
         await loadCardStatuses();
         
         // Рендерим карточки после загрузки всех данных
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:69',message:'About to call renderTopicsGrid',data:{hasTopicsData:!!topicsData,topicsDataKeys:topicsData?Object.keys(topicsData):[],topicsDataValue:topicsData},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+        // #endregion
         renderTopicsGrid();
     } catch (error) {
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:71',message:'initLesson error',data:{errorMessage:error.message,errorStack:error.stack},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'D'})}).catch(()=>{});
+        // #endregion
         console.error('Ошибка инициализации:', error);
     }
 }
@@ -132,19 +144,34 @@ function updateAvatar() {
 
 // Рендеринг сетки тем
 function renderTopicsGrid() {
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:134',message:'renderTopicsGrid called',data:{hasTopicsData:!!topicsData,topicsDataType:typeof topicsData,topicsDataKeys:topicsData?Object.keys(topicsData):[]},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'E'})}).catch(()=>{});
+    // #endregion
     const container = document.getElementById('topics-grid');
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:136',message:'Container check',data:{containerFound:!!container,containerId:container?.id},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'F'})}).catch(()=>{});
+    // #endregion
     if (!container) return;
     
     container.innerHTML = '';
     
     // Сортируем темы
     const sortedTopics = Object.keys(topicsData).sort();
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:141',message:'Topics sorted',data:{sortedTopicsCount:sortedTopics.length,sortedTopics},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'G'})}).catch(()=>{});
+    // #endregion
     
     sortedTopics.forEach(topic => {
         const topicData = topicsData[topic];
+        // #region agent log
+        fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:143',message:'Processing topic',data:{topic,hasTopicData:!!topicData,cardsCount:topicData?.cards?.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'H'})}).catch(()=>{});
+        // #endregion
         const topicSection = createTopicSection(topic, topicData);
         container.appendChild(topicSection);
     });
+    // #region agent log
+    fetch('http://127.0.0.1:7244/ingest/47fa6f77-db98-4c70-bd7a-f564ec61d812',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'lesson-grid.js:148',message:'renderTopicsGrid completed',data:{containerChildrenCount:container.children.length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'I'})}).catch(()=>{});
+    // #endregion
 }
 
 // Создание секции темы
